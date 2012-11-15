@@ -45,12 +45,12 @@ public class Expending extends Finance implements Entities{
     }
 
     @Override
-    public void modify() {
+    public void modify(String name) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void delete() {
+    public void delete(String name) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
