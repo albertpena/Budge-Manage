@@ -10,7 +10,7 @@ package source.products;
  */
 public class Account {
     
-    private double balance = 25000;
+    private double balance;
     private String  accountNumber;
     private String accountBank;
 
@@ -42,19 +42,12 @@ public class Account {
     public  void add(){}
     
     
-    public Account get(String account)
-    {
-        return null;
-
-    }
-    
-    
-    public Account get()
-    {
+    public Account get(String account){
         return null;
     }
-            
     
- 
     
+    public Account get(){
+        return null;
+    }
 }
