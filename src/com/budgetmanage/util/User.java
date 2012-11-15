@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.budgetmanage.user;
+package com.budgetmanage.util;
 import com.budgetmanage.util.Entities;
 
 /**
