@@ -10,6 +10,6 @@ package com.budgetmanage.util;
  */
 public interface Entities {
     public void add();
-    public void modify();
-    public void delete();
+    public void modify(String name);
+    public void delete(String name);
 }
