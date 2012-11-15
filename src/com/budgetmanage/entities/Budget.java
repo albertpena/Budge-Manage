@@ -13,6 +13,7 @@ import com.budgetmanage.util.Entities;
 public class Budget extends Finance implements Entities{
 
     public Budget() {
+        
     }
     
     public Budget(double amount, int concept) {
