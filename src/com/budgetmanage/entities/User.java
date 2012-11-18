@@ -4,25 +4,24 @@
  */
 package com.budgetmanage.entities;
 import com.budgetmanage.util.Entities;
-import com.budgetmanage.util.Entities;
 
 /**
  * The User class have all about the User's management 
  * @author Fulvio
  */
 public class User implements Entities{
-    private String nombre;
+    private String name;
     private String lastName;
     private String password;
     private String userName;
 
    
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLastName() {

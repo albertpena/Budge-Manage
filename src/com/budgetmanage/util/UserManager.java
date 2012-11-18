@@ -9,7 +9,7 @@ import com.budgetmanage.entities.User;
  *
  * @author Fulvio
  */
-public class UserManager {
+public class UserManager{
     /**
      * Static method for validate the access on the system.
      * @param user a instance the entities.User
@@ -23,6 +23,4 @@ public class UserManager {
         String userName = user.getUserName();
         return true;
     }
-    
-    
 }
