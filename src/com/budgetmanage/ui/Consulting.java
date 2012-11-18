@@ -31,6 +31,7 @@ public class Consulting extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
+        setOpaque(false);
         setLayout(null);
         add(jTextField1);
         jTextField1.setBounds(32, 48, 44, 20);
