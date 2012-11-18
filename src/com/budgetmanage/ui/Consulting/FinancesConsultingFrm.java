@@ -2,18 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.budgetmanage.ui;
+package com.budgetmanage.ui.Consulting;
 
 /**
  *
- * @author Alexateam
+ * @author Nestor_Velasquez
  */
-public class Loan extends javax.swing.JPanel {
+public class FinancesConsultingFrm extends javax.swing.JPanel {
 
     /**
-     * Creates new form Loan
+     * Creates new form FinancesConsultingFrm
      */
-    public Loan() {
+    public FinancesConsultingFrm() {
         initComponents();
     }
 
