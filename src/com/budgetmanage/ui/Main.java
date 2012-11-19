@@ -4,6 +4,7 @@
  */
 package com.budgetmanage.ui;
 
+import com.budgetmanage.ui.Consulting.FinancesConsultingFrm;
 import java.awt.BorderLayout;
 
 /**
@@ -17,7 +18,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-        setSize(500,500);
+        setSize(600, 600);
         this.setLayout(new BorderLayout());
     }
 
@@ -35,7 +36,6 @@ public class Main extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
         jMenuItem21 = new javax.swing.JMenuItem();
@@ -45,25 +45,21 @@ public class Main extends javax.swing.JFrame {
         jMenuItem23 = new javax.swing.JMenuItem();
         jMenuItem24 = new javax.swing.JMenuItem();
         jMenuItem25 = new javax.swing.JMenuItem();
-        jMenuItem26 = new javax.swing.JMenuItem();
-        jMenuItem27 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setLayout(new java.awt.BorderLayout());
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 580, 460);
+        jPanel1.setBounds(0, 0, 770, 550);
 
         jMenu4.setText("Start");
         jMenuBar1.add(jMenu4);
 
         jMenu1.setText("Maintenance");
-
-        jMenuItem18.setText("Loan");
-        jMenu1.add(jMenuItem18);
 
         jMenuItem19.setText("Account");
         jMenu1.add(jMenuItem19);
@@ -84,7 +80,7 @@ public class Main extends javax.swing.JFrame {
 
         jMenu3.setText("Consulting");
 
-        jMenuItem23.setText("Budget");
+        jMenuItem23.setText("Finances");
         jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem23ActionPerformed(evt);
@@ -98,19 +94,14 @@ public class Main extends javax.swing.JFrame {
         jMenuItem25.setText("Account");
         jMenu3.add(jMenuItem25);
 
-        jMenuItem26.setText("Ingress");
-        jMenu3.add(jMenuItem26);
-
-        jMenuItem27.setText("Expending");
-        jMenu3.add(jMenuItem27);
-
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
-
+        jPanel1.removeAll();
+        jPanel1.add(new FinancesConsultingFrm(), BorderLayout.CENTER);
     }//GEN-LAST:event_jMenuItem23ActionPerformed
 
     /**
@@ -153,7 +144,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
@@ -161,8 +151,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;
-    private javax.swing.JMenuItem jMenuItem26;
-    private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem33;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
