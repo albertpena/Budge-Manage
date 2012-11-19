@@ -134,7 +134,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel {
                 .addComponent(jCheckBox1)
                 .addGap(13, 13, 13)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         jTextField1.setVisible(false);

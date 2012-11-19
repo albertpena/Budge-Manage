@@ -5,6 +5,7 @@
 package com.budgetmanage.ui;
 
 import com.budgetmanage.ui.Consulting.FinancesConsultingFrm;
+import com.budgetmanage.ui.Maintenance.FinancesMaintenanceFrm;
 import java.awt.BorderLayout;
 
 /**
@@ -38,13 +39,11 @@ public class Main extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
-        jMenuItem21 = new javax.swing.JMenuItem();
-        jMenuItem22 = new javax.swing.JMenuItem();
         jMenuItem33 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem25 = new javax.swing.JMenuItem();
         jMenuItem23 = new javax.swing.JMenuItem();
         jMenuItem24 = new javax.swing.JMenuItem();
-        jMenuItem25 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -64,14 +63,13 @@ public class Main extends javax.swing.JFrame {
         jMenuItem19.setText("Account");
         jMenu1.add(jMenuItem19);
 
-        jMenuItem20.setText("Ingress");
+        jMenuItem20.setText("Finanza");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem20);
-
-        jMenuItem21.setText("Expending");
-        jMenu1.add(jMenuItem21);
-
-        jMenuItem22.setText("Budget");
-        jMenu1.add(jMenuItem22);
 
         jMenuItem33.setText("User");
         jMenu1.add(jMenuItem33);
@@ -79,6 +77,9 @@ public class Main extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu3.setText("Consulting");
+
+        jMenuItem25.setText("Account");
+        jMenu3.add(jMenuItem25);
 
         jMenuItem23.setText("Finances");
         jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
@@ -91,9 +92,6 @@ public class Main extends javax.swing.JFrame {
         jMenuItem24.setText("Loan");
         jMenu3.add(jMenuItem24);
 
-        jMenuItem25.setText("Account");
-        jMenu3.add(jMenuItem25);
-
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -103,6 +101,11 @@ public class Main extends javax.swing.JFrame {
         jPanel1.removeAll();
         jPanel1.add(new FinancesConsultingFrm(), BorderLayout.CENTER);
     }//GEN-LAST:event_jMenuItem23ActionPerformed
+
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+        jPanel1.removeAll();
+        jPanel1.add(new FinancesMaintenanceFrm(), BorderLayout.CENTER);
+    }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,8 +149,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem20;
-    private javax.swing.JMenuItem jMenuItem21;
-    private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;
