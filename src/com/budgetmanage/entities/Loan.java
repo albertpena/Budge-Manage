@@ -25,7 +25,10 @@ public class Loan {
     {
         return null;
     }
-
+    
+    /*
+     * @return amount
+     */
     public double getAmount() {
         
         return amount;
