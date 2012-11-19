@@ -5,6 +5,8 @@
 package com.budgetmanage.entities;
 
 import com.budgetmanage.util.Entities;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -12,13 +14,11 @@ import com.budgetmanage.util.Entities;
  */
 public class Budget extends Finance implements Entities{
 
+    private Set<Ingress>   ingresses = new HashSet<>();
+    private Set<Expending> expending = new HashSet<>();
+    
     public Budget() {
         
-    }
-    
-    public Budget(double amount, int concept) {
-        setAmount(amount);
-        setConcept(concept);
     }
     
     
