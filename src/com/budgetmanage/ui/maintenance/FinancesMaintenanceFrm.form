@@ -24,10 +24,6 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="230" pref="230" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
                       <Component id="jComboBox1" min="-2" pref="110" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -41,6 +37,10 @@
                   </Group>
                   <Component id="jCheckBox1" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" alignment="0" min="-2" pref="446" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="218" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="131" max="32767" attributes="0"/>
           </Group>
@@ -49,9 +49,9 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
@@ -71,7 +71,7 @@
               <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="94" max="-2" attributes="0"/>
-              <EmptySpace pref="119" max="32767" attributes="0"/>
+              <EmptySpace pref="116" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
