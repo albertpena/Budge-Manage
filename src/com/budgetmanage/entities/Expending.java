@@ -8,9 +8,11 @@ import com.budgetmanage.util.Entities;
  */
 public class Expending extends Finance implements Entities{   
 
-    public Expending(double amount, int concept) {
-        setAmount(amount);
-        setConcept(concept);
+    public Expending(String name, String type, double amount, int priority) {
+        this.name = name;
+        this.type = type;
+        this.amount = amount;        
+        this.priority = priority;        
     }
     
     @Override
@@ -31,14 +33,14 @@ public class Expending extends Finance implements Entities{
         this.setAmount(amount);
     }
 
-    public void setConcept(int concept) {
-        this.setConcept(concept);
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
-    public int getConcept() {
-        return getConcept();
-    }    
-
+    public int getPriority() {
+        return priority;
+    }
+    
     @Override
     public void add() {
         throw new UnsupportedOperationException("Not supported yet.");

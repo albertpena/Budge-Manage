@@ -17,9 +17,11 @@ public class Ingress extends Finance implements Entities {
     
     }
     
-    public Ingress(double amount, int concept){
-        setAmount(amount);
-        setConcept(concept);
+    public Ingress(String name, String type, double amount, int priority){
+        this.name = name;
+        this.type = type;
+        this.amount = amount;        
+        this.priority = priority;
     }
     
     @Override
@@ -55,12 +57,13 @@ public class Ingress extends Finance implements Entities {
         this.amount = amount;
     }
 
-    public int getConcept() {
-        return concept;
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
-    public void setConcept(int concept) {
-        this.concept = concept;
+    public int getPriority() {
+        return priority;
     }
+    
     
 }

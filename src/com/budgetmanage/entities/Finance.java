@@ -9,8 +9,10 @@ package com.budgetmanage.entities;
  * @author Nestor_Velasquez
  */
 public abstract class Finance {
-    public double amount;
-    public int concept;
+    public double amount;    
+    public int priority;
+    public String name;
+    public String type;
     
     public abstract Finance get();
     public abstract Finance get(String name);

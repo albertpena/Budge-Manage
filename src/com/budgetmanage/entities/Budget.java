@@ -57,12 +57,4 @@ public class Budget extends Finance implements Entities{
     public double getAmount() {
         return amount;
     }
-
-    public void setConcept(int concept) {
-        this.concept = concept;
-    }
-
-    public int getConcept() {
-        return concept;
-    }
 }
