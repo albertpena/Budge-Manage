@@ -161,11 +161,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel {
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         if(jComboBox1.getSelectedItem().toString().equalsIgnoreCase("seleccione")){
-            jScrollPane1.setVisible(false);
-            jButton1.setVisible(false);
-            jTextField1.setVisible(false);
-            jLabel2.setVisible(false);        
-            jCheckBox1.setVisible(false);
+            unactivateComponents(false, "cmbbx");
         }
         else{
             //jScrollPane1.setVisible(true);
@@ -180,10 +176,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel {
 
     private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
         if(evt.getStateChange() == ItemEvent.SELECTED){
-            jButton1.setVisible(false);
-            jTextField1.setVisible(false);
-            jLabel2.setVisible(false);        
-            jScrollPane1.setVisible(true);
+            unactivateComponents(true, "ckbbx");
         }else{
             jButton1.setVisible(true);
             jTextField1.setVisible(true);
@@ -192,6 +185,47 @@ public class FinancesConsultingFrm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
 
+    private void unactivateComponents(boolean is, String what){
+        if(is){
+            switch(what){
+                case "cmbbx":{
+                    jScrollPane1.setVisible(false);
+                    jCheckBox1.setVisible(true);
+                    jButton1.setVisible(true);
+                    jTextField1.setVisible(true);
+                    jLabel2.setVisible(true);
+                    jLabel3.setVisible(false);
+                    jLabel2.setText("Nombre del "+jComboBox1.getSelectedItem().toString());
+                    break;
+                }
+                case "ckbbx":{
+                    jButton1.setVisible(false);
+                    jTextField1.setVisible(false);
+                    jLabel2.setVisible(false);        
+                    jScrollPane1.setVisible(true);
+                    break;
+                }
+            }
+        }else{
+            switch(what){
+                case "cmbbx":{
+                    jScrollPane1.setVisible(false);
+                    jButton1.setVisible(false);
+                    jTextField1.setVisible(false);
+                    jLabel2.setVisible(false);        
+                    jCheckBox1.setVisible(false);
+                    break;
+                }
+                case "ckbbx":{
+                    jButton1.setVisible(true);
+                    jTextField1.setVisible(true);
+                    jLabel2.setVisible(true);        
+                    jScrollPane1.setVisible(false);
+                    break;
+                }
+            }
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;

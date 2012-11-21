@@ -152,4 +152,5 @@ public class Ingress implements Serializable {
         this.type = type;
     }
     
+    
 }

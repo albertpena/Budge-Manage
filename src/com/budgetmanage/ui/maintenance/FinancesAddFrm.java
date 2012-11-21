@@ -363,7 +363,48 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
             jTextField2.setVisible(false);
             jButton2.setVisible(false);
         }
+        else{
+            jLabel4.setVisible(false);
+            jTextField2.setVisible(false);
+        }
     }//GEN-LAST:event_jComboBox3ItemStateChanged
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        
+        int priority = 1;
+        String process = jComboBox1.getSelectedItem().toString();
+        
+        switch(jComboBox3.getSelectedItem().toString().toUpperCase()){
+            case "ALTO":{
+                priority = 1;
+                break;
+            }
+            case "MEDIO": {
+                priority = 2;
+                break;
+            }
+            case "BAJO": {
+                priority = 3;
+                break;
+            }   
+        }
+        
+        switch(process.toUpperCase()){
+            case "GASTO":{
+                 Expending expending = new Expending(jTextField1.getText().trim().toUpperCase(), jComboBox2.getSelectedItem().toString().trim().toUpperCase()
+                                              , Double.parseDouble(jTextField3.getText().toString().trim().toUpperCase()), priority);
+                 break;
+            }
+            case "INGRESO":{
+                 Ingress ingress = new Ingress(jTextField1.getText().trim().toUpperCase(), jComboBox2.getSelectedItem().toString().trim().toUpperCase()
+                                              , Double.parseDouble(jTextField3.getText().toString().trim().toUpperCase()), priority);
+                 break;
+            }            
+        }
+        com.budgetmanage.util.Util.clearTextFields(this);               
+        jLabel12.setText(process+" agregado satisfactoriamente");
+        jLabel12.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
        
