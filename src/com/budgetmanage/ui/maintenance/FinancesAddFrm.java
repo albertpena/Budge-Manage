@@ -1,13 +1,11 @@
 
 package com.budgetmanage.ui.maintenance;
 
-import com.budgetmanage.modeler.ExpendingJpaController;
-import com.budgetmanage.modeler.IngressJpaController;
 import com.budgetmanage.entities.Expending;
 import com.budgetmanage.entities.Ingress;
+import com.budgetmanage.modeler.ExpendingJpaController;
+import com.budgetmanage.modeler.IngressJpaController;
 import com.budgetmanage.util.Constant;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
@@ -16,7 +14,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -82,7 +79,6 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
         setBackground(new java.awt.Color(204, 255, 204));
         setForeground(new java.awt.Color(99, 99, 241));
 
-        jComboBox1.setEditable(true);
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Ingreso", "Gasto" }));
         jComboBox1.setToolTipText(Constant.COMBOX_FINANCE_MSG);
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
@@ -135,22 +131,18 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton1)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, 115, Short.MAX_VALUE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton1)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, 115, Short.MAX_VALUE)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jButton2)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -291,7 +283,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(165, 165, 165)
+                        .addGap(161, 161, 161)
                         .addComponent(jLabel12)))
                 .addContainerGap(111, Short.MAX_VALUE))
         );
@@ -343,7 +335,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
             jLabel2.setText("Nombre del "+type);
             jLabel7.setText("Nombre: Nombre designado para el "+type);
             jLabel8.setText("Tipo: Categoria del "+type);
-            jLabel9.setText("Monto: Valor numerico designado para el "+type+", favor colocar solo numeros");
+            jLabel9.setText("Monto: Valor numerico designado para el "+type);
             jLabel10.setText("Prioridad: Prioridad asignada al "+type);
             jPanel1.setBorder(BorderFactory.createTitledBorder("Datos del "+jComboBox1.getSelectedItem().toString().toLowerCase()));
             jPanel1.setVisible(true);
@@ -363,48 +355,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
             jTextField2.setVisible(false);
             jButton2.setVisible(false);
         }
-        else{
-            jLabel4.setVisible(false);
-            jTextField2.setVisible(false);
-        }
     }//GEN-LAST:event_jComboBox3ItemStateChanged
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        
-        int priority = 1;
-        String process = jComboBox1.getSelectedItem().toString();
-        
-        switch(jComboBox3.getSelectedItem().toString().toUpperCase()){
-            case "ALTO":{
-                priority = 1;
-                break;
-            }
-            case "MEDIO": {
-                priority = 2;
-                break;
-            }
-            case "BAJO": {
-                priority = 3;
-                break;
-            }   
-        }
-        
-        switch(process.toUpperCase()){
-            case "GASTO":{
-                 Expending expending = new Expending(jTextField1.getText().trim().toUpperCase(), jComboBox2.getSelectedItem().toString().trim().toUpperCase()
-                                              , Double.parseDouble(jTextField3.getText().toString().trim().toUpperCase()), priority);
-                 break;
-            }
-            case "INGRESO":{
-                 Ingress ingress = new Ingress(jTextField1.getText().trim().toUpperCase(), jComboBox2.getSelectedItem().toString().trim().toUpperCase()
-                                              , Double.parseDouble(jTextField3.getText().toString().trim().toUpperCase()), priority);
-                 break;
-            }            
-        }
-        com.budgetmanage.util.Util.clearTextFields(this);               
-        jLabel12.setText(process+" agregado satisfactoriamente");
-        jLabel12.setVisible(true);
-    }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
        
