@@ -4,6 +4,8 @@
  */
 package com.budgetmanage.ui.Maintenance;
 
+import com.budgetmanage.ui.maintenance.FinancesAddFrm;
+import java.awt.Container;
 import java.awt.event.ItemEvent;
 
 /**
@@ -15,7 +17,8 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel {
     /**
      * Creates new form FinancesMaintenanceFrm
      */
-    public FinancesMaintenanceFrm() {
+    public FinancesMaintenanceFrm(Container n) {
+        this.c = n;
         initComponents();
     }
 
@@ -28,36 +31,61 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 255, 204));
-        setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
-        jLabel1.setText("Finanzas");
-        add(jLabel1);
-        jLabel1.setBounds(230, 10, 73, 22);
-
+        jComboBox1.setEditable(true);
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Ingreso", "Gasto", "Presupuesto" }));
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
             }
         });
-        add(jComboBox1);
-        jComboBox1.setBounds(30, 60, 110, 20);
-        add(jTextField1);
-        jTextField1.setBounds(30, 90, 85, 20);
-        jTextField1.setVisible(false);
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3.setText("*Seleccione un tipo de finanza");
+
+        jPanel3.setBackground(new java.awt.Color(0, 204, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 0, 0)));
+
+        jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(204, 255, 204));
+        jLabel13.setText("Editar Finanzas");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(215, 215, 215)
+                .addComponent(jLabel13)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addContainerGap())
+        );
+
+        jPanel2.setBackground(this.getBackground());
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Finanza", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+
+        jLabel2.setText("Nombre del "+jComboBox1.getSelectedItem().toString());
 
         jButton1.setText("Buscar");
         jButton1.setBorderPainted(false);
@@ -66,14 +94,6 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel {
                 jButton1MouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        add(jButton1);
-        jButton1.setBounds(310, 90, 70, 23);
-        jButton1.setVisible(false);
 
         jCheckBox1.setText("Buscar todos");
         jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
@@ -81,24 +101,13 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel {
                 jCheckBox1ItemStateChanged(evt);
             }
         });
-        add(jCheckBox1);
-        jCheckBox1.setBounds(30, 130, 120, 23);
-        jCheckBox1.setVisible(false);
 
-        jButton2.setText("Nuevo");
+        jButton2.setText("Crear");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
             }
         });
-        add(jButton2);
-        jButton2.setBounds(310, 130, 65, 23);
-        jButton2.setVisible(false);
-
-        jLabel2.setText("Nombre del "+jComboBox1.getSelectedItem().toString());
-        add(jLabel2);
-        jLabel2.setBounds(120, 90, 145, 23);
-        jLabel2.setVisible(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,35 +132,82 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel {
         jScrollPane1.setVisible(false);
         //jTable1.setVisible(false);
 
-        add(jScrollPane1);
-        jScrollPane1.setBounds(30, 190, 446, 94);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jButton1))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox1)
+                    .addComponent(jButton2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(87, Short.MAX_VALUE))
+        );
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel3.setText("*Seleccione un tipo de finanza");
-        add(jLabel3);
-        jLabel3.setBounds(160, 60, 145, 14);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel3)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 349, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(474, Short.MAX_VALUE))
+        );
+
+        jPanel2.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         if(jComboBox1.getSelectedItem().toString().equalsIgnoreCase("seleccione")){
-            jScrollPane1.setVisible(false);
-            jButton1.setVisible(false);
-            jTextField1.setVisible(false);
-            jLabel2.setVisible(false);
-            jCheckBox1.setVisible(false);
-            jButton2.setVisible(false);
-            jLabel3.setVisible(true);
+            jPanel2.setVisible(false);
         }
         else{
-            //jScrollPane1.setVisible(true);
-            jCheckBox1.setVisible(true);
-            jButton1.setVisible(true);
-            jTextField1.setVisible(true);
-            jLabel2.setVisible(true);
-            jButton2.setVisible(true);
-            jLabel3.setVisible(false);
-            jLabel2.setText("Nombre del "+jComboBox1.getSelectedItem().toString());
+            jPanel2.setVisible(true);
         }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
@@ -160,40 +216,81 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel {
         jScrollPane1.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //jCheckBox1.setVisible(false);
-        //jScrollPane1.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
         if(evt.getStateChange() == ItemEvent.SELECTED){
-            jButton1.setVisible(false);
-            jTextField1.setVisible(false);
-            jLabel2.setVisible(false);
-            jScrollPane1.setVisible(true);
+            unValidateItems(true, 2);
 
         }else{
-            jButton1.setVisible(true);
-            jTextField1.setVisible(true);
-            jLabel2.setVisible(true);
-            jScrollPane1.setVisible(false);
+            unValidateItems(false, 2);
         }
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        
+        c.removeAll();
+        FinancesAddFrm faf = new FinancesAddFrm(jComboBox1.getSelectedItem().toString());
+        faf.setPreferredSize(c.getPreferredSize());
+        c.add(faf);
     }//GEN-LAST:event_jButton2MouseClicked
 
+    private void unValidateItems(boolean i, int what){
+        if(i){
+            switch(what){
+                case 1: {
+                    jCheckBox1.setVisible(true);
+                    jButton1.setVisible(true);
+                    jTextField1.setVisible(true);
+                    jLabel2.setVisible(true);
+                    jLabel3.setVisible(false);
+                    if(!jComboBox1.getSelectedItem().toString().equalsIgnoreCase("presupuesto")){
+                        jButton2.setVisible(true);
+                    }                    
+                    jLabel2.setText("Nombre del "+jComboBox1.getSelectedItem().toString());
+                    break;
+                    
+                }
+                case 2: {
+                    jButton1.setVisible(false);
+                    jTextField1.setVisible(false);
+                    jLabel2.setVisible(false);
+                    jScrollPane1.setVisible(true);
+                    break;
+                }
+            }
+        }else{
+            switch(what){
+                case 1: {
+                    jScrollPane1.setVisible(false);
+                    jButton1.setVisible(false);
+                    jTextField1.setVisible(false);
+                    jLabel2.setVisible(false);
+                    jCheckBox1.setVisible(false);
+                    jLabel3.setVisible(true);
+                    jButton2.setVisible(false);
+                    break;
+                }
+                case 2: {
+                    jButton1.setVisible(true);
+                    jTextField1.setVisible(true);
+                    jLabel2.setVisible(true);
+                    jScrollPane1.setVisible(false);
+                    break;
+                }
+            }
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+    private Container c;
 }

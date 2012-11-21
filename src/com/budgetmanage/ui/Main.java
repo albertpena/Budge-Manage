@@ -50,17 +50,20 @@ public class Main extends javax.swing.JFrame implements Constant{
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
         jMenuItem33 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle(Constant.TITLE);
         setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         jPanel1.setLayout(new java.awt.BorderLayout());
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 770, 550);
+        jPanel1.setBounds(0, 0, 600, 550);
         jPanel1.setPreferredSize(this.getPreferredSize());
 
         jMenu4.setText("Inicio");
@@ -122,6 +125,9 @@ public class Main extends javax.swing.JFrame implements Constant{
 
         jMenuBar1.add(jMenu1);
 
+        jMenu5.setText("Salir");
+        jMenuBar1.add(jMenu5);
+
         setJMenuBar(jMenuBar1);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -132,7 +138,7 @@ public class Main extends javax.swing.JFrame implements Constant{
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
         jPanel1.removeAll();
-        FinancesMaintenanceFrm fmf = new FinancesMaintenanceFrm();
+        FinancesMaintenanceFrm fmf = new FinancesMaintenanceFrm(jPanel1);
         fmf.setPreferredSize(dim);
         jPanel1.add(fmf, BorderLayout.CENTER);
     }//GEN-LAST:event_jMenuItem20ActionPerformed
@@ -188,6 +194,7 @@ public class Main extends javax.swing.JFrame implements Constant{
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem19;

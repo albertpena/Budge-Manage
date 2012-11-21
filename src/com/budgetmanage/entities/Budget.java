@@ -4,65 +4,88 @@
  */
 package com.budgetmanage.entities;
 
-import com.budgetmanage.util.Entities;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Nestor_Velasquez
  */
-public class Budget extends Finance implements Entities{
-
-    private Set<Ingress>   ingresses = new HashSet<>();
-    private Set<Expending> expending = new HashSet<>();
+@Entity
+public class Budget implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    @Column(name="Budget_name", unique=true)
+    private String name;
+    @Column(name="Budget_Status")
+    private String Status;
     
-    public Budget() {
-        
-    }
-    
-    
-    @Override
-    public Finance get() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Finance get(String name) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Integer getId() {
+        return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
-    public void add() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Budget)) {
+            return false;
+        }
+        Budget other = (Budget) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.budgetmanage.entities.Budget[ id=" + id + " ]";
+    }
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
     }
 
     /**
-     *
+     * @param name the name to set
      */
-    @Override
-    public void modify(String name) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Override
-    public void delete(String name) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    /**
+     * @return the Status
+     */
+    public String getStatus() {
+        return Status;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    /**
+     * @param Status the Status to set
+     */
+    public void setStatus(String Status) {
+        this.Status = Status;
     }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setConcept(int concept) {
-        this.concept = concept;
-    }
-
-    public int getConcept() {
-        return concept;
-    }
+    
 }
