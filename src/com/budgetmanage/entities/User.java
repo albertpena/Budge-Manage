@@ -3,65 +3,89 @@
  * and open the template in the editor.
  */
 package com.budgetmanage.entities;
-import com.budgetmanage.util.Entities;
+
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
- * The User class have all about the User's management 
+ *
  * @author Fulvio
  */
-public class User implements Entities{
-    private String name;
-    private String lastName;
+@Entity
+public class User implements Serializable {
+    @Column(nullable=false, length=50)
     private String password;
+    @Column(unique=true)
     private String userName;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    private Long id;
 
-   
-    public String getName() {
-        return name;
+    public Long getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getLastName() {
-        return lastName;
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof User)) {
+            return false;
+        }
+        User other = (User) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 
+    @Override
+    public String toString() {
+        return "com.budgetmanage.entities.User[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * @param password the password to set
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * @return the userName
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * @param userName the userName to set
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
-     @Override
-    public void add() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void modify(String name) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void delete(String name) {
-        /*This method without your name is delete its fuction is disable users
-         on the system*/
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
+    
 }
