@@ -51,7 +51,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
 
         jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(204, 255, 204));
-        jLabel13.setText("Editar Finanzas");
+        jLabel13.setText("Consultar Finanzas");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
