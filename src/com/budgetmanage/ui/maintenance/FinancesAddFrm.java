@@ -66,6 +66,10 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -119,6 +123,22 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
 
         jButton2.setText("Agregar");
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel1.setText("jLabel1");
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel14.setText("jLabel1");
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel15.setText("jLabel1");
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel16.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -138,11 +158,25 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
                     .addComponent(jFormattedTextField1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                                .addComponent(jButton2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel14))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel15))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -151,22 +185,26 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addContainerGap(32, Short.MAX_VALUE))
@@ -190,8 +228,12 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
                 }
             }
         });
+        jLabel1.setVisible(false);
+        jLabel14.setVisible(false);
+        jLabel15.setVisible(false);
+        jLabel16.setVisible(false);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Leyenda", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 2, 12), new java.awt.Color(51, 0, 51))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Leyenda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(51, 0, 51))); // NOI18N
 
         jLabel7.setForeground(new java.awt.Color(99, 99, 241));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -273,19 +315,18 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel11))
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel11))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(161, 161, 161)
-                        .addComponent(jLabel12)))
-                .addContainerGap(111, Short.MAX_VALUE))
+                        .addComponent(jLabel12))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,8 +356,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
         if(jComboBox1.getSelectedItem().toString().equalsIgnoreCase("seleccione")){
             jPanel1.setVisible(false);
             jPanel2.setVisible(false);
-        }
-        else{
+        }else{
             switch(jComboBox1.getSelectedItem().toString().toUpperCase()){
                 case "GASTO":{
                     jComboBox3.setModel(new DefaultComboBoxModel(EXPENDING_TYPES));
@@ -358,69 +398,116 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
     }//GEN-LAST:event_jComboBox3ItemStateChanged
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-       
-        int priority = 1;
+        unactivateErrorMsg();
+        int priority = 0;        
         String process = jComboBox1.getSelectedItem().toString();
         
-        switch(jComboBox3.getSelectedItem().toString().toUpperCase()){
-            case "ALTO":{
+        switch(jComboBox2.getSelectedItem().toString().toUpperCase()){
+            case "ALTA":{
                 priority = 1;
                 break;
             }
-            case "MEDIO": {
+            case "MEDIA": {
                 priority = 2;
                 break;
             }
-            case "BAJO": {
+            case "BAJA": {
                 priority = 3;
                 break;
             }   
         }
+        
+        String name = jTextField1.getText().trim().toUpperCase();
+        String type = jComboBox3.getSelectedItem().toString().toUpperCase();
+        int value = 0;
+        try{
+            value = Integer.parseInt(jFormattedTextField1.getText());
+        }catch(Exception e){
+            jLabel14.setText(Constant.VALUE_ERROR_MSG);
+            jLabel14.setVisible(true);
+        }
+        
         Date actualDate = new Date();
         String date = new SimpleDateFormat(FORMAT_DATE).format(actualDate);        
         
-        switch(process.toUpperCase()){            
-            case "GASTO":{
-                Expending expending = new Expending(); 
-                EntityManagerFactory emf = Persistence.createEntityManagerFactory("BudgeManagePU");
-                ExpendingJpaController ejpa = new ExpendingJpaController(emf);
-               
-                //Setting attributes
-                expending.setName(jTextField1.getText().trim().toUpperCase());
-                expending.setPriority(priority);
-                expending.setExpendingTotal(Integer.parseInt(jFormattedTextField1.getText()));
-                expending.setGenerateDate(date);
-                expending.setUpdateDate(date);
-                expending.setType(jComboBox3.getSelectedItem().toString().toUpperCase().trim());
-                
-                //Database saving
-                ejpa.create(expending);                 
-                break;
+        if(dataValidation(name, type, priority, value, process)){
+            
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory(P_UNIT);
+            switch(process.toUpperCase()){            
+                case "GASTO":{
+                    Expending expending = new Expending();                 
+                    ExpendingJpaController ejpa = new ExpendingJpaController(emf);
+
+                    //Setting attributes
+                    expending.setName(name);
+                    expending.setPriority(priority);
+                    expending.setExpendingTotal(value);
+                    expending.setGenerateDate(date);
+                    expending.setUpdateDate(date);
+                    expending.setType(type);
+
+                    //Database saving                
+                    ejpa.create(expending);                 
+                    break;
+                }
+                case "INGRESO":{
+                     Ingress ingress = new Ingress();                 
+                     IngressJpaController ijpa = new IngressJpaController(emf);
+
+                     //Setting attributes
+                     ingress.setName(name);
+                     ingress.setPriority(priority);
+                     ingress.setIngressTotal(value);
+                     ingress.setGenerateDate(date);
+                     ingress.setUpdateDate(date);
+                     ingress.setType(type);
+
+                     //Saving on DB
+                     ijpa.create(ingress);
+                     break;
+                }            
             }
-            case "INGRESO":{
-                 Ingress ingress = new Ingress();
-                 EntityManagerFactory emf = Persistence.createEntityManagerFactory("BudgeManagePU");
-                 IngressJpaController ijpa = new IngressJpaController(emf);
-                 
-                 //Setting attributes
-                 ingress.setName(jTextField1.getText().trim().toUpperCase());
-                 ingress.setPriority(priority);
-                 ingress.setIngressTotal(Integer.parseInt(jFormattedTextField1.getText()));
-                 ingress.setGenerateDate(date);
-                 ingress.setUpdateDate(date);
-                 ingress.setType(jComboBox3.getSelectedItem().toString().toUpperCase().trim());
-                 
-                 //Saving on DB
-                 ijpa.create(ingress);
-                 break;
-            }            
+            jLabel12.setText(Constant.FINANCE_SUCCEED_MSG);
+            jLabel12.setVisible(true);
         }
-        com.budgetmanage.util.Util.clearTextFields(this);               
-        jLabel12.setText(process+" agregado satisfactoriamente");
-        jLabel12.setVisible(true);
-       
     }//GEN-LAST:event_jButton1MouseClicked
 
+    public boolean dataValidation(String name, String type, int pr, int value, String process){
+
+        if(name.equals("")){
+            jLabel1.setText(Constant.NAME_ERROR_MSG);
+            jLabel1.setVisible(true);
+            return false;
+        }
+        if(type.equalsIgnoreCase("Seleccione")){
+            jLabel15.setText(Constant.TYPE_ERROR_MSG);
+            jLabel15.setVisible(true);
+            return false;
+        }
+        
+        if(value == 0){            
+            jLabel14.setText(Constant.VALUE_ERROR_MSG);
+            jLabel14.setVisible(true);
+            return false;
+        }
+        
+        if(process.equalsIgnoreCase("gasto")){
+            if(pr == 0){
+                jLabel16.setText(Constant.PRIORITY_ERROR_MSG);
+                jLabel16.setVisible(true);
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public void unactivateErrorMsg(){
+        jLabel1.setVisible(false);
+        jLabel14.setVisible(false);
+        jLabel15.setVisible(false);
+        jLabel16.setVisible(false);
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -428,10 +515,14 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
