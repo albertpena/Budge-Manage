@@ -26,6 +26,15 @@ public interface Constant {
     public String VALUE_ERROR_MSG = "Debe colocar un monto";
     public String FINANCE_SUCCEED_MSG = "Finanza agregada satisfactoriamente";
     public String P_UNIT = "BudgeManagePU";
+    public String[] FINANCES_ADD_ARRAY = {"Seleccione","Gastos","Ingresos"};
+    public String[] FINANCES_EDIT_ARRAY = {"Seleccione","Gastos","Ingresos","Presupuesto"};
+    public String GASTO = "GASTOS";
+    public String INGRESO = "INGRESOS";
+    public String NAME_MSG = "Nombre: Nombre designado para la finanza.";
+    public String TYPE_MSG = "Tipo: Categoria a la que pertenece la finanza.";
+    public String VALUE_MSG = "Monto: Valor numerico designado para la finanza.";
+    public String PRIORITY_MSG = "Prioridad: Prioridad asignada a la finanza";
+    
     Color BKG = new Color(204,255,204);
     
 }

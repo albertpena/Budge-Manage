@@ -73,6 +73,8 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jPanel1.setBackground(Constant.BKG);
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 11))); // NOI18N
 
+        jLabel2.setText("Nombre:");
+
         jButton1.setText("Buscar");
         jButton1.setBorderPainted(false);
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,7 +186,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("*Seleccione un tipo de finanza");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Ingreso", "Gasto", "Presupuesto" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(FINANCES_EDIT_ARRAY));
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
@@ -243,8 +245,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         if(process.equalsIgnoreCase("seleccione")){
             reset();            
         }else{
-            jLabel3.setVisible(false);
-            jLabel2.setText("Nombre del "+process);
+            jLabel3.setVisible(false);            
             jPanel1.setVisible(true);
         }
     }//GEN-LAST:event_jComboBox1ItemStateChanged

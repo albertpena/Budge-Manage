@@ -4,8 +4,8 @@
  */
 package com.budgetmanage.modeler;
 
-import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.entities.Expending;
+import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
