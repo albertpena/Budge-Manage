@@ -21,6 +21,9 @@ public class User implements Serializable {
     private String password;
     @Column(unique=true)
     private String userName;
+    @Column(nullable=false)
+    private boolean status;
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -86,6 +89,20 @@ public class User implements Serializable {
      */
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    /**
+     * @return the status
+     */
+    public boolean isStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(boolean status) {
+        this.status = status;
     }
     
 }
