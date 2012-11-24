@@ -406,7 +406,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
                     //Setting attributes
                     expending.setName(name);
                     expending.setPriority(priority);
-                    expending.setExpendingTotal(value);
+                    expending.seFinanceTotal(value);
                     expending.setGenerateDate(date);
                     expending.setUpdateDate(date);
                     expending.setType(type);
@@ -426,7 +426,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
                      //Setting attributes
                      ingress.setName(name);
                      ingress.setPriority(priority);
-                     ingress.setIngressTotal(value);
+                     ingress.seFinanceTotal(value);
                      ingress.setGenerateDate(date);
                      ingress.setUpdateDate(date);
                      ingress.setType(type);

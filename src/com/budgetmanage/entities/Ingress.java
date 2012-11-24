@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
  * @author Nestor_Velasquez
  */
 @Entity
-public class Ingress implements Serializable {
+public class Ingress extends Finance implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,10 +35,12 @@ public class Ingress implements Serializable {
     @Column(name="Ingress_type")
     private String type;
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }
@@ -71,6 +73,7 @@ public class Ingress implements Serializable {
     /**
      * @return the name
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -78,6 +81,7 @@ public class Ingress implements Serializable {
     /**
      * @param name the name to set
      */
+    @Override
     public void setName(String name) {
         this.name = name;
     }
@@ -85,20 +89,23 @@ public class Ingress implements Serializable {
     /**
      * @return the ingressTotal
      */
-    public int getIngressTotal() {
+    @Override
+    public int getFinanceTotal() {
         return ingressTotal;
     }
 
     /**
      * @param ingressTotal the ingressTotal to set
      */
-    public void setIngressTotal(int ingressTotal) {
+    @Override
+    public void seFinanceTotal(int ingressTotal) {
         this.ingressTotal = ingressTotal;
     }
 
     /**
      * @return the generateDate
      */
+    @Override
     public String getGenerateDate() {
         return generateDate;
     }
@@ -106,6 +113,7 @@ public class Ingress implements Serializable {
     /**
      * @param generateDate the generateDate to set
      */
+    @Override
     public void setGenerateDate(String generateDate) {
         this.generateDate = generateDate;
     }
@@ -113,6 +121,7 @@ public class Ingress implements Serializable {
     /**
      * @return the updateDate
      */
+    @Override
     public String getUpdateDate() {
         return updateDate;
     }
@@ -120,6 +129,7 @@ public class Ingress implements Serializable {
     /**
      * @param updateDate the updateDate to set
      */
+    @Override
     public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
     }
@@ -127,6 +137,7 @@ public class Ingress implements Serializable {
     /**
      * @return the priority
      */
+    @Override
     public int getPriority() {
         return priority;
     }
@@ -134,6 +145,7 @@ public class Ingress implements Serializable {
     /**
      * @param priority the priority to set
      */
+    @Override
     public void setPriority(int priority) {
         this.priority = priority;
     }
@@ -141,6 +153,7 @@ public class Ingress implements Serializable {
     /**
      * @return the type
      */
+    @Override
     public String getType() {
         return type;
     }
@@ -148,9 +161,9 @@ public class Ingress implements Serializable {
     /**
      * @param type the type to set
      */
+    @Override
     public void setType(String type) {
         this.type = type;
     }
-    
     
 }

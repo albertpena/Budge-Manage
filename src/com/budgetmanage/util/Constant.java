@@ -40,6 +40,8 @@ public interface Constant {
     public String PU = "BudgeManagePU";
     public String USER_ERROR_MSG = "Favor colocar un nombre de usuario";
     public String PASS_ERROR_MSG = "Favor colocar la clave";
+    public String[] INGRESS_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Fecha Modificacion"};
+    public String[] EXPENDING_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Fecha Modificacion", "Prioridad"};
     
     Color BKG = new Color(204,255,204);
     

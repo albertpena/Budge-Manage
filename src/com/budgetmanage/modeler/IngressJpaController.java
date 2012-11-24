@@ -6,6 +6,8 @@ package com.budgetmanage.modeler;
 
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.entities.Ingress;
+import com.budgetmanage.modeler.exceptions.PreexistingEntityException;
+import com.budgetmanage.util.Constant;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -30,14 +32,17 @@ public class IngressJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Ingress ingress) {
+    public void create(Ingress ingress) throws PreexistingEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(ingress);
-            em.getTransaction().commit();
-        } finally {
+            em.getTransaction().commit();           
+        }catch(Exception ex){
+            throw new PreexistingEntityException(Constant.EXIST_ERROR_MSG);
+        }
+        finally {
             if (em != null) {
                 em.close();
             }
