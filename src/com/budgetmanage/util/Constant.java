@@ -34,6 +34,8 @@ public interface Constant {
     public String TYPE_MSG = "Tipo: Categoria a la que pertenece la finanza.";
     public String VALUE_MSG = "Monto: Valor numerico designado para la finanza.";
     public String PRIORITY_MSG = "Prioridad: Prioridad asignada a la finanza";
+    public String USER_ERROR_MSG = "Favor colocar un nombre de usuario";
+    public String PASS_ERROR_MSG = "Favor colocar la clave";
     
     Color BKG = new Color(204,255,204);
     
