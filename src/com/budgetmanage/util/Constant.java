@@ -28,12 +28,16 @@ public interface Constant {
     public String P_UNIT = "BudgeManagePU";
     public String[] FINANCES_ADD_ARRAY = {"Seleccione","Gastos","Ingresos"};
     public String[] FINANCES_EDIT_ARRAY = {"Seleccione","Gastos","Ingresos","Presupuesto"};
-    public String GASTO = "GASTOS";
-    public String INGRESO = "INGRESOS";
+    public String EXPENDING = "GASTOS";
+    public String INGRESS = "INGRESOS";
     public String NAME_MSG = "Nombre: Nombre designado para la finanza.";
     public String TYPE_MSG = "Tipo: Categoria a la que pertenece la finanza.";
     public String VALUE_MSG = "Monto: Valor numerico designado para la finanza.";
     public String PRIORITY_MSG = "Prioridad: Prioridad asignada a la finanza";
+    public String EXIST_ERROR_MSG = "Existe una finanza con este criterio";
+    public int PAGE_MAX = 10;
+    public int PAGE_MIN = 1;
+    public String PU = "BudgeManagePU";
     public String USER_ERROR_MSG = "Favor colocar un nombre de usuario";
     public String PASS_ERROR_MSG = "Favor colocar la clave";
     

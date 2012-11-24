@@ -6,6 +6,8 @@ package com.budgetmanage.modeler;
 
 import com.budgetmanage.entities.Expending;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
+import com.budgetmanage.util.Constant;
+import com.budgetmanage.modeler.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -30,14 +32,17 @@ public class ExpendingJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Expending expending) {
+    public void create(Expending expending) throws PreexistingEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(expending);
             em.getTransaction().commit();
-        } finally {
+        }catch(Exception ex){
+            throw new PreexistingEntityException(Constant.EXIST_ERROR_MSG);
+        }
+        finally {
             if (em != null) {
                 em.close();
             }
