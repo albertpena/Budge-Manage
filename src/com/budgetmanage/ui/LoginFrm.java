@@ -62,6 +62,11 @@ public class LoginFrm extends javax.swing.JPanel implements Constant{
                 btnAceptarMouseClicked(evt);
             }
         });
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setText("Clave");
@@ -90,8 +95,8 @@ public class LoginFrm extends javax.swing.JPanel implements Constant{
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(ContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPassword)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
+                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(txtUsuario)))
                     .addComponent(lblValidatorMessage))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
@@ -136,16 +141,19 @@ public class LoginFrm extends javax.swing.JPanel implements Constant{
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         lblValidatorMessage.setVisible(false);
        boolean isOk = true;
+       //Validate if the field was Empty 
         if(txtUsuario.getText().isEmpty()){
             lblValidatorMessage.setText(USER_ERROR_MSG);
             txtUsuario.setFocusable(true);
             isOk = false;
-        }if(txtPassword.getPassword().toString().equals("")){
+        }else if(txtPassword.getText().isEmpty()){
             lblValidatorMessage.setText(PASS_ERROR_MSG);
             txtPassword.setFocusable(true);
             isOk = false;
         }
-        if(isOk){
+        //if all is correct [No empty fields] next step is
+        //is to verify in the DataBase
+        if(isOk == true){
             con.removeAll();
             Dimension dim = con.getPreferredSize();
             FinancesAddFrm fna = new FinancesAddFrm();
@@ -156,6 +164,10 @@ public class LoginFrm extends javax.swing.JPanel implements Constant{
            lblValidatorMessage.setVisible(true);
         }
     }//GEN-LAST:event_btnAceptarMouseClicked
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContainerPanel;

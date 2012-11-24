@@ -72,8 +72,8 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtPassword" max="32767" attributes="0"/>
-                              <Component id="txtUsuario" pref="180" max="32767" attributes="0"/>
+                              <Component id="txtPassword" pref="180" max="32767" attributes="0"/>
+                              <Component id="txtUsuario" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="lblValidatorMessage" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -149,6 +149,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAceptarMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAceptarActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
