@@ -140,8 +140,7 @@ public class LoginFrm extends javax.swing.JPanel implements Constant{
             lblValidatorMessage.setText(USER_ERROR_MSG);
             txtUsuario.setFocusable(true);
             isOk = false;
-        }
-        if(txtPassword.getPassword().toString().equals("")){
+        }if(txtPassword.getPassword().toString().equals("")){
             lblValidatorMessage.setText(PASS_ERROR_MSG);
             txtPassword.setFocusable(true);
             isOk = false;

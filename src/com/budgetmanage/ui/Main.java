@@ -24,6 +24,9 @@ public class Main extends javax.swing.JFrame implements Constant{
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setLayout(new BorderLayout());
         dim = this.getPreferredSize();
+        LoginFrm login = new LoginFrm(this);
+        jPanel1.removeAll();
+        jPanel1.add(login, BorderLayout.CENTER);
         //jPanel1.add(new LoginFrm(), BorderLayout.CENTER);
     }
 

@@ -5,12 +5,12 @@ package com.budgetmanage.ui;
  *
  * @author Fulvio
  */
-public class FrmRegister extends javax.swing.JFrame {
+public class RegisterFrm extends javax.swing.JFrame {
 
     /**
-     * Creates new form FrmRegister
+     * Creates new form RegisterFrm
      */
-    public FrmRegister() {
+    public RegisterFrm() {
         initComponents();
     }
 
