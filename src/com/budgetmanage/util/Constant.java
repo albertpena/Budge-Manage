@@ -14,7 +14,7 @@ public interface Constant {
     public int FRAME_HEIGHT = 602;
     public int FRAME_WIDTH = 606;
     public String TITLE = "Budget Friendly";
-    public String[] EXPENDING_TYPES = {"Seleccione","Telecomunicaciones","Alquiler","Prestamo","Celular","Ocio","Estetica","Combustible","Transporte","Alimentos","Hogar","Otros"};
+    public String[] EXPENDING_TYPES = {"Seleccione","Comunicacion","Alquiler","Prestamo","Celular","Ocio","Estetica","Combustible","Transporte","Alimentos","Hogar","Otros"};
     public String[] INGRESS_TYPES = {"Seleccione","Salario","Remesas","Comisiones","Bonificaciones","Extras","Otros"};
     public int YES = 1;
     public int NO = 2;
@@ -42,6 +42,7 @@ public interface Constant {
     public String PASS_ERROR_MSG = "Favor colocar la clave";
     public String[] INGRESS_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Fecha Modificacion"};
     public String[] EXPENDING_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Fecha Modificacion", "Prioridad"};
+    public String SEARCH_MSG_ERROR = "Debe colocar un criterio de busqueda";
     
     Color BKG = new Color(204,255,204);
     

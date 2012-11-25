@@ -4,15 +4,20 @@
  */
 package com.budgetmanage.ui.Consulting;
 
+import com.budgetmanage.entities.Budget;
+import com.budgetmanage.entities.Expending;
 import com.budgetmanage.entities.Finance;
+import com.budgetmanage.entities.Ingress;
 import com.budgetmanage.modeler.ExpendingJpaController;
 import com.budgetmanage.modeler.IngressJpaController;
 import com.budgetmanage.util.Constant;
-import com.budgetmanage.util.TableModel;
 import java.awt.event.ItemEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -39,6 +44,8 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -48,11 +55,26 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
 
         setBackground(Constant.BKG);
 
@@ -83,7 +105,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jPanel1.setBackground(Constant.BKG);
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 11))); // NOI18N
 
-        jLabel2.setText("Nombre:");
+        jLabel2.setText("Buscar por:");
 
         jButton1.setText("Buscar");
         jButton1.setBorderPainted(false);
@@ -111,6 +133,15 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setText("jLabel1");
 
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Id", "Nombre", "Monto" }));
+        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox2ItemStateChanged(evt);
+            }
+        });
+
+        jLabel4.setText("jLabel4");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -118,40 +149,55 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
-                    .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(26, 26, 26)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton2)))
+                        .addGap(0, 40, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jCheckBox1)
-                    .addComponent(jLabel1))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jButton1)
+                        .addComponent(jButton2)))
+                .addContainerGap())
         );
 
+        jTextField1.setVisible(false);
         jLabel1.setVisible(false);
+        jLabel4.setVisible(false);
 
         jPanel2.setBackground(Constant.BKG);
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Finanza", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 11))); // NOI18N
 
+        jTable1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -160,37 +206,23 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                 {null, null, null, null}
             },
             new String [] {
-                "Nombre", "Tipo", "Monto", "Fecha Modificacion"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jScrollPane1.setViewportView(jTable1);
-        //jScrollPane1.setVisible(false);
-        //jTable1.setVisible(false);
+        ));
+        jScrollPane3.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane3)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
@@ -211,15 +243,14 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(jLabel3))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(253, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,9 +262,9 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         jPanel1.setVisible(false);
@@ -241,11 +272,12 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        if(dataValidation("name")){
+        if(dataValidation()){
             jLabel1.setVisible(false);
-            jPanel2.setVisible(true);
+            String what = jTextField1.getText().trim().toUpperCase();
+            search(false, what);
         }else{
-            jLabel1.setText(Constant.NAME_ERROR_MSG);
+            jLabel1.setText(Constant.SEARCH_MSG_ERROR);
             jLabel1.setVisible(true);
         }
     }//GEN-LAST:event_jButton1MouseClicked
@@ -258,36 +290,16 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         }else{
             jLabel3.setVisible(false);            
             jPanel1.setVisible(true);
+            jCheckBox1.setSelected(false);
         }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
-        String process = jComboBox1.getSelectedItem().toString().toUpperCase();
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(P_UNIT);
-        List<Finance> finances = null;
-        
         
         if(evt.getStateChange() == ItemEvent.SELECTED){
-            switch(process){
-                case EXPENDING:{
-                    ExpendingJpaController ejc = new ExpendingJpaController(emf);
-                    finances = ejc.findExpendingEntities(PAGE_MAX,PAGE_MIN);
-                    break;                    
-                }
-                case INGRESS:{
-                    IngressJpaController ijc = new IngressJpaController(emf);
-                    finances = ijc.findIngressEntities(PAGE_MAX,PAGE_MIN);
-                    break;
-                }
-            }
-            
-            if(!finances.isEmpty()){                
-                ((TableModel) jTable1.getModel()).getFinances().clear();
-                ((TableModel) jTable1.getModel()).getFinances().addAll(finances);
-                jTable1.updateUI();
-            }
-            jPanel2.setVisible(true);
+            search(true, null);
         }else{
+            jTable1.removeAll();
             jPanel2.setVisible(false);
         }
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
@@ -295,6 +307,85 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         reset();        
     }//GEN-LAST:event_jButton2MouseClicked
+    
+    private void search(boolean all, String what){
+        
+        String process = jComboBox1.getSelectedItem().toString().toUpperCase();
+        String wich = jLabel4.getText().toUpperCase();
+        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(P_UNIT);
+        ExpendingJpaController ejc = new ExpendingJpaController(emf);
+        IngressJpaController ijc = new IngressJpaController(emf);
+        
+        List<Finance> finances = null;
+        jTable1.setModel(new TableModel());
+       
+        
+        switch(process){
+            case EXPENDING:{
+                if(all){
+                    finances = ejc.findExpendingEntities();
+                }else{
+                    switch(wich){
+                        case "NOMBRE":{
+                            finances = ejc.findExpending("'%"+what+"%'");
+                            break;
+                        }
+                        case "MONTO":{
+                            finances = ejc.findExpending(Integer.parseInt(what));
+                            break;
+                        }
+                        case "ID":{
+                            finances = ejc.findExpending(Integer.parseInt(what));
+                        }
+                    }                    
+                }
+                break;                    
+            }
+            case INGRESS:{
+                if(all){
+                    finances = ijc.findIngressEntities();
+                }else{
+                    switch(wich){
+                        case "NOMBRE":{
+                            finances = ijc.findIngress("'%"+what+"%'");
+                            break;
+                        }
+                        case "MONTO":{
+                            finances = ijc.findIngress(Integer.parseInt(what));
+                            break;
+                        }
+                        case "ID":{
+                            finances = ijc.findIngress(Integer.parseInt(what));
+                        }
+                    }
+                }
+                break;
+            }
+        }               
+
+         if(!finances.isEmpty()){                
+                ((TableModel) jTable1.getModel()).getFinances().clear();
+                ((TableModel) jTable1.getModel()).getFinances().addAll(finances);
+                jTable1.updateUI();
+                jPanel2.setVisible(true);
+        }else{
+             JOptionPane.showMessageDialog(this, "No se encontraron finanzas con estos criterios","Busqueda",JOptionPane.INFORMATION_MESSAGE);
+         }
+    }
+    
+    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
+        String process = evt.getItem().toString();
+        
+        if(process.equalsIgnoreCase("Seleccione")){
+            jLabel4.setVisible(false);
+            jTextField1.setVisible(false);
+        }else{
+            jLabel4.setVisible(true);
+            jTextField1.setVisible(true);
+            jLabel4.setText(process);
+        }       
+    }//GEN-LAST:event_jComboBox2ItemStateChanged
 
     private void reset(){
         jLabel3.setVisible(true);
@@ -304,31 +395,143 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jCheckBox1.setSelected(false);
         jTextField1.setText("");
         jLabel1.setVisible(false);
+        jComboBox2.setSelectedIndex(0);
     }  
     
-    private boolean dataValidation(String what){
-        if(what.equalsIgnoreCase("name")){
-            if(jTextField1.getText().equals("")){
-                return false;
-            }
-        }
+    private boolean dataValidation(){
+        String what = jTextField1.getText();
+        if (what.equalsIgnoreCase("")){
+            return false;
+        }        
         return true;
         
     }
+
+private class TableModel<T> extends AbstractTableModel{
+
+    private List<T> finances;
+    private String[] columns = EXPENDING_COL_ARRAY;
+
+    public TableModel() {
+        this.finances = new ArrayList<>();
+    }
+
+    public TableModel(List<T> finances, String[] columns) {
+        this.finances = finances;
+        this.columns = columns;
+    }
+    
+    public TableModel(String[] columns){
+        this.columns = columns;
+    }
+    
+    public TableModel(List<T> finances) {
+        this.finances = finances;
+    }
+     
+    
+    @Override
+    public int getRowCount() {
+        return getFinances().size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return columns.length;
+    }
+
+    @Override
+    public String getColumnName(int i) {
+        return columns[i];
+    }
+    
+    
+    
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        String valueAt = null;
+        Object obj =  getFinances().get(rowIndex);
+        Finance finance = null;
+        
+        //Verifying the type of object
+        if(obj instanceof Expending){
+            finance = (Expending) obj;
+        }else if(obj instanceof Ingress){
+            finance = (Ingress) obj;
+        }else if(obj instanceof Budget){
+            finance = (Budget) obj;
+        }        
+        
+        switch(columnIndex){
+            case 0:{
+                valueAt = finance.getId().toString();
+                break;
+            }
+            case 1:{
+                valueAt = finance.getName();
+                break;
+            }
+            case 2:{
+                valueAt = finance.getType();
+                break;
+            }
+            case 3:{
+                valueAt = String.valueOf(finance.getFinanceTotal());
+                break;
+            }
+            case 4:{
+                valueAt = finance.getUpdateDate();
+                break;
+            }
+            case 5:{
+                valueAt = String.valueOf(finance.getPriority());
+                break;
+            }
+        }
+        return valueAt;
+    }
+
+    /**
+     * @param columns the columns to set
+     */
+    public void setColumns(String[] columns) {
+        this.columns = columns;
+    }
+
+    /**
+     * @return the finances
+     */
+    public List<T> getFinances() {
+        return finances;
+    }
+
+    /**
+     * @param finances the finances to set
+     */
+    public void setFinances(List<T> finances) {
+        this.finances = finances;
+    }
+    
+}
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 

@@ -127,11 +127,11 @@ public class ExpendingJpaController implements Serializable {
         }
     }
     
-    public List findExpending(String name){
+    public List<Finance> findExpending(String name){
         EntityManager em = getEntityManager();
         try{
-            Query exQuery = em.createNativeQuery("Select * from Expending where Expending_name like '"+name+"%';");
-            List<Expending> ex = exQuery.getResultList();
+            Query exQuery = em.createNativeQuery("Select c.* from Expending c where c.Expending_name like"+name, Expending.class);
+            List<Finance> ex = exQuery.getResultList();
             return ex;
         }
         finally{
@@ -139,11 +139,11 @@ public class ExpendingJpaController implements Serializable {
         }
     }
     
-    public List findExpending(int value){
+    public List<Finance> findExpending(int value){
         EntityManager em = getEntityManager();
         try{
-            Query exQuery = em.createNativeQuery("Select * from Expending where Expending_total = "+value+";");
-            List<Expending> ex = exQuery.getResultList();
+            Query exQuery = em.createNativeQuery("Select c.* from Expending c where c.Expending_Total = "+value, Expending.class);
+            List<Finance> ex = exQuery.getResultList();
             return ex;
         }
         finally{

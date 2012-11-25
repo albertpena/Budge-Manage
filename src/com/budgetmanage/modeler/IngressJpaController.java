@@ -72,7 +72,29 @@ public class IngressJpaController implements Serializable {
             }
         }
     }
-
+    
+    public List<Finance> findIngress(String name){
+        EntityManager em = getEntityManager();
+        try{            
+            Query inQuery = em.createNativeQuery("Select i.* from INGRESS i where i.INGRESS_NAME like "+name, Ingress.class);
+            List<Finance> ins= inQuery.getResultList();
+            return ins;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public List<Finance> findIngress(int value){
+        EntityManager em = getEntityManager();
+        try{            
+            Query inQuery = em.createNativeQuery("Select i.* from INGRESS i where i.Ingress_Total = "+value, Ingress.class);
+            List<Finance> ins= inQuery.getResultList();
+            return ins;
+        }finally{
+            em.close();
+        }
+    }
+    
     public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
