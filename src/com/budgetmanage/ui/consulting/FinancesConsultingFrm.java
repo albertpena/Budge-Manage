@@ -15,7 +15,8 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
 
     /**
      * Creates new form FinancesConsultingFrm
-     */
+    */
+    
     public FinancesConsultingFrm() {
         initComponents();
     }
@@ -252,6 +253,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
 
     private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
         if(evt.getStateChange() == ItemEvent.SELECTED){
+            
             jPanel2.setVisible(true);
         }else{
             jPanel2.setVisible(false);

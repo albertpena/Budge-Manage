@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
  * @author Nestor_Velasquez
  */
 @Entity
-public class Budget implements Serializable {
+public class Budget extends Finance implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -86,6 +86,56 @@ public class Budget implements Serializable {
      */
     public void setStatus(String Status) {
         this.Status = Status;
+    }
+
+    @Override
+    public int getFinanceTotal() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void seFinanceTotal(int expendingTotal) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getGenerateDate() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setGenerateDate(String generateDate) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getUpdateDate() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setUpdateDate(String updateDate) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int getPriority() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setPriority(int priority) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getType() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setType(String type) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

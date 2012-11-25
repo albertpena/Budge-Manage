@@ -10,14 +10,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Nestor_Velasquez
  */
 @Entity
-public class Expending implements Serializable {
+public class Expending extends Finance implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,10 +36,12 @@ public class Expending implements Serializable {
     @Column(name="Expending_Type")
     private String type;
     
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }
@@ -68,20 +69,23 @@ public class Expending implements Serializable {
     /**
      * @return the expendingTotal
      */
-    public int getExpendingTotal() {
+    @Override
+    public int getFinanceTotal() {
         return expendingTotal;
     }
 
     /**
      * @param expendingTotal the expendingTotal to set
      */
-    public void setExpendingTotal(int expendingTotal) {
+    @Override
+    public void seFinanceTotal(int expendingTotal) {
         this.expendingTotal = expendingTotal;
     }
 
     /**
      * @return the generateDate
      */
+    @Override
     public String getGenerateDate() {
         return generateDate;
     }
@@ -89,6 +93,7 @@ public class Expending implements Serializable {
     /**
      * @param generateDate the generateDate to set
      */
+    @Override
     public void setGenerateDate(String generateDate) {
         this.generateDate = generateDate;
     }
@@ -96,6 +101,7 @@ public class Expending implements Serializable {
     /**
      * @return the updateDate
      */
+    @Override
     public String getUpdateDate() {
         return updateDate;
     }
@@ -103,6 +109,7 @@ public class Expending implements Serializable {
     /**
      * @param updateDate the updateDate to set
      */
+    @Override
     public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
     }
@@ -110,6 +117,7 @@ public class Expending implements Serializable {
     /**
      * @return the priority
      */
+    @Override
     public int getPriority() {
         return priority;
     }
@@ -117,6 +125,7 @@ public class Expending implements Serializable {
     /**
      * @param priority the priority to set
      */
+    @Override
     public void setPriority(int priority) {
         this.priority = priority;
     }
@@ -124,6 +133,7 @@ public class Expending implements Serializable {
     /**
      * @return the name
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -131,6 +141,7 @@ public class Expending implements Serializable {
     /**
      * @param name the name to set
      */
+    @Override
     public void setName(String name) {
         this.name = name;
     }
@@ -138,6 +149,7 @@ public class Expending implements Serializable {
     /**
      * @return the type
      */
+    @Override
     public String getType() {
         return type;
     }
@@ -145,6 +157,7 @@ public class Expending implements Serializable {
     /**
      * @param type the type to set
      */
+    @Override
     public void setType(String type) {
         this.type = type;
     }
