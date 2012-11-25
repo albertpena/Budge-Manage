@@ -11,7 +11,7 @@ import java.awt.Color;
  * @author Nestor_Velasquez
  */
 public interface Constant {
-    public int FRAME_HEIGHT = 600;
+    public int FRAME_HEIGHT = 602;
     public int FRAME_WIDTH = 606;
     public String TITLE = "Budget Friendly";
     public String[] EXPENDING_TYPES = {"Seleccione","Telecomunicaciones","Alquiler","Prestamo","Celular","Ocio","Estetica","Combustible","Transporte","Alimentos","Hogar","Otros"};
@@ -35,7 +35,7 @@ public interface Constant {
     public String VALUE_MSG = "Monto: Valor numerico designado para la finanza.";
     public String PRIORITY_MSG = "Prioridad: Prioridad asignada a la finanza";
     public String EXIST_ERROR_MSG = "Existe una finanza con este criterio";
-    public int PAGE_MAX = 10;
+    public int PAGE_MAX = 5;
     public int PAGE_MIN = 1;
     public String PU = "BudgeManagePU";
     public String USER_ERROR_MSG = "Favor colocar un nombre de usuario";

@@ -496,7 +496,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
         jComboBox2.setSelectedIndex(0);
         jComboBox3.setSelectedIndex(0);
         jLabel11.setVisible(true);
-        jLabel12.setVisible(false);
+ //       jLabel12.setVisible(false);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

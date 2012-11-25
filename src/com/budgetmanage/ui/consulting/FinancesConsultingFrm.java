@@ -171,6 +171,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                 return types [columnIndex];
             }
         });
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane1.setViewportView(jTable1);
         //jScrollPane1.setVisible(false);
         //jTable1.setVisible(false);
@@ -187,8 +188,9 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 11, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
@@ -269,12 +271,12 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
             switch(process){
                 case EXPENDING:{
                     ExpendingJpaController ejc = new ExpendingJpaController(emf);
-                    finances = ejc.findExpendingEntities();
+                    finances = ejc.findExpendingEntities(PAGE_MAX,PAGE_MIN);
                     break;                    
                 }
                 case INGRESS:{
                     IngressJpaController ijc = new IngressJpaController(emf);
-                    finances = ijc.findIngressEntities();
+                    finances = ijc.findIngressEntities(PAGE_MAX,PAGE_MIN);
                     break;
                 }
             }
