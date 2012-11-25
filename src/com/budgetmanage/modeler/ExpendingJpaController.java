@@ -5,6 +5,7 @@
 package com.budgetmanage.modeler;
 
 import com.budgetmanage.entities.Expending;
+import com.budgetmanage.entities.Finance;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.util.Constant;
 import com.budgetmanage.modeler.exceptions.PreexistingEntityException;
@@ -93,15 +94,15 @@ public class ExpendingJpaController implements Serializable {
         }
     }
 
-    public List<Expending> findExpendingEntities() {
+    public List<Finance> findExpendingEntities() {
         return findExpendingEntities(true, -1, -1);
     }
 
-    public List<Expending> findExpendingEntities(int maxResults, int firstResult) {
+    public List<Finance> findExpendingEntities(int maxResults, int firstResult) {
         return findExpendingEntities(false, maxResults, firstResult);
     }
 
-    private List<Expending> findExpendingEntities(boolean all, int maxResults, int firstResult) {
+    private List<Finance> findExpendingEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();

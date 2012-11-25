@@ -4,8 +4,15 @@
  */
 package com.budgetmanage.ui.Consulting;
 
+import com.budgetmanage.entities.Finance;
+import com.budgetmanage.modeler.ExpendingJpaController;
+import com.budgetmanage.modeler.IngressJpaController;
 import com.budgetmanage.util.Constant;
+import com.budgetmanage.util.TableModel;
 import java.awt.event.ItemEvent;
+import java.util.List;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -19,6 +26,8 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
     
     public FinancesConsultingFrm() {
         initComponents();
+        jTable1.setModel(new TableModel());
+        
     }
 
     /**
@@ -172,15 +181,14 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 11, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
@@ -223,7 +231,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         jPanel1.setVisible(false);
@@ -252,8 +260,30 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
+        String process = jComboBox1.getSelectedItem().toString().toUpperCase();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(P_UNIT);
+        List<Finance> finances = null;
+        
+        
         if(evt.getStateChange() == ItemEvent.SELECTED){
+            switch(process){
+                case EXPENDING:{
+                    ExpendingJpaController ejc = new ExpendingJpaController(emf);
+                    finances = ejc.findExpendingEntities();
+                    break;                    
+                }
+                case INGRESS:{
+                    IngressJpaController ijc = new IngressJpaController(emf);
+                    finances = ijc.findIngressEntities();
+                    break;
+                }
+            }
             
+            if(!finances.isEmpty()){                
+                ((TableModel) jTable1.getModel()).getFinances().clear();
+                ((TableModel) jTable1.getModel()).getFinances().addAll(finances);
+                jTable1.updateUI();
+            }
             jPanel2.setVisible(true);
         }else{
             jPanel2.setVisible(false);
@@ -299,4 +329,6 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
 }
+

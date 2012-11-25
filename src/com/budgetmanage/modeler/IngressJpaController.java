@@ -4,6 +4,7 @@
  */
 package com.budgetmanage.modeler;
 
+import com.budgetmanage.entities.Finance;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.entities.Ingress;
 import com.budgetmanage.modeler.exceptions.PreexistingEntityException;
@@ -93,15 +94,15 @@ public class IngressJpaController implements Serializable {
         }
     }
 
-    public List<Ingress> findIngressEntities() {
+    public List<Finance> findIngressEntities() {
         return findIngressEntities(true, -1, -1);
     }
 
-    public List<Ingress> findIngressEntities(int maxResults, int firstResult) {
+    public List<Finance> findIngressEntities(int maxResults, int firstResult) {
         return findIngressEntities(false, maxResults, firstResult);
     }
 
-    private List<Ingress> findIngressEntities(boolean all, int maxResults, int firstResult) {
+    private List<Finance> findIngressEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();

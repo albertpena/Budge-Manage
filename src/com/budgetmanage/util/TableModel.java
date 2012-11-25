@@ -18,8 +18,8 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TableModel<T> extends AbstractTableModel{
 
-    List<T> finances;
-    private String[] columns;
+    private List<T> finances;
+    private String[] columns = Constant.EXPENDING_COL_ARRAY;
 
     public TableModel() {
         this.finances = new ArrayList<>();
@@ -37,7 +37,7 @@ public class TableModel<T> extends AbstractTableModel{
     
     @Override
     public int getRowCount() {
-        return finances.size();
+        return getFinances().size();
     }
 
     @Override
@@ -55,7 +55,7 @@ public class TableModel<T> extends AbstractTableModel{
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         String valueAt = null;
-        Object obj =  finances.get(rowIndex);
+        Object obj =  getFinances().get(rowIndex);
         Finance finance = null;
         
         //Verifying the type of object
@@ -101,6 +101,20 @@ public class TableModel<T> extends AbstractTableModel{
      */
     public void setColumns(String[] columns) {
         this.columns = columns;
+    }
+
+    /**
+     * @return the finances
+     */
+    public List<T> getFinances() {
+        return finances;
+    }
+
+    /**
+     * @param finances the finances to set
+     */
+    public void setFinances(List<T> finances) {
+        this.finances = finances;
     }
     
 }
