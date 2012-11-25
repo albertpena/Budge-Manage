@@ -101,7 +101,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Alta", "Media", "Baja" }));
 
-        jButton1.setText("Crear");
+        jButton1.setText("Guardar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -330,13 +330,13 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         String process = evt.getItem().toString();
-        
         evt.getStateChange();
         if(evt.getStateChange() == ItemEvent.SELECTED){
             if(process.equalsIgnoreCase("seleccione")){
                 jPanel1.setVisible(false);
                 jPanel2.setVisible(false);
             }else{
+                //jTextField1.setText("");
                 jLabel11.setVisible(false);
                 jLabel12.setVisible(false);
                 switch(process.toUpperCase()){
@@ -458,6 +458,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
         if(name.equals("")){
             jLabel1.setText(Constant.NAME_ERROR_MSG);
             jLabel1.setVisible(true);
+            jTextField1.grabFocus();
             return false;
         }
         if(type.equalsIgnoreCase("Seleccione")){
@@ -469,6 +470,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
         if(value == 0){            
             jLabel14.setText(Constant.VALUE_ERROR_MSG);
             jLabel14.setVisible(true);
+            jFormattedTextField1.grabFocus();
             return false;
         }
         

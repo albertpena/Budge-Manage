@@ -137,14 +137,16 @@ public class Main extends javax.swing.JFrame implements Constant{
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
         jPanel1.removeAll();
-        jPanel1.add(new FinancesConsultingFrm(), BorderLayout.CENTER);
+        FinancesConsultingFrm fcm = new FinancesConsultingFrm("Consultar Finanzas");
+        fcm.setPreferredSize(dim);
+        jPanel1.add(fcm, BorderLayout.CENTER);
     }//GEN-LAST:event_jMenuItem23ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
         jPanel1.removeAll();
-        FinancesMaintenanceFrm fmf = new FinancesMaintenanceFrm(jPanel1);
-        fmf.setPreferredSize(dim);
-        jPanel1.add(fmf, BorderLayout.CENTER);
+        FinancesConsultingFrm fcm = new FinancesConsultingFrm("Actualizar Finanzas", jPanel1);
+        fcm.setPreferredSize(dim);
+        jPanel1.add(fcm, BorderLayout.CENTER);
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem27ActionPerformed

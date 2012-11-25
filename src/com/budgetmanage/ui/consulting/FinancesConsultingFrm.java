@@ -10,7 +10,9 @@ import com.budgetmanage.entities.Finance;
 import com.budgetmanage.entities.Ingress;
 import com.budgetmanage.modeler.ExpendingJpaController;
 import com.budgetmanage.modeler.IngressJpaController;
+import com.budgetmanage.ui.maintenance.FinancesAddFrm;
 import com.budgetmanage.util.Constant;
+import java.awt.Container;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +31,22 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
      * Creates new form FinancesConsultingFrm
     */
     
-    public FinancesConsultingFrm() {
+    Container c;
+    
+    public FinancesConsultingFrm(String name) {
         initComponents();
         jTable1.setModel(new TableModel());
-        
+        jLabel13.setText(name.toUpperCase());
+        jButton3.setVisible(false);
     }
-
+    
+    public FinancesConsultingFrm(String name, Container c) {
+        initComponents();
+        jTable1.setModel(new TableModel());
+        jLabel13.setText(name.toUpperCase());
+        this.c = c;
+        jButton3.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,6 +74,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
+        jButton3 = new javax.swing.JButton();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -133,7 +146,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setText("jLabel1");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Id", "Nombre", "Monto" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Nombre", "Monto" }));
         jComboBox2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox2ItemStateChanged(evt);
@@ -197,7 +210,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jPanel2.setBackground(Constant.BKG);
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Finanza", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 11))); // NOI18N
 
-        jTable1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jTable1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -215,14 +228,14 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
@@ -233,6 +246,13 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
+            }
+        });
+
+        jButton3.setText("Crear Finanza");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
             }
         });
 
@@ -247,9 +267,13 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(253, Short.MAX_VALUE))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -259,12 +283,13 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         jPanel1.setVisible(false);
@@ -277,6 +302,8 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
             String what = jTextField1.getText().trim().toUpperCase();
             search(false, what);
         }else{
+            jTextField1.setText("");
+            jTextField1.grabFocus();
             jLabel1.setText(Constant.SEARCH_MSG_ERROR);
             jLabel1.setVisible(true);
         }
@@ -288,6 +315,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         if(process.equalsIgnoreCase("seleccione")){
             reset();            
         }else{
+            jTextField1.setText("");
             jLabel3.setVisible(false);            
             jPanel1.setVisible(true);
             jCheckBox1.setSelected(false);
@@ -319,8 +347,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         
         List<Finance> finances = null;
         jTable1.setModel(new TableModel());
-       
-        
+          
         switch(process){
             case EXPENDING:{
                 if(all){
@@ -334,9 +361,6 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                         case "MONTO":{
                             finances = ejc.findExpending(Integer.parseInt(what));
                             break;
-                        }
-                        case "ID":{
-                            finances = ejc.findExpending(Integer.parseInt(what));
                         }
                     }                    
                 }
@@ -354,9 +378,6 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                         case "MONTO":{
                             finances = ijc.findIngress(Integer.parseInt(what));
                             break;
-                        }
-                        case "ID":{
-                            finances = ijc.findIngress(Integer.parseInt(what));
                         }
                     }
                 }
@@ -387,6 +408,13 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         }       
     }//GEN-LAST:event_jComboBox2ItemStateChanged
 
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        c.removeAll();
+        FinancesAddFrm faf = new FinancesAddFrm(jComboBox1.getSelectedIndex());
+        faf.setPreferredSize(c.getPreferredSize());
+        c.add(faf);
+    }//GEN-LAST:event_jButton3MouseClicked
+
     private void reset(){
         jLabel3.setVisible(true);
         jPanel1.setVisible(false);
@@ -399,7 +427,13 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
     }  
     
     private boolean dataValidation(){
-        String what = jTextField1.getText();
+        String what = jTextField1.getText().trim();
+        if(jLabel4.getText().equalsIgnoreCase("ID")){
+            if(!com.budgetmanage.util.Util.numberValid(what)){
+                JOptionPane.showMessageDialog(this,"Favor introducir un id valido", "Error",JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
         if (what.equalsIgnoreCase("")){
             return false;
         }        
@@ -517,6 +551,7 @@ private class TableModel<T> extends AbstractTableModel{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
