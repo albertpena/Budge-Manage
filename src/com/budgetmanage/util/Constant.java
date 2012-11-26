@@ -43,6 +43,7 @@ public interface Constant {
     public String[] INGRESS_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Fecha Modificacion"};
     public String[] EXPENDING_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Modificacion", "Prioridad"};
     public String SEARCH_MSG_ERROR = "Debe colocar un criterio de busqueda";
+    public String SUCEED_MSG = "Finanza guardada Satisfactoriamente";
     
     Color BKG = new Color(204,255,204);
     

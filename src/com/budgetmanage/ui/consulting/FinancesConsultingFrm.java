@@ -10,6 +10,7 @@ import com.budgetmanage.entities.Finance;
 import com.budgetmanage.entities.Ingress;
 import com.budgetmanage.modeler.ExpendingJpaController;
 import com.budgetmanage.modeler.IngressJpaController;
+import com.budgetmanage.ui.Maintenance.FinancesMaintenanceFrm;
 import com.budgetmanage.ui.maintenance.FinancesAddFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.Container;
@@ -33,19 +34,15 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
     
     Container c;
     
-    public FinancesConsultingFrm(String name) {
-        initComponents();
-        jTable1.setModel(new TableModel());
-        jLabel13.setText(name.toUpperCase());
-        jButton3.setVisible(false);
-    }
-    
+   
     public FinancesConsultingFrm(String name, Container c) {
         initComponents();
         jTable1.setModel(new TableModel());
         jLabel13.setText(name.toUpperCase());
         this.c = c;
-        jButton3.setVisible(true);
+        if(!name.equalsIgnoreCase("CONSULTAR FINANZAS")){
+            jButton3.setVisible(true);
+        }        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,6 +69,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jButton3 = new javax.swing.JButton();
@@ -222,20 +220,33 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable1);
+
+        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel5.setText("Dar Doble-Click sobre la finanza para editarla.");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
+            .addComponent(jScrollPane3)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jLabel5))
         );
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
@@ -289,7 +300,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         jPanel1.setVisible(false);
@@ -414,6 +425,17 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         faf.setPreferredSize(c.getPreferredSize());
         c.add(faf);
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if(evt.getClickCount()>1){
+            int rowCount = jTable1.getSelectedRow();
+            Finance finance = (Finance)((TableModel) jTable1.getModel()).finances.get(rowCount);
+            c.removeAll();
+            FinancesMaintenanceFrm fmf = new FinancesMaintenanceFrm(c, finance, jComboBox1.getSelectedIndex());
+            fmf.setPreferredSize(c.getPreferredSize());
+            c.add(fmf);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     private void reset(){
         jLabel3.setVisible(true);
@@ -560,6 +582,7 @@ private class TableModel<T> extends AbstractTableModel{
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
