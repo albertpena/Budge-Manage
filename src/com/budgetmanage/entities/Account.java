@@ -81,7 +81,7 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "com.budgetmanage.entities.Account1[ id=" + id + " ]";
+        return "com.budgetmanage.entities.Account[ id=" + id + " ]";
     }
     
 }
