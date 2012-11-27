@@ -72,6 +72,7 @@ public class LoginFrm extends javax.swing.JPanel implements Constant{
         jLabel2.setText("Clave");
 
         btnRegistrar.setBackground(new java.awt.Color(102, 102, 102));
+        btnRegistrar.setForeground(new java.awt.Color(0, 0, 204));
         btnRegistrar.setText("Crear Usuario");
         btnRegistrar.setBorder(new javax.swing.border.MatteBorder(null));
         btnRegistrar.setBorderPainted(false);
@@ -142,10 +143,11 @@ public class LoginFrm extends javax.swing.JPanel implements Constant{
         lblValidatorMessage.setVisible(false);
        boolean isOk = true;
        //Validate if the field was Empty 
-        if(txtUsuario.getText().isEmpty()){
+        if(txtUsuario.getText().trim().isEmpty()){
             lblValidatorMessage.setText(USER_ERROR_MSG);
             txtUsuario.setFocusable(true);
             isOk = false;
+          
         }else if(txtPassword.getText().isEmpty()){
             lblValidatorMessage.setText(PASS_ERROR_MSG);
             txtPassword.setFocusable(true);
