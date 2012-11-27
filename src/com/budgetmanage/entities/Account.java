@@ -1,8 +1,8 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this template, choose Tools | Templates   tesg
  * and open the template in the editor.
  */
-package com.budgetmanage.entities;
+package com.budgetmanage.entities;       
 
 import java.io.Serializable;
 import javax.persistence.Entity;
