@@ -383,7 +383,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
         }
         
         String name = jTextField1.getText().trim().toUpperCase();
-        String type = jComboBox3.getSelectedItem().toString().toUpperCase();
+        String type = jComboBox3.getSelectedItem().toString();
         int value = 0;
         try{
             value = Integer.parseInt(jFormattedTextField1.getText());

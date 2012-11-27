@@ -40,7 +40,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jTable1.setModel(new TableModel());
         jLabel13.setText(name.toUpperCase());
         this.c = c;
-        if(!name.equalsIgnoreCase("CONSULTAR FINANZAS")){
+        if(name.equalsIgnoreCase("EDITAR FINANZAS")){
             jButton3.setVisible(true);
         }        
     }
@@ -305,6 +305,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
 
         jPanel1.setVisible(false);
         jPanel2.setVisible(false);
+        jButton3.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked

@@ -6,6 +6,7 @@ package com.budgetmanage.ui;
 
 import com.budgetmanage.ui.Consulting.FinancesConsultingFrm;
 import com.budgetmanage.ui.Maintenance.FinancesMaintenanceFrm;
+import com.budgetmanage.ui.consulting.MainWindowFrm;
 import com.budgetmanage.ui.maintenance.FinancesAddFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.BorderLayout;
@@ -43,6 +44,7 @@ public class Main extends javax.swing.JFrame implements Constant{
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem26 = new javax.swing.JMenuItem();
         jMenuItem27 = new javax.swing.JMenuItem();
@@ -71,6 +73,15 @@ public class Main extends javax.swing.JFrame implements Constant{
         jPanel1.setPreferredSize(this.getPreferredSize());
 
         jMenu4.setText("Inicio");
+
+        jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem2);
+
         jMenuBar1.add(jMenu4);
 
         jMenu2.setText("Agregar");
@@ -144,7 +155,7 @@ public class Main extends javax.swing.JFrame implements Constant{
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
         jPanel1.removeAll();
-        FinancesConsultingFrm fcm = new FinancesConsultingFrm("Actualizar Finanzas", jPanel1);
+        FinancesConsultingFrm fcm = new FinancesConsultingFrm("Editar Finanzas", jPanel1);
         fcm.setPreferredSize(dim);
         jPanel1.add(fcm, BorderLayout.CENTER);
     }//GEN-LAST:event_jMenuItem20ActionPerformed
@@ -159,6 +170,13 @@ public class Main extends javax.swing.JFrame implements Constant{
     private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem24ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+//        jPanel1.removeAll();
+//        MainWindowFrm main = new MainWindowFrm();
+//        main.setPreferredSize(dim);
+//        jPanel1.add(main, BorderLayout.CENTER);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,6 +222,7 @@ public class Main extends javax.swing.JFrame implements Constant{
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem19;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;

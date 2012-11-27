@@ -28,21 +28,40 @@ public class Budget extends Finance implements Serializable {
     @Column(name="Budget_Status")
     private String Status;
     
+    private List<Finance> finances;
+    
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
-        return hash;
+        return hash;        
     }
 
+    /**
+     *
+     * @param object
+     * @return
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -56,6 +75,10 @@ public class Budget extends Finance implements Serializable {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "com.budgetmanage.entities.Budget[ id=" + id + " ]";
@@ -88,54 +111,108 @@ public class Budget extends Finance implements Serializable {
         this.Status = Status;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getFinanceTotal() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     *
+     * @param expendingTotal
+     */
     @Override
     public void seFinanceTotal(int expendingTotal) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getGenerateDate() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     *
+     * @param generateDate
+     */
     @Override
     public void setGenerateDate(String generateDate) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getUpdateDate() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     *
+     * @param updateDate
+     */
     @Override
     public void setUpdateDate(String updateDate) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getPriority() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     *
+     * @param priority
+     */
     @Override
     public void setPriority(int priority) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getType() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     *
+     * @param type
+     */
     @Override
     public void setType(String type) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    /**
+     * @return the finances
+     */
+    public List<Finance> getFinances() {
+        return finances;
+    }
+
+    /**
+     * @param finances the finances to set
+     */
+    public void setFinances(List<Finance> finances) {
+        this.finances = finances;
     }
     
 }

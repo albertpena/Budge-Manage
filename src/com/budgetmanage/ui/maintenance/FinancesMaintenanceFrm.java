@@ -290,8 +290,7 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        save(jComboBox1.getSelectedItem().toString().toUpperCase());
-        jButton1.setEnabled(false);
+        save(jComboBox1.getSelectedItem().toString().toUpperCase());        
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
@@ -299,12 +298,19 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
     }//GEN-LAST:event_jButton3MouseClicked
     
     private void save(String what){
-        
+        boolean isOk = false;
         String name = jTextField1.getText().toString().toUpperCase();
         String type = jComboBox3.getSelectedItem().toString();
         int priority = jComboBox2.getSelectedIndex();
-        int value = Integer.parseInt(jFormattedTextField1.getText().trim());
-        boolean isOk = false;
+        int value = 0;
+        try{
+            value = Integer.parseInt(jFormattedTextField1.getText().trim());
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, Constant.VALUE_ERROR_MSG, "Error", JOptionPane.ERROR_MESSAGE);
+            jFormattedTextField1.grabFocus();
+            isOk = false;
+        }    
+        
         
         if(isOk()){    
             finance.setName(name);
@@ -343,6 +349,7 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
             if(isOk){
                 jLabel12.setVisible(true);
                 jLabel12.setText(Constant.SUCEED_MSG);
+                jButton1.setEnabled(false);
             }
         }
     }
@@ -361,7 +368,7 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
             return false;
         }
         
-        if(jComboBox2.getSelectedIndex() == 0){
+        if(jComboBox3.getSelectedIndex() == 0){
             JOptionPane.showMessageDialog(this, Constant.TYPE_ERROR_MSG, "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -372,7 +379,7 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
             return false;
         }
         
-        if(jComboBox3.getSelectedIndex() == 0){
+        if(jComboBox2.getSelectedIndex() == 0){
             JOptionPane.showMessageDialog(this, Constant.PRIORITY_ERROR_MSG, "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
