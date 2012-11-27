@@ -3,7 +3,8 @@
  * and open the template in the editor.
  */
 package com.budgetmanage.entities;
-
+                                            
+                                          // Formula para calcular interes Ic= cant_inicial * (1+tasa/100)^periodos
 /**
  *
  * @author Alexateam
