@@ -14,7 +14,7 @@
             <Property name="text" type="java.lang.String" value="Inicio"/>
           </Properties>
           <Events>
-            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="jMenu4MenuSelected"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu4MouseClicked"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
@@ -94,6 +94,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu5MouseClicked"/>
+          </Events>
         </Menu>
       </SubComponents>
     </Menu>
@@ -147,21 +150,6 @@
       </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel1"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jLabel1.setVisible(false);"/>
-          </AuxValues>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-              <BorderConstraints direction="Center"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-      </SubComponents>
     </Container>
   </SubComponents>
 </Form>

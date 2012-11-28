@@ -266,7 +266,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
 
         jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(204, 255, 204));
-        jLabel13.setText("Agregar Finanzas");
+        jLabel13.setText(ADD_PANEL_TITLE);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

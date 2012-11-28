@@ -5,13 +5,11 @@
 package com.budgetmanage.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -27,9 +25,10 @@ public class Budget extends Finance implements Serializable {
     private String name;
     @Column(name="Budget_Status")
     private String Status;
-    
-    private List<Finance> finances;
-    
+    @Column(name="Expending_Total", columnDefinition="DOUBLE DEFAULT 0")
+    private double expendingTotal;
+    @Column(name="Ingress_Total", columnDefinition="DOUBLE DEFAULT 0")
+    private double ingressTotal;
     /**
      *
      * @return
@@ -202,17 +201,30 @@ public class Budget extends Finance implements Serializable {
     }
 
     /**
-     * @return the finances
+     * @return the expendingTotal
      */
-    public List<Finance> getFinances() {
-        return finances;
+    public double getExpendingTotal() {
+        return expendingTotal;
     }
 
     /**
-     * @param finances the finances to set
+     * @param expendingTotal the expendingTotal to set
      */
-    public void setFinances(List<Finance> finances) {
-        this.finances = finances;
+    public void setExpendingTotal(double expendingTotal) {
+        this.expendingTotal = expendingTotal;
     }
-    
+
+    /**
+     * @return the ingressTotal
+     */
+    public double getIngressTotal() {
+        return ingressTotal;
+    }
+
+    /**
+     * @param ingressTotal the ingressTotal to set
+     */
+    public void setIngressTotal(double ingressTotal) {
+        this.ingressTotal = ingressTotal;
+    }
 }

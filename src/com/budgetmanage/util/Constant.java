@@ -35,6 +35,7 @@ public interface Constant {
     public String VALUE_MSG = "Monto: Valor numerico designado para la finanza.";
     public String PRIORITY_MSG = "Prioridad: Prioridad asignada a la finanza";
     public String EXIST_ERROR_MSG = "Existe una finanza con este criterio";
+    public String NON_EXISTS_ERROR_MSG = "No existe una finanza con estos criterios";
     public int PAGE_MAX = 5;
     public int PAGE_MIN = 1;
     public String PU = "BudgeManagePU";
@@ -44,6 +45,10 @@ public interface Constant {
     public String[] EXPENDING_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Modificacion", "Prioridad"};
     public String SEARCH_MSG_ERROR = "Debe colocar un criterio de busqueda";
     public String SUCEED_MSG = "Finanza guardada Satisfactoriamente";
+    public String MAIN_PANEL_TITLE = "Finanzas Amigables";
+    public String EDIT_PANEL_TITLE = "Editar Finanzas";
+    public String CONSULT_PANEL_TITLE = "Consultar Finanzas";
+    public String ADD_PANEL_TITLE = "Agregar Finanzas";
     
     Color BKG = new Color(204,255,204);
     

@@ -38,7 +38,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
     public FinancesConsultingFrm(String name, Container c) {
         initComponents();
         jTable1.setModel(new TableModel());
-        jLabel13.setText(name.toUpperCase());
+        jLabel13.setText(name);
         this.c = c;
         if(name.equalsIgnoreCase("EDITAR FINANZAS")){
             jButton3.setVisible(true);

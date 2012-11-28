@@ -34,6 +34,7 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
         initComponents();
         this.finance = finance;
         
+        jLabel13.setText(EDIT_PANEL_TITLE);
         jComboBox1.setSelectedIndex(process);
         jTextField1.setText(finance.getName());
         switch(process){

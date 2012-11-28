@@ -9,6 +9,7 @@ import com.budgetmanage.ui.consulting.MainPanel;
 import com.budgetmanage.ui.maintenance.FinancesAddFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.BorderLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -41,7 +42,6 @@ public class Main extends javax.swing.JFrame implements Constant{
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -67,23 +67,14 @@ public class Main extends javax.swing.JFrame implements Constant{
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         jPanel1.setLayout(new java.awt.BorderLayout());
-
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
-        jLabel1.setVisible(false);
-
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 600, 550);
         jPanel1.setPreferredSize(this.getPreferredSize());
 
         jMenu4.setText("Inicio");
-        jMenu4.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jMenu4MenuSelected(evt);
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
             }
         });
         jMenuBar1.add(jMenu4);
@@ -145,44 +136,53 @@ public class Main extends javax.swing.JFrame implements Constant{
         jMenuBar1.add(jMenu1);
 
         jMenu5.setText("Salir");
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu5MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
-        jPanel1.removeAll();
-        FinancesConsultingFrm fcm = new FinancesConsultingFrm("Consultar Finanzas", jPanel1);
-        fcm.setPreferredSize(dim);
-        jPanel1.add(fcm, BorderLayout.CENTER);
+        FinancesConsultingFrm fcm = new FinancesConsultingFrm(CONSULT_PANEL_TITLE, jPanel1);
+        addPanel(fcm);
     }//GEN-LAST:event_jMenuItem23ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
-        jPanel1.removeAll();
-        FinancesConsultingFrm fcm = new FinancesConsultingFrm("Editar Finanzas", jPanel1);
-        fcm.setPreferredSize(dim);
-        jPanel1.add(fcm, BorderLayout.CENTER);
+        FinancesConsultingFrm fcm = new FinancesConsultingFrm(EDIT_PANEL_TITLE, jPanel1);
+        addPanel(fcm);
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem27ActionPerformed
-        jPanel1.removeAll();
         FinancesAddFrm fad = new FinancesAddFrm();
-        fad.setPreferredSize(dim);
-        jPanel1.add(fad, BorderLayout.CENTER);
+        addPanel(fad);
     }//GEN-LAST:event_jMenuItem27ActionPerformed
 
     private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem24ActionPerformed
 
-    private void jMenu4MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu4MenuSelected
-       jPanel1.removeAll();
-//       MainPanel main = new MainPanel();
-//       main.setPreferredSize(dim);
-//       jPanel1.add(main, BorderLayout.CENTER);
-               
-    }//GEN-LAST:event_jMenu4MenuSelected
+    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
+        LoginFrm log = new LoginFrm(jPanel1);
+        addPanel(log);
+        jMenu5.setSelected(false);
+    }//GEN-LAST:event_jMenu5MouseClicked
 
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+       MainPanel main = new MainPanel();
+       addPanel(main);
+       jMenu4.setSelected(false);
+    }//GEN-LAST:event_jMenu4MouseClicked
+
+    private void addPanel(JPanel p){
+       jPanel1.removeAll();       
+       p.setPreferredSize(dim);          
+       jPanel1.add(p, BorderLayout.CENTER);
+       jPanel1.updateUI();  
+    }
     /**
      * @param args the command line arguments
      */
@@ -219,7 +219,6 @@ public class Main extends javax.swing.JFrame implements Constant{
     }
     private java.awt.Dimension dim;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

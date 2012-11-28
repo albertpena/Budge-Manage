@@ -6,6 +6,7 @@ package com.budgetmanage.modeler;
 
 import com.budgetmanage.entities.Budget;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
+import com.budgetmanage.util.Constant;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -117,6 +118,21 @@ public class BudgetJpaController implements Serializable {
         }
     }
 
+    public Budget getActual()throws NonexistentEntityException{
+        EntityManager em = getEntityManager();        
+        Budget budget = null;
+        try{
+            Query q = em.createQuery("Select max(ID) from BUDGET");
+            Object id = q.getSingleResult();        
+            budget =  em.find(Budget.class, id);
+        }catch(Exception ex){
+            throw new NonexistentEntityException(Constant.NON_EXISTS_ERROR_MSG);
+        }finally{
+            em.close();
+        }
+        
+        return budget;
+    }
     public Budget findBudget(Integer id) {
         EntityManager em = getEntityManager();
         try {
