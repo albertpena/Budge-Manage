@@ -122,7 +122,7 @@ public class BudgetJpaController implements Serializable {
         EntityManager em = getEntityManager();        
         Budget budget = null;
         try{
-            Query q = em.createQuery("Select max(ID) from BUDGET");
+            Query q = em.createNativeQuery("Select max(ID) from BUDGET");
             Object id = q.getSingleResult();        
             budget =  em.find(Budget.class, id);
         }catch(Exception ex){

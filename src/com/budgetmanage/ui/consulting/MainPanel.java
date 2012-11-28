@@ -9,6 +9,7 @@ import com.budgetmanage.entities.Finance;
 import com.budgetmanage.modeler.BudgetJpaController;
 import com.budgetmanage.modeler.ExpendingJpaController;
 import com.budgetmanage.modeler.IngressJpaController;
+import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.util.Constant;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,6 +51,9 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -63,15 +67,40 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         jPanel1.setBackground(Constant.BKG);
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resumen", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 0, 0))); // NOI18N
 
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel3.setText("jLabel3");
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel4.setText("jLabel4");
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel5.setText("jLabel5");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 176, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 204, 255));
@@ -176,7 +205,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         jPanel1.setVisible(false);
@@ -189,13 +218,13 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         if(name.equals("")){
             JOptionPane.showMessageDialog(this, "Coloque un nombre para el presupuesto", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         }else{
-            //Generate the budget
+            //Generate the budgets
             generateBudget(name);
 
         }        
     }//GEN-LAST:event_jButton1MouseClicked
     private void generateBudget(String name){
-        //Defining attiributes for the budget.
+        //Defining attiributes for the budgets.
             boolean isOk = true;
             double expendigTotal = 0;
             double ingressTotal = 0;
@@ -229,7 +258,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
             finances.clear();
             
             if(isOk){
-                //Creating and persisting the budget.
+                //Creating and persisting the budgets.
                 Budget budget = new Budget(name);
                 budget.setExpendingTotal(expendigTotal);
                 budget.setIngressTotal(ingressTotal);
@@ -243,15 +272,23 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
     }
     
     private void loadWindow(){
-        List<Budget> budget;
-        budget = bjc.findBudgetEntities();
+        List<Budget> budgets;
+        budgets = bjc.findBudgetEntities();
         
-        if(budget.isEmpty()){
+        if(budgets.isEmpty()){
             jLabel1.setVisible(true);
             jPanel2.setVisible(true);
         }
         else{
             jPanel1.setVisible(true);
+            try {
+                Budget budget = bjc.getActual();
+                jLabel3.setText("Nombre: "+budget.getName());
+                jLabel4.setText("Total Gastos: "+String.valueOf(budget.getExpendingTotal()));
+                jLabel5.setText("Total Ingresos: "+String.valueOf(budget.getIngressTotal()));
+            }catch(NonexistentEntityException ex){
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }            
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -259,6 +296,9 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
