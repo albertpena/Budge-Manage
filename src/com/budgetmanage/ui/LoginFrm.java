@@ -1,13 +1,12 @@
 
 package com.budgetmanage.ui;
 
+import com.budgetmanage.ui.user.RegisterFrm;
 import com.budgetmanage.ui.maintenance.FinancesAddFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -62,11 +61,6 @@ public class LoginFrm extends javax.swing.JPanel implements Constant{
                 btnAceptarMouseClicked(evt);
             }
         });
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setText("Clave");
@@ -77,6 +71,11 @@ public class LoginFrm extends javax.swing.JPanel implements Constant{
         btnRegistrar.setBorder(new javax.swing.border.MatteBorder(null));
         btnRegistrar.setBorderPainted(false);
         btnRegistrar.setContentAreaFilled(false);
+        btnRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegistrarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout ContainerPanelLayout = new javax.swing.GroupLayout(ContainerPanel);
         ContainerPanel.setLayout(ContainerPanelLayout);
@@ -167,9 +166,12 @@ public class LoginFrm extends javax.swing.JPanel implements Constant{
         }
     }//GEN-LAST:event_btnAceptarMouseClicked
 
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAceptarActionPerformed
+    private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
+       con.removeAll();
+       RegisterFrm register = new RegisterFrm();
+       register.setPreferredSize(con.getPreferredSize());
+       con.add(register, BorderLayout.CENTER);
+    }//GEN-LAST:event_btnRegistrarMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContainerPanel;
