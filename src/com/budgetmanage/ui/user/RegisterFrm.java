@@ -4,18 +4,30 @@
  */
 package com.budgetmanage.ui.user;
 
+import com.budgetmanage.ui.LoginFrm;
 import com.budgetmanage.util.Constant;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Fulvio
  */
-public class RegisterFrm extends javax.swing.JPanel implements Constant{
+public class RegisterFrm extends javax.swing.JPanel implements Constant {
+
+    private Container container;
 
     /**
      * Creates new form RegisterFrm
      */
     public RegisterFrm() {
+        initComponents();
+    }
+
+    public RegisterFrm(Container container) {
+        this.container = container;
         initComponents();
     }
 
@@ -119,6 +131,11 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant{
 
         btnCancel.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -153,20 +170,33 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant{
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(139, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addGap(81, 81, 81))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(102, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(102, 102, 102)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        int opt = JOptionPane.showConfirmDialog(null, "¿Desea cancelar el registro?",
+                Constant.TITLE, JOptionPane.YES_NO_OPTION);
+        //If [opt] had '1' value is the option yes and I show the login JPanel
+        if (opt == 0) {
+            container.removeAll();
+            LoginFrm loginf = new LoginFrm(container);
+            loginf.setPreferredSize(container.getPreferredSize());
+            container.add(loginf, BorderLayout.CENTER);
+            JPanel con = (JPanel) container;
+            con.updateUI();
+        }
+    }//GEN-LAST:event_btnCancelActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnCreate;
