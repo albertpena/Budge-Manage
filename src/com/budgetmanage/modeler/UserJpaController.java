@@ -4,14 +4,14 @@
  */
 package com.budgetmanage.modeler;
 
-import com.budgetmanage.entities.User;
+import com.budgetmanage.entities.BudgetUser;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -30,7 +30,7 @@ public class UserJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(User user) {
+    public void create(BudgetUser user) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -44,7 +44,7 @@ public class UserJpaController implements Serializable {
         }
     }
 
-    public void edit(User user) throws NonexistentEntityException, Exception {
+    public void edit(BudgetUser user) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -72,9 +72,9 @@ public class UserJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            User user;
+            BudgetUser user;
             try {
-                user = em.getReference(User.class, id);
+                user = em.getReference(BudgetUser.class, id);
                 user.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The user with id " + id + " no longer exists.", enfe);
@@ -88,19 +88,19 @@ public class UserJpaController implements Serializable {
         }
     }
 
-    public List<User> findUserEntities() {
+    public List<BudgetUser> findUserEntities() {
         return findUserEntities(true, -1, -1);
     }
 
-    public List<User> findUserEntities(int maxResults, int firstResult) {
+    public List<BudgetUser> findUserEntities(int maxResults, int firstResult) {
         return findUserEntities(false, maxResults, firstResult);
     }
 
-    private List<User> findUserEntities(boolean all, int maxResults, int firstResult) {
+    private List<BudgetUser> findUserEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(User.class));
+            cq.select(cq.from(BudgetUser.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -112,10 +112,10 @@ public class UserJpaController implements Serializable {
         }
     }
 
-    public User findUser(Long id) {
+    public BudgetUser findUser(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(User.class, id);
+            return em.find(BudgetUser.class, id);
         } finally {
             em.close();
         }
@@ -125,7 +125,7 @@ public class UserJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<User> rt = cq.from(User.class);
+            Root<BudgetUser> rt = cq.from(BudgetUser.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
