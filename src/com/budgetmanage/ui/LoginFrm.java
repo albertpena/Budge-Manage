@@ -1,4 +1,3 @@
-
 package com.budgetmanage.ui;
 
 import com.budgetmanage.ui.user.RegisterFrm;
@@ -7,13 +6,16 @@ import com.budgetmanage.util.Constant;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Fulvio
  */
-public class LoginFrm extends javax.swing.JPanel implements Constant{
+public class LoginFrm extends javax.swing.JPanel implements Constant {
+
     Container con;
+
     public LoginFrm(Container con) {
         this.con = con;
         initComponents();
@@ -74,6 +76,11 @@ public class LoginFrm extends javax.swing.JPanel implements Constant{
         btnRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegistrarMouseClicked(evt);
+            }
+        });
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
             }
         });
 
@@ -140,39 +147,44 @@ public class LoginFrm extends javax.swing.JPanel implements Constant{
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         lblValidatorMessage.setVisible(false);
-       boolean isOk = true;
-       //Validate if the field was Empty 
-        if(txtUsuario.getText().trim().isEmpty()){
+        boolean isOk = true;
+        //Validate if the field was Empty 
+        if (txtUsuario.getText().trim().isEmpty()) {
             lblValidatorMessage.setText(USER_ERROR_MSG);
             txtUsuario.setFocusable(true);
             isOk = false;
-          
-        }else if(txtPassword.getText().isEmpty()){
+
+        } else if (txtPassword.getText().isEmpty()) {
             lblValidatorMessage.setText(PASS_ERROR_MSG);
             txtPassword.setFocusable(true);
             isOk = false;
         }
         //if all is correct [No empty fields] next step is
         //is to verify in the DataBase
-        if(isOk == true){
+        if (isOk == true) {
             con.removeAll();
             Dimension dim = con.getPreferredSize();
             FinancesAddFrm fna = new FinancesAddFrm();
             fna.setPreferredSize(dim);
             con.add(fna, BorderLayout.CENTER);
-            
-        }else{
-           lblValidatorMessage.setVisible(true);
+
+        } else {
+            lblValidatorMessage.setVisible(true);
         }
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
-       con.removeAll();
-       RegisterFrm register = new RegisterFrm();
-       register.setPreferredSize(con.getPreferredSize());
-       con.add(register, BorderLayout.CENTER);
+        con.removeAll();
+        RegisterFrm register = new RegisterFrm(con);
+        register.setPreferredSize(con.getPreferredSize());
+        con.add(register, BorderLayout.CENTER);
+        JPanel pn = (JPanel) con;
+        pn.updateUI();
     }//GEN-LAST:event_btnRegistrarMouseClicked
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContainerPanel;
     private javax.swing.JButton btnAceptar;
