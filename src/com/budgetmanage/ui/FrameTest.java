@@ -15,7 +15,8 @@ public class FrameTest extends javax.swing.JFrame {
      */
     public FrameTest() {
         initComponents();
-        add(new Loan());
+        add(new LoanPanel());
+        setTitle("PRESTAMO");
     }
 
     /**

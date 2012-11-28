@@ -26,6 +26,17 @@ public class Account implements Serializable {
     private String  accountNumber;
     private String accountBank;
 
+    public Account() {
+    }
+
+    public Account(double balance, String accountNumber, String accountBank) {
+        this.balance = balance;
+        this.accountNumber = accountNumber;
+        this.accountBank = accountBank;
+    }
+    
+    
+
     public double getBalance() {
         return balance;
     }
