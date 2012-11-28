@@ -29,9 +29,20 @@ public class Budget extends Finance implements Serializable {
     private double expendingTotal;
     @Column(name="Ingress_Total", columnDefinition="DOUBLE DEFAULT 0")
     private double ingressTotal;
+    @Column(name="Generate_Date")
+    private String generateDate;
+
+    public Budget() {
+    }
+    
+    public Budget(String name) {
+        this.name = name;
+    }
+    
+    
     /**
      *
-     * @return
+     * @return id
      */
     public Integer getId() {
         return id;
@@ -134,7 +145,7 @@ public class Budget extends Finance implements Serializable {
      */
     @Override
     public String getGenerateDate() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.generateDate;
     }
 
     /**
@@ -143,7 +154,7 @@ public class Budget extends Finance implements Serializable {
      */
     @Override
     public void setGenerateDate(String generateDate) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.generateDate = generateDate;
     }
 
     /**
