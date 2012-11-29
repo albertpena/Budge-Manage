@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -31,6 +32,8 @@ public class Budget extends Finance implements Serializable {
     private double ingressTotal;
     @Column(name="Generate_Date")
     private String generateDate;
+    @ManyToOne
+    private BudgetUser budgetUser;
 
     public Budget() {
     }

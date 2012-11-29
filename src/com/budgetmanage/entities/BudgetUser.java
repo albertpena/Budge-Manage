@@ -5,11 +5,13 @@
 package com.budgetmanage.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -33,6 +35,13 @@ public class BudgetUser implements Serializable {
     private String password;
     private boolean status_User;
 
+    @OneToMany(mappedBy = "budgetUser")
+    List<Budget> budgets;
+    @OneToMany(mappedBy = "budgetUser")
+    List<Expending> expendings;
+    @OneToMany(mappedBy = "budgetUser")
+    List<Ingress> ingresses;
+    
     public Long getId() {
         return id;
     }

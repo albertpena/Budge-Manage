@@ -4,9 +4,14 @@
  */
 package com.budgetmanage.modeler;
 
+import com.budgetmanage.entities.Budget;
 import com.budgetmanage.entities.BudgetUser;
+import com.budgetmanage.entities.Expending;
+import com.budgetmanage.entities.Finance;
+import com.budgetmanage.entities.Ingress;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -68,7 +73,30 @@ public class UserJpaController implements Serializable {
             }
         }
     }
-
+    
+    public List<Finance> getFinace(Integer id, Finance finance)throws Exception{
+        EntityManager em = getEntityManager();
+        List<Finance> finances = new ArrayList<>();
+        Query q = null;
+        
+        try{
+            if(finance instanceof Budget){
+                q = em.createNativeQuery("Select * from BUDGET where BUDGETUSER_ID = "+id);
+            } else if(finance instanceof Expending){
+                q = em.createNativeQuery("Select * from EXPENDING where BUDGETUSER_ID = "+id);
+            }
+            if(finance instanceof Ingress){
+                q = em.createNativeQuery("Select * from INGRESS where BUDGETUSER_ID = "+id);
+            }else{
+                throw new Exception("Favor introduzca una finanza valida");
+            }
+            return finances = q.getResultList();
+                    
+        }finally{            
+            em.close();            
+        }
+    }
+    
     public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -122,7 +150,7 @@ public class UserJpaController implements Serializable {
             em.close();
         }
     }
-
+    
     public int getUserCount() {
         EntityManager em = getEntityManager();
         try {

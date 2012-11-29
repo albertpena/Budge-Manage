@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class Ingress extends Finance implements Serializable {
+    @ManyToOne
+    private BudgetUser budgetUser;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

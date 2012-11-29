@@ -17,9 +17,7 @@ import javax.swing.JPanel;
  */
 public class Main extends javax.swing.JFrame implements Constant{
 
-    /**
-     * Creates new form Main
-     */
+
     public Main() {
         initComponents();
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
