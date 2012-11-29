@@ -14,7 +14,9 @@ public interface Constant {
     public int FRAME_HEIGHT = 602;
     public int FRAME_WIDTH = 606;
     public String TITLE = "Budget Friendly";
-    public String[] EXPENDING_TYPES = {"Seleccione","Comunicacion","Alquiler","Prestamo","Celular","Ocio","Estetica","Combustible","Transporte","Alimentos","Hogar","Otros"};
+    public String[] FIXED_EXPENSE = {"Seleccione","Alquiler","Electricidad","Agua","Basura","Alimentacion","Combustible","Educacion","Otros"};
+    public String[] SERVICES = {"Seleccione","Comunicaciones","Estetica","Prestamo","Tarjetas","Otros"};
+    public String[] LEISURE = {"Seleccione","Cine","Familia","Disco","Compras","Imprevistos","Otros"};
     public String[] INGRESS_TYPES = {"Seleccione","Salario","Remesas","Comisiones","Bonificaciones","Extras","Otros"};
     public int YES = 1;
     public int NO = 2;
@@ -51,5 +53,8 @@ public interface Constant {
     public String ADD_PANEL_TITLE = "Agregar Finanzas";
     
     Color BKG = new Color(204,255,204);
+    public Color FIXED_EXPENSE_COLOR = Color.BLUE;
+    public Color SERVICES_COLOR = Color.GREEN;
+    public Color LEISURE_COLOR = Color.RED;
     
 }
