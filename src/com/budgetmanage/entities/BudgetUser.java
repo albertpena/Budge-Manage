@@ -24,7 +24,7 @@ public class BudgetUser implements Serializable {
     private String  userName;
     private String  password;
     private boolean status_User;
-    
+    //
     private Long id;
 
     public Long getId() {
