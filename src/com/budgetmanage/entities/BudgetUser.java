@@ -5,6 +5,7 @@
 package com.budgetmanage.entities;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,16 +17,21 @@ import javax.persistence.Id;
  */
 @Entity
 public class BudgetUser implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String  nombre;
-    private String  apellidos;
-    private String  userName;
-    private String  password;
-    private boolean status_User;
     //
     private Long id;
+    @Column(nullable=false)
+    private String nombre;
+    @Column(nullable=false)
+    private String apellidos;
+    @Column(nullable=false, unique=true)
+    private String userName;
+    @Column(nullable=false)
+    private String password;
+    private boolean status_User;
 
     public Long getId() {
         return id;
@@ -129,5 +135,4 @@ public class BudgetUser implements Serializable {
     public void setStatus_User(boolean status_User) {
         this.status_User = status_User;
     }
-    
 }
