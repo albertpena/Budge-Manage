@@ -4,10 +4,15 @@
  */
 package com.budgetmanage.ui.user;
 
+import com.budgetmanage.entities.BudgetUser;
+import com.budgetmanage.modeler.UserJpaController;
 import com.budgetmanage.ui.LoginFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.util.logging.Logger;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -49,7 +54,7 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
         jLabel3 = new javax.swing.JLabel();
         txtLaName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JPasswordField();
         btnCreate = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
@@ -82,7 +87,7 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
         jLabel2.setText("Clave Secreta");
         jLabel2.setName(""); // NOI18N
 
-        jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPassword.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,7 +109,7 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
                         .addGap(10, 10, 10)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
@@ -122,12 +127,13 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
                     .addComponent(jLabel3)
                     .addComponent(txtLaName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4))))
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         btnCreate.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
@@ -135,6 +141,11 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
         btnCreate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCreateMouseClicked(evt);
+            }
+        });
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
             }
         });
 
@@ -208,9 +219,30 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreateMouseClicked
-        // TODO add your handling code here:
+        //checkign all JTextField searching Empty fields. 
+        if (txtLaName.getText().trim().isEmpty() || txtName.getText().trim().isEmpty()
+                || txtUserName.getText().trim().isEmpty() || txtPassword.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Exigen campos vacios favor completar",
+                    null, JOptionPane.ERROR_MESSAGE);
+        } else {
+            BudgetUser user = new BudgetUser(); //Creating a new object BudgetUser
+
+            //creating instances for work to persistences into UserBudget
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory(P_UNIT);
+            UserJpaController userController = new UserJpaController(emf);
+
+            //Setting the properties necesaries for a new user.
+            user.setNombre(txtLaName.getText());
+            user.setApellidos(txtLaName.getText());
+            user.setPassword(txtPassword.getPassword().toString());
+            user.setUserName(txtUserName.getText());
+
+            userController.create(user);
+        }
     }//GEN-LAST:event_btnCreateMouseClicked
 
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+    }//GEN-LAST:event_btnCreateActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnCreate;
@@ -220,9 +252,9 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField txtLaName;
     private javax.swing.JTextField txtName;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }
