@@ -162,7 +162,8 @@ public class Main extends javax.swing.JFrame implements Constant{
     }//GEN-LAST:event_jMenuItem27ActionPerformed
 
     private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
-        // TODO add your handling code here:
+        LoanPanel lp = new LoanPanel();
+        addPanel(lp);
     }//GEN-LAST:event_jMenuItem24ActionPerformed
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked

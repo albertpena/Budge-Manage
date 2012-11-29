@@ -11,48 +11,57 @@ import java.awt.Color;
  * @author Nestor_Velasquez
  */
 public interface Constant {
-    public int FRAME_HEIGHT = 602;
-    public int FRAME_WIDTH = 606;
-    public String TITLE = "Budget Friendly";
-    public String[] FIXED_EXPENSE = {"Seleccione","Alquiler","Electricidad","Agua","Basura","Alimentacion","Combustible","Educacion","Otros"};
-    public String[] SERVICES = {"Seleccione","Comunicaciones","Estetica","Prestamo","Tarjetas","Otros"};
-    public String[] LEISURE = {"Seleccione","Cine","Familia","Disco","Compras","Imprevistos","Otros"};
-    public String[] INGRESS_TYPES = {"Seleccione","Salario","Remesas","Comisiones","Bonificaciones","Extras","Otros"};
-    public int YES = 1;
-    public int NO = 2;
-    public String FORMAT_DATE = "dd-MMM-yyyy";
-    public String COMBOX_FINANCE_MSG = "Seleccione el tipo de finanza que desea";
+    /*************************Errors Constant********************************/
     public String NAME_ERROR_MSG = "Debe colocar un nombre para esta finanza";
     public String PRIORITY_ERROR_MSG = "Debe colocar la prioridad de esta finanza";
     public String TYPE_ERROR_MSG = "Debe colocar el tipo de finanza";
     public String VALUE_ERROR_MSG = "Debe colocar un monto";
+    public String EXIST_ERROR_MSG = "Existe una finanza con este criterio";
+    public String NON_EXISTS_ERROR_MSG = "No existe una finanza con estos criterios";
+    public String USER_ERROR_MSG = "Favor colocar un nombre de usuario";
+    public String PASS_ERROR_MSG = "Favor colocar la clave";
+    public String SEARCH_MSG_ERROR = "Debe colocar un criterio de busqueda";
+    
+    /*************************Messages And Labels***************************************/
+    public String COMBOX_FINANCE_MSG = "Seleccione el tipo de finanza que desea";
     public String FINANCE_SUCCEED_MSG = "Finanza agregada satisfactoriamente";
-    public String P_UNIT = "BudgeManagePU";
-    public String[] FINANCES_ADD_ARRAY = {"Seleccione","Gastos","Ingresos"};
-    public String[] FINANCES_EDIT_ARRAY = {"Seleccione","Gastos","Ingresos","Presupuesto"};
+    public String TITLE = "Budget Friendly";
     public String EXPENDING = "GASTOS";
     public String INGRESS = "INGRESOS";
-    public String NAME_MSG = "Nombre: Nombre designado para la finanza.";
+    public String BUDGET = "PRESUPUESTO";
     public String TYPE_MSG = "Tipo: Categoria a la que pertenece la finanza.";
     public String VALUE_MSG = "Monto: Valor numerico designado para la finanza.";
     public String PRIORITY_MSG = "Prioridad: Prioridad asignada a la finanza";
-    public String EXIST_ERROR_MSG = "Existe una finanza con este criterio";
-    public String NON_EXISTS_ERROR_MSG = "No existe una finanza con estos criterios";
-    public int PAGE_MAX = 5;
-    public int PAGE_MIN = 1;
-    public String PU = "BudgeManagePU";
-    public String USER_ERROR_MSG = "Favor colocar un nombre de usuario";
-    public String PASS_ERROR_MSG = "Favor colocar la clave";
-    public String[] INGRESS_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Fecha Modificacion"};
-    public String[] EXPENDING_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Modificacion", "Prioridad"};
-    public String SEARCH_MSG_ERROR = "Debe colocar un criterio de busqueda";
-    public String SUCEED_MSG = "Finanza guardada Satisfactoriamente";
     public String MAIN_PANEL_TITLE = "Finanzas Amigables";
     public String EDIT_PANEL_TITLE = "Editar Finanzas";
     public String CONSULT_PANEL_TITLE = "Consultar Finanzas";
     public String ADD_PANEL_TITLE = "Agregar Finanzas";
+    public String NAME_MSG = "Nombre: Nombre designado para la finanza.";
     
-    Color BKG = new Color(204,255,204);
+    /**************************Parameters*********************************************/
+    public int FRAME_HEIGHT = 602;
+    public int FRAME_WIDTH = 606;
+    public int PAGE_MAX = 5;
+    public int PAGE_MIN = 1;
+    public int YES = 1;
+    public int NO = 2;
+    public String PU = "BudgeManagePU";
+    public String FORMAT_DATE = "dd-MMM-yyyy";
+    public String P_UNIT = "BudgeManagePU";
+    
+    /***************************Lists************************************************/
+    public String[] FIXED_EXPENSE = {"Seleccione","Alquiler","Electricidad","Agua","Basura","Alimentacion","Combustible","Educacion","Otros"};
+    public String[] SERVICES = {"Seleccione","Comunicaciones","Estetica","Prestamo","Tarjetas","Otros"};
+    public String[] LEISURE = {"Seleccione","Cine","Familia","Disco","Compras","Imprevistos","Otros"};
+    public String[] INGRESS_TYPES = {"Seleccione","Salario","Remesas","Comisiones","Bonificaciones","Extras","Otros"};    
+    public String[] FINANCES_ADD_ARRAY = {"Seleccione","Gastos","Ingresos"};
+    public String[] FINANCES_EDIT_ARRAY = {"Seleccione","Gastos","Ingresos","Presupuesto"};
+    public String[] INGRESS_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Fecha Modificacion"};
+    public String[] EXPENDING_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Modificacion", "Prioridad"};
+    public String SUCEED_MSG = "Finanza guardada Satisfactoriamente";
+    
+   /************************Colors**************************************************/ 
+    public Color BKG = new Color(204,255,204);
     public Color FIXED_EXPENSE_COLOR = Color.BLUE;
     public Color SERVICES_COLOR = Color.GREEN;
     public Color LEISURE_COLOR = Color.RED;

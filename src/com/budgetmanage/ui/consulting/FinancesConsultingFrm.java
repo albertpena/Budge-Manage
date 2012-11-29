@@ -8,8 +8,10 @@ import com.budgetmanage.entities.Budget;
 import com.budgetmanage.entities.Expending;
 import com.budgetmanage.entities.Finance;
 import com.budgetmanage.entities.Ingress;
+import com.budgetmanage.modeler.BudgetJpaController;
 import com.budgetmanage.modeler.ExpendingJpaController;
 import com.budgetmanage.modeler.IngressJpaController;
+import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.ui.Maintenance.FinancesMaintenanceFrm;
 import com.budgetmanage.ui.maintenance.FinancesAddFrm;
 import com.budgetmanage.util.Constant;
@@ -17,10 +19,13 @@ import java.awt.Container;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -356,6 +361,8 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(P_UNIT);
         ExpendingJpaController ejc = new ExpendingJpaController(emf);
         IngressJpaController ijc = new IngressJpaController(emf);
+        BudgetJpaController bjc = new BudgetJpaController(emf);
+        Budget budget = new Budget();
         
         List<Finance> finances = null;
         jTable1.setModel(new TableModel());
@@ -395,16 +402,31 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                 }
                 break;
             }
-        }               
-
-         if(!finances.isEmpty()){                
+            case BUDGET:{
+            try {
+                budget  = bjc.getActual();
+            } catch (NonexistentEntityException ex) {
+                JOptionPane.showMessageDialog(this, NON_EXISTS_ERROR_MSG, "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            }
+        }
+        if(process.equalsIgnoreCase(BUDGET)){
+                 String[] col = {"ID","Nombre","Total Gasto", "Total Ingreso","Fecha generado"};
+                 DefaultTableModel model = new DefaultTableModel(col, 1);
+                 jTable1.setModel(model);
+                 model.insertRow(0, new Object[]{budget.getId(),budget.getName(),budget.getExpendingTotal(), budget.getIngressTotal(), budget.getGenerateDate()});
+                 jTable1.updateUI();
+                 jPanel2.setVisible(true);
+        }else{
+            if(!finances.isEmpty()){             
                 ((TableModel) jTable1.getModel()).getFinances().clear();
                 ((TableModel) jTable1.getModel()).getFinances().addAll(finances);
                 jTable1.updateUI();
-                jPanel2.setVisible(true);
-        }else{
-             JOptionPane.showMessageDialog(this, "No se encontraron finanzas con estos criterios","Busqueda",JOptionPane.INFORMATION_MESSAGE);
-         }
+                jPanel2.setVisible(true);            
+            }else{
+                JOptionPane.showMessageDialog(this, "No se encontraron finanzas con estos criterios","Busqueda",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
     }
     
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
