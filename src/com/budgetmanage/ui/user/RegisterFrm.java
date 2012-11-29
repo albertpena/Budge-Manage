@@ -225,19 +225,33 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
             JOptionPane.showMessageDialog(null, "Exigen campos vacios favor completar",
                     null, JOptionPane.ERROR_MESSAGE);
         } else {
-            BudgetUser user = new BudgetUser(); //Creating a new object BudgetUser
-
             //creating instances for work to persistences into UserBudget
             EntityManagerFactory emf = Persistence.createEntityManagerFactory(P_UNIT);
             UserJpaController userController = new UserJpaController(emf);
 
+            //Creating a new object BudgetUser
+            BudgetUser user = new BudgetUser();
             //Setting the properties necesaries for a new user.
-            user.setNombre(txtLaName.getText());
+            user.setNombre(txtName.getText());
             user.setApellidos(txtLaName.getText());
             user.setPassword(txtPassword.getPassword().toString());
             user.setUserName(txtUserName.getText());
 
-            userController.create(user);
+            boolean exitoso = userController.create(user);
+            if (exitoso) {
+                JOptionPane.showMessageDialog(null, "Se ha creado un nuevo Usuario",
+                        "Accion Satisfactoria", JOptionPane.INFORMATION_MESSAGE);
+                container.removeAll();
+
+                LoginFrm login = new LoginFrm(container);
+                login.setPreferredSize(container.getPreferredSize());
+                container.add(login, BorderLayout.CENTER);
+                JPanel pn = (JPanel) container;
+                pn.updateUI();
+            } else {
+                JOptionPane.showMessageDialog(null, "Ha occurido un error",
+                        "Error Insertar", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnCreateMouseClicked
 
