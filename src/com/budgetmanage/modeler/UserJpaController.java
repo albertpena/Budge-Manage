@@ -30,18 +30,20 @@ public class UserJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(BudgetUser user) {
+    public boolean create(BudgetUser user) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(user);
             em.getTransaction().commit();
-        } finally {
             if (em != null) {
                 em.close();
             }
+            return true;
+        } catch (Exception e) {
         }
+        return false;
     }
 
     public void edit(BudgetUser user) throws NonexistentEntityException, Exception {
@@ -133,5 +135,4 @@ public class UserJpaController implements Serializable {
             em.close();
         }
     }
-    
 }
