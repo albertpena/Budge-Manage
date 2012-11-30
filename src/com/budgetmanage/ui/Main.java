@@ -4,11 +4,15 @@
  */
 package com.budgetmanage.ui;
 
+import com.budgetmanage.entities.BudgetUser;
+import com.budgetmanage.modeler.UserJpaController;
 import com.budgetmanage.ui.Consulting.FinancesConsultingFrm;
 import com.budgetmanage.ui.consulting.MainPanel;
 import com.budgetmanage.ui.maintenance.FinancesAddFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.BorderLayout;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JPanel;
 
 /**
@@ -17,7 +21,21 @@ import javax.swing.JPanel;
  */
 public class Main extends javax.swing.JFrame implements Constant{
 
+    private static BudgetUser user;
 
+    /**
+     * @return the user
+     */
+    public static BudgetUser getUser() {
+        return user;
+    }
+
+    /**
+     * @param aUser the user to set
+     */
+    public static void setUser(BudgetUser aUser) {
+        user = aUser;
+    }
     public Main() {
         initComponents();
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -171,6 +189,10 @@ public class Main extends javax.swing.JFrame implements Constant{
     }//GEN-LAST:event_jMenu5MouseClicked
 
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+       EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
+       UserJpaController ujc = new UserJpaController(emf);
+       BudgetUser user = ujc.findUser(1L);
+       this.user = user;
        MainPanel main = new MainPanel();
        addPanel(main);
        jMenu4.setSelected(false);

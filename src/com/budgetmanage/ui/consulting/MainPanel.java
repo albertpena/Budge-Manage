@@ -5,11 +5,13 @@
 package com.budgetmanage.ui.consulting;
 
 import com.budgetmanage.entities.Budget;
+import com.budgetmanage.entities.BudgetUser;
 import com.budgetmanage.entities.Finance;
 import com.budgetmanage.modeler.BudgetJpaController;
 import com.budgetmanage.modeler.ExpendingJpaController;
 import com.budgetmanage.modeler.IngressJpaController;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
+import com.budgetmanage.ui.Main;
 import com.budgetmanage.util.Constant;
 import com.budgetmanage.util.PieChart;
 import com.budgetmanage.util.PieSlice;
@@ -37,9 +39,9 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
     BudgetJpaController bjc;
     
     public MainPanel() {
-        initComponents();
+        initComponents();        
         jLabel13.setText(MAIN_PANEL_TITLE);
-        
+        jLabel4.setText("Bienvenido "+Main.getUser().getNombre()+" "+Main.getUser().getApellidos());
         emf = Persistence.createEntityManagerFactory(PU);
         bjc = new BudgetJpaController(emf);
         
@@ -129,6 +131,8 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Consultar Finanzas");
 
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 255, 204));
         jLabel4.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -136,11 +140,11 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(215, 215, 215)
+                .addContainerGap()
                 .addComponent(jLabel13)
-                .addGap(119, 119, 119)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

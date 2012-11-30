@@ -6,6 +6,7 @@ import com.budgetmanage.entities.Ingress;
 import com.budgetmanage.modeler.ExpendingJpaController;
 import com.budgetmanage.modeler.IngressJpaController;
 import com.budgetmanage.modeler.exceptions.PreexistingEntityException;
+import com.budgetmanage.ui.Main;
 import com.budgetmanage.util.Constant;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
@@ -394,6 +395,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
                     ExpendingJpaController ejpa = new ExpendingJpaController(emf);
 
                     //Setting attributes
+                    expending.setBudgetUser(Main.getUser());
                     expending.setName(name);
                     expending.setPriority(priority);
                     expending.seFinanceTotal(value);

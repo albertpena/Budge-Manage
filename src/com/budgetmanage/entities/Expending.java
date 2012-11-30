@@ -168,4 +168,18 @@ public class Expending extends Finance implements Serializable {
         this.type = type;
     }
 
+    /**
+     * @return the budgetUser
+     */
+    public BudgetUser getBudgetUser() {
+        return budgetUser;
+    }
+
+    /**
+     * @param budgetUser the budgetUser to set
+     */
+    public void setBudgetUser(BudgetUser budgetUser) {
+        this.budgetUser = budgetUser;
+    }
+
 }
