@@ -5,25 +5,45 @@
 package com.budgetmanage.entities;       
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author Alexateam
  */
+
+
 @Entity
+@Table(name ="accounts")
+@NamedQueries({
+    @NamedQuery(name = "Account.findAll", query = "SELECT e FROM Account e")
+        
+})
 public class Account implements Serializable {
+    
+    
     private static final long serialVersionUID = 1L;
+    
+    //Recurda poner para que genere el id automatico, el codigo que habia se me olvido
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
     
     //Migrating
-    private double balance;
+    
+    @Column(name = "balance")
+    private Double balance;
+    
+    @Column(name="account_number")
     private String  accountNumber;
+    
+    @Column(name="account_bank")
     private String accountBank;
 
     public Account() {
@@ -62,11 +82,11 @@ public class Account implements Serializable {
     }
     
     
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

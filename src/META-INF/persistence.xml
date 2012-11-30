@@ -7,6 +7,8 @@
     <class>com.budgetmanage.entities.Budget</class>
     <class>com.budgetmanage.entities.Account</class>
     <class>com.budgetmanage.entities.BudgetUser</class>
+    <class>com.budgetmanage.entities.Usuario</class>
+    <class>com.budgetmanage.entities.UserEntity</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/BudgetManage"/>
       <property name="javax.persistence.jdbc.password" value="123456"/>
