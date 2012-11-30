@@ -17,6 +17,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -130,12 +131,14 @@ public class UserJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+
             cq.select(cq.from(BudgetUser.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
             }
+
             return q.getResultList();
         } finally {
             em.close();
@@ -146,6 +149,7 @@ public class UserJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             return em.find(BudgetUser.class, id);
+
         } finally {
             em.close();
         }
@@ -170,18 +174,21 @@ public class UserJpaController implements Serializable {
      * @param userNameSearch a userName to search on the database
      * @return the count the occurrence
      */
-    public int isUserNameExist(String userNameSearch) {
+    public BudgetUser isUserValidate(String password) {
         EntityManager em = getEntityManager();
         List<BudgetUser> userList = new ArrayList<>();
-        Query query;
+
         try {
-            query = em.createNativeQuery("SELECT * FROM NVELASQUEZ.BUDGETUSER WHERE USERNAME = '" + userNameSearch + "'");
-            userList = query.getResultList();
-            //  Object[] array = userList.toArray();
-            // String a  = array.toString().g;
+            userList = this.findUserEntities();
+            for (BudgetUser ub : userList) {
+                //Verifing the indentity and password the user logger
+                if (ub.getPassword().equals(password)) {
+                    return ub;
+                }
+            }
         } finally {
             em.close();
         }
-        return userList.size();
+        return null;
     }
 }
