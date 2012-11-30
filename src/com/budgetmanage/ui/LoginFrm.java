@@ -1,5 +1,6 @@
 package com.budgetmanage.ui;
 
+import com.budgetmanage.entities.BudgetUser;
 import com.budgetmanage.modeler.UserJpaController;
 import com.budgetmanage.ui.maintenance.FinancesAddFrm;
 import com.budgetmanage.ui.user.RegisterFrm;
@@ -173,11 +174,13 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
         if (isOk == true) {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("BudgeManagePU");
             UserJpaController ujc = new UserJpaController(emf);
-            
-            int verificador = ujc.isUserNameExist(txtUsuario.getText());
-            if (verificador >= 1){
+
+            BudgetUser Currentuser = ujc.isUserValidate(txtPassword.getText());
+
+            if (Currentuser != null) {
                 JOptionPane.showMessageDialog(null, "Usuario exitente");
-            }  else{
+                Main.setUser(Currentuser);
+            } else {
                 JOptionPane.showMessageDialog(null, "Usuario no encontrado..!");
             }
 
@@ -202,7 +205,6 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAceptarActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContainerPanel;
     private javax.swing.JButton btnAceptar;
