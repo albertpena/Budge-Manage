@@ -98,6 +98,11 @@ public class Main extends javax.swing.JFrame implements Constant{
         jMenu2.setText("Agregar");
 
         jMenuItem26.setText("Cuentas");
+        jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem26ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem26);
 
         jMenuItem27.setText("Finanzas");
@@ -197,6 +202,11 @@ public class Main extends javax.swing.JFrame implements Constant{
        addPanel(main);
        jMenu4.setSelected(false);
     }//GEN-LAST:event_jMenu4MouseClicked
+
+    private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
+        AccountPanel ap = new AccountPanel();
+        addPanel(ap);
+    }//GEN-LAST:event_jMenuItem26ActionPerformed
 
     private void addPanel(JPanel p){
        jPanel1.removeAll();       
