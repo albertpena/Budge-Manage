@@ -73,30 +73,30 @@ public class UserJpaController implements Serializable {
             }
         }
     }
-    
-    public List<Finance> getFinace(Integer id, Finance finance)throws Exception{
+
+    public List<Finance> getFinace(Integer id, Finance finance) throws Exception {
         EntityManager em = getEntityManager();
         List<Finance> finances = new ArrayList<>();
         Query q = null;
-        
-        try{
-            if(finance instanceof Budget){
-                q = em.createNativeQuery("Select * from BUDGET where BUDGETUSER_ID = "+id);
-            } else if(finance instanceof Expending){
-                q = em.createNativeQuery("Select * from EXPENDING where BUDGETUSER_ID = "+id);
+
+        try {
+            if (finance instanceof Budget) {
+                q = em.createNativeQuery("Select * from BUDGET where BUDGETUSER_ID = " + id);
+            } else if (finance instanceof Expending) {
+                q = em.createNativeQuery("Select * from EXPENDING where BUDGETUSER_ID = " + id);
             }
-            if(finance instanceof Ingress){
-                q = em.createNativeQuery("Select * from INGRESS where BUDGETUSER_ID = "+id);
-            }else{
+            if (finance instanceof Ingress) {
+                q = em.createNativeQuery("Select * from INGRESS where BUDGETUSER_ID = " + id);
+            } else {
                 throw new Exception("Favor introduzca una finanza valida");
             }
             return finances = q.getResultList();
-                    
-        }finally{            
-            em.close();            
+
+        } finally {
+            em.close();
         }
     }
-    
+
     public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -150,7 +150,7 @@ public class UserJpaController implements Serializable {
             em.close();
         }
     }
-    
+
     public int getUserCount() {
         EntityManager em = getEntityManager();
         try {
@@ -162,5 +162,26 @@ public class UserJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+
+    /**
+     * Method which the occurrence amount
+     *
+     * @param userNameSearch a userName to search on the database
+     * @return the count the occurrence
+     */
+    public int isUserNameExist(String userNameSearch) {
+        EntityManager em = getEntityManager();
+        List<BudgetUser> userList = new ArrayList<>();
+        Query query;
+        try {
+            query = em.createNativeQuery("SELECT * FROM NVELASQUEZ.BUDGETUSER WHERE USERNAME = '" + userNameSearch + "'");
+            userList = query.getResultList();
+            //  Object[] array = userList.toArray();
+            // String a  = array.toString().g;
+        } finally {
+            em.close();
+        }
+        return userList.size();
     }
 }
