@@ -234,7 +234,7 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
             //Setting the properties necesaries for a new user.
             user.setNombre(txtName.getText());
             user.setApellidos(txtLaName.getText());
-            user.setPassword(txtPassword.getPassword().toString());
+            user.setPassword(txtPassword.getText());
             user.setUserName(txtUserName.getText());
 
             boolean exitoso = userController.create(user);
