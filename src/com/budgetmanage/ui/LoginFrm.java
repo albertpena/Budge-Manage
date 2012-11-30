@@ -1,20 +1,11 @@
 package com.budgetmanage.ui;
 
-import com.budgetmanage.entities.BudgetUser;
-import com.budgetmanage.modeler.BudgetJpaController;
-import com.budgetmanage.modeler.UserJpaController;
-import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
-import com.budgetmanage.ui.user.RegisterFrm;
 import com.budgetmanage.ui.maintenance.FinancesAddFrm;
+import com.budgetmanage.ui.user.RegisterFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**

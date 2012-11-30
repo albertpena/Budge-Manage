@@ -5,8 +5,8 @@
 package com.budgetmanage.modeler;
 
 import com.budgetmanage.entities.Finance;
-import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.entities.Ingress;
+import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.modeler.exceptions.PreexistingEntityException;
 import com.budgetmanage.util.Constant;
 import java.io.Serializable;

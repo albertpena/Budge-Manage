@@ -167,5 +167,19 @@ public class Ingress extends Finance implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
+
+    /**
+     * @return the budgetUser
+     */
+    public BudgetUser getBudgetUser() {
+        return budgetUser;
+    }
+
+    /**
+     * @param budgetUser the budgetUser to set
+     */
+    public void setBudgetUser(BudgetUser budgetUser) {
+        this.budgetUser = budgetUser;
+    }
     
 }

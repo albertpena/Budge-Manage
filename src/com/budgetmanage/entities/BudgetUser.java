@@ -5,6 +5,7 @@
 package com.budgetmanage.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,6 +42,32 @@ public class BudgetUser implements Serializable {
     List<Expending> expendings;
     @OneToMany(mappedBy = "budgetUser")
     List<Ingress> ingresses;
+    
+    
+    public void addFinance(Finance finance){
+        if(finance instanceof Budget){
+            if(budgets == null){
+                budgets = new ArrayList<>();
+            }
+            budgets.add((Budget) finance);
+            ((Budget) finance).setBudgetUser(this);
+        }
+        if(finance instanceof Expending){
+            if(expendings == null){
+                expendings = new ArrayList<>();
+            }
+            expendings.add((Expending) finance);
+            ((Expending) finance).setBudgetUser(this);
+        }
+        if(finance instanceof Ingress){
+            if(ingresses == null){
+                ingresses = new ArrayList<>();
+            }
+            ingresses.add((Ingress) finance);
+            ((Ingress) finance).setBudgetUser(this);
+        }
+        
+    }
     
     public Long getId() {
         return id;

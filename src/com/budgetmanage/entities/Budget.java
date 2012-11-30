@@ -241,4 +241,18 @@ public class Budget extends Finance implements Serializable {
     public void setIngressTotal(double ingressTotal) {
         this.ingressTotal = ingressTotal;
     }
+
+    /**
+     * @return the budgetUser
+     */
+    public BudgetUser getBudgetUser() {
+        return budgetUser;
+    }
+
+    /**
+     * @param budgetUser the budgetUser to set
+     */
+    public void setBudgetUser(BudgetUser budgetUser) {
+        this.budgetUser = budgetUser;
+    }
 }
