@@ -18,7 +18,7 @@ import javax.persistence.Table;
  *
  * @author Alexateam
  */
-
+//testing linked form
 
 @Entity
 @Table(name ="accounts")
