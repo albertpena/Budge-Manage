@@ -1,11 +1,15 @@
 package com.budgetmanage.ui;
 
+import com.budgetmanage.modeler.UserJpaController;
 import com.budgetmanage.ui.maintenance.FinancesAddFrm;
 import com.budgetmanage.ui.user.RegisterFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -61,6 +65,11 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
         btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAceptarMouseClicked(evt);
+            }
+        });
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
             }
         });
 
@@ -162,11 +171,15 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
         //if all is correct [No empty fields] next step is
         //is to verify in the DataBase
         if (isOk == true) {
-            con.removeAll();
-            Dimension dim = con.getPreferredSize();
-            FinancesAddFrm fna = new FinancesAddFrm();
-            fna.setPreferredSize(dim);
-            con.add(fna, BorderLayout.CENTER);
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("BudgeManagePU");
+            UserJpaController ujc = new UserJpaController(emf);
+            
+            int verificador = ujc.isUserNameExist(txtUsuario.getText());
+            if (verificador >= 1){
+                JOptionPane.showMessageDialog(null, "Usuario exitente");
+            }  else{
+                JOptionPane.showMessageDialog(null, "Usuario no encontrado..!");
+            }
 
         } else {
             lblValidatorMessage.setVisible(true);
@@ -185,6 +198,11 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContainerPanel;
     private javax.swing.JButton btnAceptar;
