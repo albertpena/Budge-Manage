@@ -5,7 +5,6 @@
 package com.budgetmanage.ui.consulting;
 
 import com.budgetmanage.entities.Budget;
-import com.budgetmanage.entities.BudgetUser;
 import com.budgetmanage.entities.Finance;
 import com.budgetmanage.modeler.BudgetJpaController;
 import com.budgetmanage.modeler.ExpendingJpaController;
@@ -326,11 +325,12 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
             
             if(isOk){
                 //Creating and persisting the budgets.
-                Budget budget = new Budget(name);
+                Budget budget = new Budget(name);                
                 budget.setExpendingTotal(expendigTotal);
                 budget.setIngressTotal(ingressTotal);
                 budget.setStatus("A");
                 budget.setGenerateDate(date);
+                Main.getUser().addFinance(budget);
                 bjc.create(budget);
                 jLabel1.setText("El Presupuesto se genero correctamente");
             }
@@ -363,6 +363,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
             generatePanel.setVisible(false); 
             fillExpendingChart();
         }
+        this.updateUI();
     }
     
        private void fillExpendingChart(){

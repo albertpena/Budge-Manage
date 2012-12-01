@@ -2,27 +2,30 @@ package com.budgetmanage.ui;
 
 import com.budgetmanage.entities.BudgetUser;
 import com.budgetmanage.modeler.UserJpaController;
+import com.budgetmanage.ui.consulting.MainPanel;
 import com.budgetmanage.ui.maintenance.FinancesAddFrm;
 import com.budgetmanage.ui.user.RegisterFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-/**
- *
- * @author Fulvio
- */
+
 public class LoginFrm extends javax.swing.JPanel implements Constant {
 
     Container con;
+    private JFrame frame;
 
-    public LoginFrm(Container con) {
+    public LoginFrm(Container con, JFrame frame) {
         this.con = con;
+        this.frame = frame;
         initComponents();
         this.lblValidatorMessage.setVisible(false);
     }
@@ -175,13 +178,21 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("BudgeManagePU");
             UserJpaController ujc = new UserJpaController(emf);
 
-            BudgetUser Currentuser = ujc.isUserValidate(txtPassword.getText());
+            BudgetUser Currentuser = null;
+            try {
+                Currentuser = ujc.isUserValid(txtUsuario.getText().trim(),txtPassword.getText());
+            } catch (Exception ex) {
+                isOk = false;
+            }
 
-            if (Currentuser != null) {
-                JOptionPane.showMessageDialog(null, "Usuario exitente");
+            if (isOk) {
                 Main.setUser(Currentuser);
+                frame.getJMenuBar().setVisible(true);
+                MainPanel main = new MainPanel();
+                com.budgetmanage.util.Util.addPanel((JPanel)con,main);
             } else {
-                JOptionPane.showMessageDialog(null, "Usuario no encontrado..!");
+                JOptionPane.showMessageDialog(this, INVALID_USER_ERROR, "Error", JOptionPane.ERROR_MESSAGE);
+                clean();
             }
 
         } else {
@@ -190,14 +201,15 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
-        con.removeAll();
-        RegisterFrm register = new RegisterFrm(con);
-        register.setPreferredSize(con.getPreferredSize());
-        con.add(register, BorderLayout.CENTER);
-        JPanel pn = (JPanel) con;
-        pn.updateUI();
+        RegisterFrm register = new RegisterFrm(con, frame);
+        com.budgetmanage.util.Util.addPanel((JPanel)con, register);
     }//GEN-LAST:event_btnRegistrarMouseClicked
 
+    private void clean(){
+        txtPassword.setText("");
+        txtUsuario.setText("");
+    }
+    
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarActionPerformed

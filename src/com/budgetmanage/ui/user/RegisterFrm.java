@@ -10,9 +10,9 @@ import com.budgetmanage.ui.LoginFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -24,6 +24,7 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
 
     private Container container;
 
+    private JFrame frame;
     /**
      * Creates new form RegisterFrm
      */
@@ -31,8 +32,9 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
         initComponents();
     }
 
-    public RegisterFrm(Container container) {
+    public RegisterFrm(Container container, JFrame frame) {
         this.container = container;
+        this.frame = frame;
         initComponents();
     }
 
@@ -209,12 +211,8 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
                 Constant.TITLE, JOptionPane.YES_NO_OPTION);
         //If [opt] had '1' value is the option yes and I show the login JPanel
         if (opt == 0) {
-            container.removeAll();
-            LoginFrm loginf = new LoginFrm(container);
-            loginf.setPreferredSize(container.getPreferredSize());
-            container.add(loginf, BorderLayout.CENTER);
-            JPanel con = (JPanel) container;
-            con.updateUI();
+            LoginFrm loginf = new LoginFrm(container, frame);
+            com.budgetmanage.util.Util.addPanel((JPanel)container, loginf);
         }
     }//GEN-LAST:event_btnCancelActionPerformed
 
@@ -234,23 +232,19 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
             //Setting the properties necesaries for a new user.
             user.setNombre(txtName.getText());
             user.setApellidos(txtLaName.getText());
-            user.setPassword(txtPassword.getText());
+            user.setPassword(txtPassword.getText().replace("@", "|"));
             user.setUserName(txtUserName.getText());
 
             boolean exitoso = userController.create(user);
             if (exitoso) {
-                JOptionPane.showMessageDialog(null, "Se ha creado un nuevo Usuario",
-                        "Accion Satisfactoria", JOptionPane.INFORMATION_MESSAGE);
-                container.removeAll();
-
-                LoginFrm login = new LoginFrm(container);
-                login.setPreferredSize(container.getPreferredSize());
-                container.add(login, BorderLayout.CENTER);
-                JPanel pn = (JPanel) container;
-                pn.updateUI();
+                JOptionPane.showMessageDialog(null, "Usuario agregado satisfactoriamente",
+                        "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                
+                LoginFrm login = new LoginFrm(container, frame);
+               com.budgetmanage.util.Util.addPanel((JPanel)container, login);
             } else {
                 JOptionPane.showMessageDialog(null, "Ha occurido un error",
-                        "Error Insertar", JOptionPane.ERROR_MESSAGE);
+                        "Error al Insertar", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnCreateMouseClicked

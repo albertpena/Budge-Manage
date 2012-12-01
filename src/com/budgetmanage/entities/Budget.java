@@ -36,6 +36,7 @@ public class Budget extends Finance implements Serializable {
     private BudgetUser budgetUser;
 
     public Budget() {
+    
     }
     
     public Budget(String name) {

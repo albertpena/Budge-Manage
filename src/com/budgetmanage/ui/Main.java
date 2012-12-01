@@ -5,15 +5,11 @@
 package com.budgetmanage.ui;
 
 import com.budgetmanage.entities.BudgetUser;
-import com.budgetmanage.modeler.UserJpaController;
 import com.budgetmanage.ui.Consulting.FinancesConsultingFrm;
 import com.budgetmanage.ui.consulting.MainPanel;
 import com.budgetmanage.ui.maintenance.FinancesAddFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.BorderLayout;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.swing.JPanel;
 
 /**
  *
@@ -41,12 +37,11 @@ public class Main extends javax.swing.JFrame implements Constant{
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setLayout(new BorderLayout());
         dim = this.getPreferredSize();
-        LoginFrm login = new LoginFrm(jPanel1);
-        jPanel1.removeAll();
-        jPanel1.add(login, BorderLayout.CENTER);
-        //jPanel1.add(new LoginFrm(), BorderLayout.CENTER);
+        LoginFrm login = new LoginFrm(jPanel1, this);
+        com.budgetmanage.util.Util.addPanel(jPanel1, login);        
     }
-
+    
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -165,58 +160,46 @@ public class Main extends javax.swing.JFrame implements Constant{
         jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
+        jMenuBar1.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
         FinancesConsultingFrm fcm = new FinancesConsultingFrm(CONSULT_PANEL_TITLE, jPanel1);
-        addPanel(fcm);
+        com.budgetmanage.util.Util.addPanel(jPanel1,fcm);
     }//GEN-LAST:event_jMenuItem23ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
         FinancesConsultingFrm fcm = new FinancesConsultingFrm(EDIT_PANEL_TITLE, jPanel1);
-        addPanel(fcm);
+        com.budgetmanage.util.Util.addPanel(jPanel1,fcm);
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem27ActionPerformed
         FinancesAddFrm fad = new FinancesAddFrm();
-        addPanel(fad);
+        com.budgetmanage.util.Util.addPanel(jPanel1,fad);
     }//GEN-LAST:event_jMenuItem27ActionPerformed
 
     private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
         LoanPanel lp = new LoanPanel();
-        addPanel(lp);
+        com.budgetmanage.util.Util.addPanel(jPanel1,lp);
     }//GEN-LAST:event_jMenuItem24ActionPerformed
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
-        LoginFrm log = new LoginFrm(jPanel1);
-        addPanel(log);
+        LoginFrm log = new LoginFrm(jPanel1, this);
+        com.budgetmanage.util.Util.addPanel(jPanel1,log);
         jMenu5.setSelected(false);
     }//GEN-LAST:event_jMenu5MouseClicked
 
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
-       EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
-       UserJpaController ujc = new UserJpaController(emf);
-       BudgetUser user = ujc.findUser(1L);
-       this.user = user;
        MainPanel main = new MainPanel();
-       addPanel(main);
+       com.budgetmanage.util.Util.addPanel(jPanel1,main);
        jMenu4.setSelected(false);
     }//GEN-LAST:event_jMenu4MouseClicked
 
     private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
         AccountPanel ap = new AccountPanel();
-        addPanel(ap);
+        com.budgetmanage.util.Util.addPanel(jPanel1,ap);
     }//GEN-LAST:event_jMenuItem26ActionPerformed
 
-    private void addPanel(JPanel p){
-       jPanel1.removeAll();       
-       p.setPreferredSize(dim);          
-       jPanel1.add(p, BorderLayout.CENTER);
-       jPanel1.updateUI();  
-    }
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

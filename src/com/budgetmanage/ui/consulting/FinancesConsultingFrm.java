@@ -11,6 +11,7 @@ import com.budgetmanage.entities.Ingress;
 import com.budgetmanage.modeler.BudgetJpaController;
 import com.budgetmanage.modeler.ExpendingJpaController;
 import com.budgetmanage.modeler.IngressJpaController;
+import com.budgetmanage.modeler.UserJpaController;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.ui.Maintenance.FinancesMaintenanceFrm;
 import com.budgetmanage.ui.maintenance.FinancesAddFrm;
@@ -19,8 +20,6 @@ import java.awt.Container;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
@@ -359,6 +358,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         String wich = jLabel4.getText().toUpperCase();
         
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(P_UNIT);
+        UserJpaController ujc = new UserJpaController(emf);
         ExpendingJpaController ejc = new ExpendingJpaController(emf);
         IngressJpaController ijc = new IngressJpaController(emf);
         BudgetJpaController bjc = new BudgetJpaController(emf);

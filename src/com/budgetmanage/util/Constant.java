@@ -21,6 +21,7 @@ public interface Constant {
     public String USER_ERROR_MSG = "Favor colocar un nombre de usuario";
     public String PASS_ERROR_MSG = "Favor colocar la clave";
     public String SEARCH_MSG_ERROR = "Debe colocar un criterio de busqueda";
+    public String INVALID_USER_ERROR = "El usuario especificado no existe o la clave es invalida";
     
     /*************************Messages And Labels***************************************/
     public String COMBOX_FINANCE_MSG = "Seleccione el tipo de finanza que desea";
