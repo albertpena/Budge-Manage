@@ -13,6 +13,7 @@ import com.budgetmanage.modeler.ExpendingJpaController;
 import com.budgetmanage.modeler.IngressJpaController;
 import com.budgetmanage.modeler.UserJpaController;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
+import com.budgetmanage.ui.Main;
 import com.budgetmanage.ui.Maintenance.FinancesMaintenanceFrm;
 import com.budgetmanage.ui.maintenance.FinancesAddFrm;
 import com.budgetmanage.util.Constant;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
@@ -330,7 +333,14 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         
         if(process.equalsIgnoreCase("seleccione")){
             reset();            
+        }else if(process.equalsIgnoreCase(BUDGET)){
+            jComboBox2.setModel(new DefaultComboBoxModel(new String[]{"Seleccione", "Nombre"}));
+            jTextField1.setText("");
+            jLabel3.setVisible(false);            
+            jPanel1.setVisible(true);
+            jCheckBox1.setSelected(false);
         }else{
+            jComboBox2.setModel(new DefaultComboBoxModel(new String[]{"Seleccione", "Nombre", "Monto"}));
             jTextField1.setText("");
             jLabel3.setVisible(false);            
             jPanel1.setVisible(true);
@@ -370,7 +380,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         switch(process){
             case EXPENDING:{
                 if(all){
-                    finances = ejc.findExpendingEntities();
+                    finances = ejc.findAll();
                 }else{
                     switch(wich){
                         case "NOMBRE":{
@@ -378,7 +388,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                             break;
                         }
                         case "MONTO":{
-                            finances = ejc.findExpending(Integer.parseInt(what));
+                            finances = ejc.findExpending(Double.parseDouble(what));
                             break;
                         }
                     }                    
@@ -387,7 +397,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
             }
             case INGRESS:{
                 if(all){
-                    finances = ijc.findIngressEntities();
+                    finances = ijc.findAll();
                 }else{
                     switch(wich){
                         case "NOMBRE":{
@@ -404,7 +414,12 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
             }
             case BUDGET:{
             try {
-                budget  = bjc.getActual();
+                if(all){
+                    finances = bjc.findAll();
+                }else{
+                    
+                }
+                budget  = bjc.getActual(Main.getUser().getId());
             } catch (NonexistentEntityException ex) {
                 JOptionPane.showMessageDialog(this, NON_EXISTS_ERROR_MSG, "ERROR", JOptionPane.ERROR_MESSAGE);
             }

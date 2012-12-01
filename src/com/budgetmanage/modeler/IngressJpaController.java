@@ -8,6 +8,7 @@ import com.budgetmanage.entities.Finance;
 import com.budgetmanage.entities.Ingress;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.modeler.exceptions.PreexistingEntityException;
+import com.budgetmanage.ui.Main;
 import com.budgetmanage.util.Constant;
 import java.io.Serializable;
 import java.util.List;
@@ -76,7 +77,8 @@ public class IngressJpaController implements Serializable {
     public List<Finance> findIngress(String name){
         EntityManager em = getEntityManager();
         try{            
-            Query inQuery = em.createNativeQuery("Select i.* from INGRESS i where i.INGRESS_NAME like "+name, Ingress.class);
+            Query inQuery = em.createNativeQuery("Select i.* from INGRESS i where i.INGRESS_NAME like "+name+" and BUDGETUSER_ID="+
+                    Main.getUser().getId(), Ingress.class);
             List<Finance> ins= inQuery.getResultList();
             return ins;
         }finally{
@@ -87,9 +89,21 @@ public class IngressJpaController implements Serializable {
     public List<Finance> findIngress(int value){
         EntityManager em = getEntityManager();
         try{            
-            Query inQuery = em.createNativeQuery("Select i.* from INGRESS i where i.Ingress_Total = "+value, Ingress.class);
+            Query inQuery = em.createNativeQuery("Select i.* from INGRESS i where i.Ingress_Total = "+value+" and BUDGETUSER_ID="+
+                    Main.getUser().getId(), Ingress.class);
             List<Finance> ins= inQuery.getResultList();
             return ins;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public List<Finance> findAll(){
+        EntityManager em = getEntityManager();
+        Query q;
+        try{
+            q = em.createNativeQuery("Select * from INGRESS where BUDGETUSER_ID = "+Main.getUser().getId(), Ingress.class);
+            return q.getResultList();
         }finally{
             em.close();
         }

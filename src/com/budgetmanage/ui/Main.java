@@ -37,6 +37,7 @@ public class Main extends javax.swing.JFrame implements Constant{
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setLayout(new BorderLayout());
         dim = this.getPreferredSize();
+        jPanel1.setPreferredSize(dim);
         LoginFrm login = new LoginFrm(jPanel1, this);
         com.budgetmanage.util.Util.addPanel(jPanel1, login);        
     }

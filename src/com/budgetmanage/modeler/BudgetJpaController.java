@@ -5,7 +5,9 @@
 package com.budgetmanage.modeler;
 
 import com.budgetmanage.entities.Budget;
+import com.budgetmanage.entities.Finance;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
+import com.budgetmanage.ui.Main;
 import com.budgetmanage.util.Constant;
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +16,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 /**
@@ -106,7 +109,7 @@ public class BudgetJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Budget.class));
+            cq.select(cq.from(Budget.class));         
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -118,21 +121,32 @@ public class BudgetJpaController implements Serializable {
         }
     }
 
-    public Budget getActual()throws NonexistentEntityException{
+    public Budget getActual(Long userId)throws NonexistentEntityException{
         EntityManager em = getEntityManager();        
         Budget budget = null;
         try{
-            Query q = em.createNativeQuery("Select max(ID) from BUDGET");
+            Query q = em.createNativeQuery("Select max(ID) from BUDGET where BUDGETUSER_ID = "+userId);
             Object id = q.getSingleResult();        
             budget =  em.find(Budget.class, id);
         }catch(Exception ex){
-            throw new NonexistentEntityException(Constant.NON_EXISTS_ERROR_MSG);
+            throw new NonexistentEntityException("No tiene presupuestos generados");
         }finally{
             em.close();
         }
         
         return budget;
     }
+    public List<Finance> findAll(){
+        EntityManager em = getEntityManager();
+        Query q;
+        try{
+            q = em.createNativeQuery("Select * from BUDGET where BUDGETUSER_ID = "+Main.getUser().getId(), Budget.class);
+            return q.getResultList();
+        }finally{
+            em.close();
+        }
+    }
+    
     public Budget findBudget(Integer id) {
         EntityManager em = getEntityManager();
         try {

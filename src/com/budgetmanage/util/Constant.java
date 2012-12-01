@@ -38,6 +38,7 @@ public interface Constant {
     public String CONSULT_PANEL_TITLE = "Consultar Finanzas";
     public String ADD_PANEL_TITLE = "Agregar Finanzas";
     public String NAME_MSG = "Nombre: Nombre designado para la finanza.";
+    public String SUCEED_MSG = "Finanza guardada Satisfactoriamente";
     
     /**************************Parameters*********************************************/
     public int FRAME_HEIGHT = 602;
@@ -59,7 +60,7 @@ public interface Constant {
     public String[] FINANCES_EDIT_ARRAY = {"Seleccione","Gastos","Ingresos","Presupuesto"};
     public String[] INGRESS_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Fecha Modificacion"};
     public String[] EXPENDING_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Modificacion", "Prioridad"};
-    public String SUCEED_MSG = "Finanza guardada Satisfactoriamente";
+    public String[] BUDGET_TABLE_COLS = {"ID","Nombre","Total Ingresos", "Total gastos", "Total Restante", "Generado"};
     
    /************************Colors**************************************************/ 
     public Color BKG = new Color(204,255,204);

@@ -9,6 +9,7 @@ import com.budgetmanage.entities.Finance;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.util.Constant;
 import com.budgetmanage.modeler.exceptions.PreexistingEntityException;
+import com.budgetmanage.ui.Main;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -139,7 +140,7 @@ public class ExpendingJpaController implements Serializable {
         }
     }
     
-    public List<Finance> findExpending(int value){
+    public List<Finance> findExpending(double value){
         EntityManager em = getEntityManager();
         try{
             Query exQuery = em.createNativeQuery("Select c.* from Expending c where c.Expending_Total = "+value, Expending.class);
@@ -179,5 +180,14 @@ public class ExpendingJpaController implements Serializable {
         }
     }
     
-    
+    public List<Finance> findAll(){
+        EntityManager em = getEntityManager();
+        Query q;
+        try{
+            q = em.createNativeQuery("Select * from EXPENDING where BUDGETUSER_ID = "+Main.getUser().getId(), Expending.class);
+            return q.getResultList();
+        }finally{
+            em.close();
+        }
+    }
 }

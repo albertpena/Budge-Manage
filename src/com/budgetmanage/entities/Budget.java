@@ -34,6 +34,8 @@ public class Budget extends Finance implements Serializable {
     private String generateDate;
     @ManyToOne
     private BudgetUser budgetUser;
+    @Column(name="Life_days")
+    private int lifeDays;
 
     public Budget() {
     
@@ -255,5 +257,19 @@ public class Budget extends Finance implements Serializable {
      */
     public void setBudgetUser(BudgetUser budgetUser) {
         this.budgetUser = budgetUser;
+    }
+
+    /**
+     * @return the lifeDays
+     */
+    public int getLifeDays() {
+        return lifeDays;
+    }
+
+    /**
+     * @param lifeDays the lifeDays to set
+     */
+    public void setLifeDays(int lifeDays) {
+        this.lifeDays = lifeDays;
     }
 }
