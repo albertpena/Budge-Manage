@@ -5,6 +5,7 @@
 package com.budgetmanage.util;
 
 import java.awt.Color;
+import java.awt.Font;
 
 /**
  *
@@ -68,5 +69,7 @@ public interface Constant {
     public Color FIXED_EXPENSE_COLOR = Color.BLUE;
     public Color SERVICES_COLOR = Color.WHITE;
     public Color LEISURE_COLOR = Color.RED;
+    public Font ALL_FONTS = new Font("Tahoma", Font.PLAIN, 11);
+    public Font TITLE_FONT = new Font("Arial",Font.BOLD,11);
     
 }
