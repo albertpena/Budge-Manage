@@ -9,6 +9,7 @@ import com.budgetmanage.modeler.exceptions.PreexistingEntityException;
 import com.budgetmanage.ui.Main;
 import com.budgetmanage.util.Constant;
 import java.awt.event.ItemEvent;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.EntityManagerFactory;
@@ -368,7 +369,8 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
         }
         
         Date actualDate = new Date();
-        String date = new SimpleDateFormat(FORMAT_DATE).format(actualDate);        
+        Timestamp date = new Timestamp(actualDate.getTime());
+              
         
         if(dataValidation(name, type, priority, value, process)){
             

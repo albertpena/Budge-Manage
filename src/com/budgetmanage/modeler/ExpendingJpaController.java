@@ -7,9 +7,9 @@ package com.budgetmanage.modeler;
 import com.budgetmanage.entities.Expending;
 import com.budgetmanage.entities.Finance;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
-import com.budgetmanage.util.Constant;
 import com.budgetmanage.modeler.exceptions.PreexistingEntityException;
 import com.budgetmanage.ui.Main;
+import com.budgetmanage.util.Constant;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -183,6 +183,21 @@ public class ExpendingJpaController implements Serializable {
         }
     }
     
+    public List<Object[]> getExpendingTotalByDay(){
+        EntityManager em = getEntityManager();
+        Query q;
+        List<Object[]> objs = null;
+        try{
+            q = em.createNativeQuery("Select sum(Expending_Total), DATE(update_date) from Expending"+
+                                    " where BUDGETUSER_ID = "+Main.getUser().getId()+" group by DATE(update_date)");
+            objs =  q.getResultList();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally{
+            em.close();
+            return objs;            
+        }
+    }
     public List<Finance> findAll(){
         EntityManager em = getEntityManager();
         Query q;

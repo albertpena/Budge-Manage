@@ -5,6 +5,8 @@
 package com.budgetmanage.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,16 +35,16 @@ public class Budget extends Finance implements Serializable {
     private double expendingTotal;
     @Column(name="Ingress_Total", columnDefinition="DOUBLE DEFAULT 0")
     private double ingressTotal;
-    @Column(name="Generate_Date")
-    private String generateDate;
-    @Column(name="UPDATED_DATE")
-    private String updateDate;
+    @Column(name="Generate_Date", columnDefinition="DATE DEFAULT CURRENT_DATE")
+    private Timestamp generateDate;
+    @Column(name="UPDATED_DATE", columnDefinition="DATE DEFAULT CURRENT_DATE")
+    private Timestamp updateDate;
     @ManyToOne
     private BudgetUser budgetUser;
     @Column(name="Life_days")
     private int lifeDays;
 
-    public Budget(String name, String Status, double expendingTotal, double ingressTotal, String generateDate, String updateDate, BudgetUser budgetUser, int lifeDays) {
+    public Budget(String name, String Status, double expendingTotal, double ingressTotal, Timestamp generateDate, Timestamp updateDate, BudgetUser budgetUser, int lifeDays) {
         this.name = name;
         this.Status = Status;
         this.expendingTotal = expendingTotal;
@@ -167,7 +169,7 @@ public class Budget extends Finance implements Serializable {
      * @return
      */
     @Override
-    public String getGenerateDate() {
+    public Timestamp getGenerateDate() {
         return this.generateDate;
     }
 
@@ -176,7 +178,7 @@ public class Budget extends Finance implements Serializable {
      * @param generateDate
      */
     @Override
-    public void setGenerateDate(String generateDate) {
+    public void setGenerateDate(Timestamp generateDate) {
         this.generateDate = generateDate;
     }
 
@@ -185,7 +187,7 @@ public class Budget extends Finance implements Serializable {
      * @return
      */
     @Override
-    public String getUpdateDate() {
+    public Timestamp getUpdateDate() {
         return this.updateDate;
     }
 
@@ -194,7 +196,7 @@ public class Budget extends Finance implements Serializable {
      * @param updateDate
      */
     @Override
-    public void setUpdateDate(String updateDate) {
+    public void setUpdateDate(Timestamp updateDate) {
         this.updateDate = updateDate;
     }
 

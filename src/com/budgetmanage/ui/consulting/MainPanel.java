@@ -12,9 +12,11 @@ import com.budgetmanage.modeler.IngressJpaController;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.ui.Main;
 import com.budgetmanage.util.Constant;
+import com.budgetmanage.util.LineChart;
 import com.budgetmanage.util.PieChart;
 import com.budgetmanage.util.PieSlice;
 import java.awt.BorderLayout;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -124,8 +126,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                 .addContainerGap()
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,17 +195,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         );
 
         flowPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Flujo Del Gasto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), java.awt.Color.black)); // NOI18N
-
-        javax.swing.GroupLayout flowPanelLayout = new javax.swing.GroupLayout(flowPanel);
-        flowPanel.setLayout(flowPanelLayout);
-        flowPanelLayout.setHorizontalGroup(
-            flowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 416, Short.MAX_VALUE)
-        );
-        flowPanelLayout.setVerticalGroup(
-            flowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 79, Short.MAX_VALUE)
-        );
+        flowPanel.setLayout(new java.awt.BorderLayout());
 
         resumeExPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resumen de Gastos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
         resumeExPanel.setLayout(new java.awt.BorderLayout());
@@ -234,14 +225,14 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(flowPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(resumeBuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(generatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 10, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(resumeExPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(resumeBuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(flowPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(generatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(resumeExPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,11 +250,11 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                     .addComponent(generatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(resumeBuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
-                        .addComponent(flowPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(flowPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(resumeExPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(325, Short.MAX_VALUE))
+                .addComponent(resumeExPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(327, Short.MAX_VALUE))
         );
 
         resumeBuPanel.setVisible(false);
@@ -294,7 +285,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
             double ingressTotal = 0;
             int days = 0;
             Date actualDate = new Date();
-            String date = new SimpleDateFormat(FORMAT_DATE).format(actualDate);
+            Timestamp date = new Timestamp(actualDate.getTime());
             List<Finance> finances;
             ExpendingJpaController ejc = new ExpendingJpaController(emf);
             IngressJpaController ijc = new IngressJpaController(emf);
@@ -347,10 +338,12 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         Budget budget;
         try {
             budget = bjc.getActual(Main.getUser().getId());
+            String generatedDate = new SimpleDateFormat(Constant.FORMAT_DATE).format(budget.getGenerateDate());
+            String updatedDate = new SimpleDateFormat(Constant.FORMAT_DATE).format(budget.getUpdateDate());
             DefaultTableModel model  = new DefaultTableModel(BUDGET_TABLE_COLS, 1);
             resumeTable.setModel(model);
             model.insertRow(0, new Object[]{budget.getId(),budget.getName(),
-                budget.getIngressTotal(), budget.getExpendingTotal(), (budget.getIngressTotal() - budget.getExpendingTotal()), budget.getGenerateDate(), budget.getUpdateDate()});
+                budget.getIngressTotal(), budget.getExpendingTotal(), (budget.getIngressTotal() - budget.getExpendingTotal()), generatedDate, updatedDate});
             resumeTable.updateUI();
             
             if(budget.getExpendingTotal() > budget.getIngressTotal()){
@@ -361,7 +354,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
             resumeExPanel.setVisible(true);
             generatePanel.setVisible(false); 
             
-            fillExpendingChart();
+            fillExpendingChart(budget.getLifeDays());
             this.updateUI();
         } catch (NonexistentEntityException ex) {
                 jLabel1.setVisible(true);
@@ -370,7 +363,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         
     }
     
-    private void fillExpendingChart(){
+    private void fillExpendingChart(int pad){
         ExpendingJpaController ejc = new ExpendingJpaController(emf);
         List<PieSlice> slices = new ArrayList<>();
         
@@ -384,6 +377,19 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         
         PieChart pieChart = new PieChart(slices);
         resumeExPanel.add(pieChart, BorderLayout.CENTER);
+        
+        List<Object[]> objs = ejc.getExpendingTotalByDay();
+        double[] exps = new double[objs.size()];
+        for(int i =0; i < objs.size(); i++){
+            Object[] obj = objs.get(i);
+            if(i==0){
+                exps[i] = (double)obj[0];
+            }else{
+                exps[i] = exps[i-1]+(double)obj[0];
+            }
+        }       
+        
+        flowPanel.add(new LineChart(exps, pad), BorderLayout.CENTER);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager BudgeManagePUEntityManager;

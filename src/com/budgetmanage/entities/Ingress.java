@@ -5,6 +5,8 @@
 package com.budgetmanage.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,10 +33,10 @@ public class Ingress extends Finance implements Serializable {
     private String name;
     @Column(name="Ingress_total")
     private double ingressTotal;
-    @Column(name="Generate_Date")
-    private String generateDate;
-    @Column(name="Update_Date")
-    private String updateDate;
+    @Column(name="Generate_Date", columnDefinition="DATE DEFAULT CURRENT_DATE")
+    private Timestamp generateDate;
+    @Column(name="Update_Date", columnDefinition="DATE DEFAULT CURRENT_DATE")
+    private Timestamp updateDate;
     @Column(name="Ingress_priority")
     private int priority;
     @Column(name="Ingress_type")
@@ -43,7 +45,7 @@ public class Ingress extends Finance implements Serializable {
     public Ingress() {
     }
 
-    public Ingress(BudgetUser budgetUser, String name, double ingressTotal, String generateDate, String updateDate, int priority, String type) {
+    public Ingress(BudgetUser budgetUser, String name, double ingressTotal, Timestamp generateDate, Timestamp updateDate, int priority, String type) {
         this.budgetUser = budgetUser;
         this.name = name;
         this.ingressTotal = ingressTotal;
@@ -125,7 +127,7 @@ public class Ingress extends Finance implements Serializable {
      * @return the generateDate
      */
     @Override
-    public String getGenerateDate() {
+    public Timestamp getGenerateDate() {
         return generateDate;
     }
 
@@ -133,7 +135,7 @@ public class Ingress extends Finance implements Serializable {
      * @param generateDate the generateDate to set
      */
     @Override
-    public void setGenerateDate(String generateDate) {
+    public void setGenerateDate(Timestamp generateDate) {
         this.generateDate = generateDate;
     }
 
@@ -141,7 +143,7 @@ public class Ingress extends Finance implements Serializable {
      * @return the updateDate
      */
     @Override
-    public String getUpdateDate() {
+    public Timestamp getUpdateDate() {
         return updateDate;
     }
 
@@ -149,7 +151,7 @@ public class Ingress extends Finance implements Serializable {
      * @param updateDate the updateDate to set
      */
     @Override
-    public void setUpdateDate(String updateDate) {
+    public void setUpdateDate(Timestamp updateDate) {
         this.updateDate = updateDate;
     }
 

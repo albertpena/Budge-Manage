@@ -15,6 +15,7 @@ import com.budgetmanage.util.Constant;
 import java.awt.Container;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -323,8 +324,8 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
         
         if(isOk()){    
             Date actualDate = new Date();
-            String date = new SimpleDateFormat(FORMAT_DATE).format(actualDate);        
-
+            Timestamp date = new Timestamp(actualDate.getDate());
+        
             finance.setName(name);
             finance.setType(type);
             finance.setPriority(priority);

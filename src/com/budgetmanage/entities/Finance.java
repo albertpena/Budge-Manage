@@ -4,6 +4,9 @@
  */
 package com.budgetmanage.entities;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 /**
  *
  * @author Nestor_Velasquez
@@ -14,10 +17,10 @@ public abstract class Finance {
     public abstract void setId(Integer id);
     public abstract double getFinanceTotal();
     public abstract void seFinanceTotal(double financeTotal);
-    public abstract String getGenerateDate();
-    public abstract void setGenerateDate(String generateDate);
-    public abstract String getUpdateDate();
-    public abstract void setUpdateDate(String updateDate);
+    public abstract Timestamp getGenerateDate();
+    public abstract void setGenerateDate(Timestamp generateDate);
+    public abstract Timestamp getUpdateDate();
+    public abstract void setUpdateDate(Timestamp updateDate);
     public abstract int getPriority();
     public abstract void setPriority(int priority);
     public abstract String getName();

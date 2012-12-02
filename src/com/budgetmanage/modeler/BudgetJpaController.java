@@ -5,21 +5,17 @@
 package com.budgetmanage.modeler;
 
 import com.budgetmanage.entities.Budget;
-import com.budgetmanage.entities.Expending;
 import com.budgetmanage.entities.Finance;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.ui.Main;
-import com.budgetmanage.util.Constant;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 /**
@@ -159,7 +155,7 @@ public class BudgetJpaController implements Serializable {
         }
     }
     
-    public void generateBudget(String updatedDate, String name, double ingressTotal, double expendingTotal)throws Exception{
+    public void generateBudget(Timestamp updatedDate, String name, double ingressTotal, double expendingTotal)throws Exception{
         try {
             Budget budget = this.getActual(Main.getUser().getId());
             
