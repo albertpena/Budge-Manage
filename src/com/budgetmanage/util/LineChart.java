@@ -75,6 +75,7 @@ public class LineChart extends JComponent {
             double y2 = h - PAD - scale*data[i+1];
             g2.draw(new Line2D.Double(x1, y1, x2, y2));
         }
+        
         // Mark data points.
         g2.setPaint(Color.red);
         for(int i = 0; i < data.length; i++) {

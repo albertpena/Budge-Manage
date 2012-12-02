@@ -51,6 +51,7 @@ public interface Constant {
     public String PU = "BudgeManagePU";
     public String FORMAT_DATE = "dd-MMM-yyyy";
     public String P_UNIT = "BudgeManagePU";
+    public double INITIAL_ACCOUNT_VALUE = 30000.00;
     
     /***************************Lists************************************************/
     public String[] FIXED_EXPENSE = {"Seleccione","Alquiler","Electricidad","Agua","Basura","Alimentacion","Combustible","Educacion","Otros"};
