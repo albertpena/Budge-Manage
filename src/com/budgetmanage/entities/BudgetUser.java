@@ -42,6 +42,8 @@ public class BudgetUser implements Serializable {
     List<Expending> expendings;
     @OneToMany(mappedBy = "budgetUser")
     List<Ingress> ingresses;
+    @OneToMany(mappedBy = "budgetUser")
+    List<Account> accounts;
     
     
     public void addFinance(Finance finance){
@@ -67,6 +69,14 @@ public class BudgetUser implements Serializable {
             ((Ingress) finance).setBudgetUser(this);
         }
         
+    }
+    
+    public void addAccount(Account account){
+        if(accounts == null){
+            accounts = new ArrayList<>();
+        }
+        accounts.add(account);
+        account.setBudgetUser(this);
     }
     
     public Long getId() {

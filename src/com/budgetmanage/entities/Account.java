@@ -4,15 +4,19 @@
  */
 package com.budgetmanage.entities;       
 
+import com.budgetmanage.ui.Main;
+import com.budgetmanage.util.Constant;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
@@ -21,7 +25,7 @@ import javax.persistence.Table;
 //testing linked form
 
 @Entity
-@Table(name ="accounts")
+@Table(name ="accounts", uniqueConstraints={@UniqueConstraint(columnNames={"account_number","account_bank","budgetuser_id"})})
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT e FROM Account e")
         
@@ -33,6 +37,7 @@ public class Account implements Serializable {
     
     //Recurda poner para que genere el id automatico, el codigo que habia se me olvido
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     
     //Migrating
@@ -45,14 +50,17 @@ public class Account implements Serializable {
     
     @Column(name="account_bank")
     private String accountBank;
+    @ManyToOne
+    private BudgetUser budgetUser;
 
     public Account() {
     }
 
-    public Account(double balance, String accountNumber, String accountBank) {
-        this.balance = balance;
+    public Account(String accountNumber, String accountBank) {
+        this.balance = Constant.INITIAL_ACCOUNT_VALUE;
         this.accountNumber = accountNumber;
         this.accountBank = accountBank;
+        budgetUser = Main.getUser();
     }
     
     
@@ -113,6 +121,20 @@ public class Account implements Serializable {
     @Override
     public String toString() {
         return "com.budgetmanage.entities.Account[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the budgetUser
+     */
+    public BudgetUser getBudgetUser() {
+        return budgetUser;
+    }
+
+    /**
+     * @param budgetUser the budgetUser to set
+     */
+    public void setBudgetUser(BudgetUser budgetUser) {
+        this.budgetUser = budgetUser;
     }
     
 }

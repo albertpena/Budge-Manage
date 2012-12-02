@@ -64,6 +64,8 @@ public interface Constant {
     public String[] EXPENDING_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Modificacion"};
     public String[] BUDGET_TABLE_COLS = {"ID","Nombre","Ingresos", "Gastos", "Restante", "Generado","Actualizado"};
     public String[]CATEGORIES = {"Seleccione", "Gastos fijos", "Servicios", "Ocio y Demas"};
+    public String[] BANKS = {"Seleccione","BHD","APAP","ASOCION CIBAO","ALNAP","SCOTIABANK","VIMENCA","BANCO POPULAR","Banco Leon","Santa Cruz",
+                             "BANRESERVAS"};
     
    /************************Colors**************************************************/ 
     public Color BKG = new Color(204,255,204);
