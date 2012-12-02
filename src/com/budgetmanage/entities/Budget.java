@@ -35,10 +35,23 @@ public class Budget extends Finance implements Serializable {
     private double ingressTotal;
     @Column(name="Generate_Date")
     private String generateDate;
+    @Column(name="UPDATED_DATE")
+    private String updateDate;
     @ManyToOne
     private BudgetUser budgetUser;
     @Column(name="Life_days")
     private int lifeDays;
+
+    public Budget(String name, String Status, double expendingTotal, double ingressTotal, String generateDate, String updateDate, BudgetUser budgetUser, int lifeDays) {
+        this.name = name;
+        this.Status = Status;
+        this.expendingTotal = expendingTotal;
+        this.ingressTotal = ingressTotal;
+        this.generateDate = generateDate;
+        this.updateDate = updateDate;
+        this.budgetUser = budgetUser;
+        this.lifeDays = lifeDays;
+    }
 
     
     public Budget() {
@@ -136,7 +149,7 @@ public class Budget extends Finance implements Serializable {
      * @return
      */
     @Override
-    public int getFinanceTotal() {
+    public double getFinanceTotal() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -145,7 +158,7 @@ public class Budget extends Finance implements Serializable {
      * @param expendingTotal
      */
     @Override
-    public void seFinanceTotal(int expendingTotal) {
+    public void seFinanceTotal(double financeTotal) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -173,7 +186,7 @@ public class Budget extends Finance implements Serializable {
      */
     @Override
     public String getUpdateDate() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.updateDate;
     }
 
     /**
@@ -182,7 +195,7 @@ public class Budget extends Finance implements Serializable {
      */
     @Override
     public void setUpdateDate(String updateDate) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.updateDate = updateDate;
     }
 
     /**

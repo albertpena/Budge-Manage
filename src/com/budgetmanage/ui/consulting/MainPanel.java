@@ -19,8 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
@@ -126,8 +124,8 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                 .addContainerGap()
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,19 +226,22 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(resumeExPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(flowPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(resumeBuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(generatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(generatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 10, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(resumeExPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,29 +320,22 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                 isOk = false;
             }
             //Get the total expendings
-            expendigTotal = ejc.getExpendingTotal();            
 
             finances.clear();
             finances = ijc.findIngressEntities();
             if(finances.isEmpty()){
                 JOptionPane.showMessageDialog(this, "No tiene ingresos registrados", "Error", JOptionPane.ERROR_MESSAGE);
                 isOk = false;
-            }
-            //Get the total ingresses
-            ingressTotal = ijc.getIngressTotal();
+            }            
             
             //Clearing the list
             finances.clear();
             
             if(isOk){
                 //Creating and persisting the budgets.
-                Budget budget = new Budget(name);                
-                budget.setExpendingTotal(expendigTotal);
-                budget.setIngressTotal(ingressTotal);
-                budget.setStatus("A");
-                budget.setGenerateDate(date);
-                budget.setLifeDays(days);
-                Main.getUser().addFinance(budget);
+                expendigTotal = ejc.getExpendingTotal();
+                ingressTotal = ijc.getIngressTotal();
+                Budget budget = new Budget(name, "A", expendigTotal, ingressTotal, date, date, Main.getUser(), days);                
                 bjc.create(budget);
                 jLabel1.setText("El Presupuesto se genero correctamente");
             }
@@ -356,7 +350,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
             DefaultTableModel model  = new DefaultTableModel(BUDGET_TABLE_COLS, 1);
             resumeTable.setModel(model);
             model.insertRow(0, new Object[]{budget.getId(),budget.getName(),
-                budget.getIngressTotal(), budget.getExpendingTotal(), (budget.getIngressTotal() - budget.getExpendingTotal()), budget.getGenerateDate()});
+                budget.getIngressTotal(), budget.getExpendingTotal(), (budget.getIngressTotal() - budget.getExpendingTotal()), budget.getGenerateDate(), budget.getUpdateDate()});
             resumeTable.updateUI();
             
             if(budget.getExpendingTotal() > budget.getIngressTotal()){
@@ -385,7 +379,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         double leisureExpendingTotal = ejc.getExpendigsTotal(3);
         
         slices.add(new PieSlice(FIXED_EXPENSE_COLOR, fixedExpendingTotal, "Total de gastos fijos"));
-        slices.add(new PieSlice(SERVICES_COLOR, servicesExpendingTotal, "Total de gastos pro servicios"));
+        slices.add(new PieSlice(SERVICES_COLOR, servicesExpendingTotal, "Total de gastos por servicios"));
         slices.add(new PieSlice(LEISURE_COLOR, leisureExpendingTotal, "Total de gastos por ocio y demas"));
         
         PieChart pieChart = new PieChart(slices);

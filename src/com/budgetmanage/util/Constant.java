@@ -15,7 +15,7 @@ public interface Constant {
     public String NAME_ERROR_MSG = "Debe colocar un nombre para esta finanza";
     public String PRIORITY_ERROR_MSG = "Debe colocar la prioridad de esta finanza";
     public String TYPE_ERROR_MSG = "Debe colocar el tipo de finanza";
-    public String VALUE_ERROR_MSG = "Debe colocar un monto";
+    public String VALUE_ERROR_MSG = "Debe colocar un monto valido";
     public String EXIST_ERROR_MSG = "Existe una finanza con este criterio";
     public String NON_EXISTS_ERROR_MSG = "No existe una finanza con estos criterios";
     public String USER_ERROR_MSG = "Favor colocar un nombre de usuario";
@@ -60,13 +60,13 @@ public interface Constant {
     public String[] FINANCES_EDIT_ARRAY = {"Seleccione","Gastos","Ingresos","Presupuesto"};
     public String[] INGRESS_COL_ARRAY = {"Numero", "Nombre", "Monto", "Fecha Modificacion"};
     public String[] EXPENDING_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Modificacion"};
-    public String[] BUDGET_TABLE_COLS = {"ID","Nombre","Total Ingresos", "Total gastos", "Total Restante", "Generado"};
+    public String[] BUDGET_TABLE_COLS = {"ID","Nombre","Ingresos", "Gastos", "Restante", "Generado","Actualizado"};
     public String[]CATEGORIES = {"Seleccione", "Gastos fijos", "Servicios", "Ocio y Demas"};
     
    /************************Colors**************************************************/ 
     public Color BKG = new Color(204,255,204);
     public Color FIXED_EXPENSE_COLOR = Color.BLUE;
-    public Color SERVICES_COLOR = Color.GREEN;
+    public Color SERVICES_COLOR = Color.WHITE;
     public Color LEISURE_COLOR = Color.RED;
     
 }

@@ -131,7 +131,8 @@ public class ExpendingJpaController implements Serializable {
     public List<Finance> findExpending(String name){
         EntityManager em = getEntityManager();
         try{
-            Query exQuery = em.createNativeQuery("Select c.* from Expending c where c.Expending_name like"+name, Expending.class);
+            Query exQuery = em.createNativeQuery("Select c.* from Expending c where c.Expending_name like"+name+" and BUDGETUSER_ID ="+
+                    + Main.getUser().getId(), Expending.class);
             List<Finance> ex = exQuery.getResultList();
             return ex;
         }
@@ -143,7 +144,8 @@ public class ExpendingJpaController implements Serializable {
     public List<Finance> findExpending(double value){
         EntityManager em = getEntityManager();
         try{
-            Query exQuery = em.createNativeQuery("Select c.* from Expending c where c.Expending_Total = "+value, Expending.class);
+            Query exQuery = em.createNativeQuery("Select c.* from Expending c where c.Expending_Total = "+value+" and "
+                    + "BUDGETUSER_ID ="+Main.getUser().getId(), Expending.class);
             List<Finance> ex = exQuery.getResultList();
             return ex;
         }
@@ -169,8 +171,9 @@ public class ExpendingJpaController implements Serializable {
         EntityManager em = getEntityManager();
         double total = 0;
         try{
-            Query q = em.createNativeQuery("Select sum(expending_total) from Expending where expending_priority ="+number);
-            total = (Integer) q.getSingleResult();
+            Query q = em.createNativeQuery("Select sum(expending_total) from Expending where expending_priority ="+number+
+                    " and BUDGETUSER_ID="+Main.getUser().getId());
+            total = (Double) q.getSingleResult();
             return total;
         }catch(Exception ex){
             total = 0;
@@ -196,9 +199,11 @@ public class ExpendingJpaController implements Serializable {
         Query q;
         double expendingTotal = 0;
         try{
-            q = em.createNativeQuery("Select sum(EXPENDING_TOTAL) from EXPENDING where BUDGETUSER_ID = "+Main.getUser().getId(), Expending.class);
-            expendingTotal = (Integer) q.getSingleResult();  
+            q = em.createNativeQuery("Select sum(EXPENDING_TOTAL) from EXPENDING where BUDGETUSER_ID = "+Main.getUser().getId());
+            expendingTotal = (Double) q.getSingleResult();  
             return expendingTotal;
+        }catch(Exception ex){
+            ex.printStackTrace();
         }finally{
             em.close();
             return expendingTotal;

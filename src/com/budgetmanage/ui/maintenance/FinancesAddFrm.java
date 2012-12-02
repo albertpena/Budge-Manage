@@ -9,8 +9,6 @@ import com.budgetmanage.modeler.exceptions.PreexistingEntityException;
 import com.budgetmanage.ui.Main;
 import com.budgetmanage.util.Constant;
 import java.awt.event.ItemEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.EntityManagerFactory;
@@ -194,21 +192,6 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        jFormattedTextField1.addKeyListener(new KeyAdapter()
-            {
-                public void keyTyped(KeyEvent e)
-                {
-                    char caracter = e.getKeyChar();
-
-                    // Verificar si la tecla pulsada no es un digito
-                    if(((caracter < '0') ||
-                        (caracter > '9')) &&
-                    (caracter != '\b' /*corresponde a BACK_SPACE*/))
-                {
-                    e.consume();  // ignorar el evento de teclado
-                }
-            }
-        });
         jLabel1.setVisible(false);
         jLabel14.setVisible(false);
         jLabel16.setVisible(false);
@@ -335,6 +318,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        reset();
         String process = evt.getItem().toString();
         evt.getStateChange();
         if(evt.getStateChange() == ItemEvent.SELECTED){
@@ -375,9 +359,9 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
         
         String name = jTextField1.getText().trim().toUpperCase();
         String type = jComboBox3.getSelectedItem().toString();
-        int value = 0;
+        double value = 0;
         try{
-            value = Integer.parseInt(jFormattedTextField1.getText());
+            value = Double.parseDouble(jFormattedTextField1.getText().trim());
         }catch(Exception e){
             jLabel14.setText(Constant.VALUE_ERROR_MSG);
             jLabel14.setVisible(true);
@@ -391,17 +375,9 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory(P_UNIT);
             switch(process.toUpperCase()){            
                 case EXPENDING:{
-                    Expending expending = new Expending();                 
+                    Expending expending = new Expending(Main.getUser(), name, value, date, date, priority, type);                 
                     ExpendingJpaController ejpa = new ExpendingJpaController(emf);
 
-                    //Setting attributes
-                    expending.setBudgetUser(Main.getUser());
-                    expending.setName(name);
-                    expending.setPriority(priority);
-                    expending.seFinanceTotal(value);
-                    expending.setGenerateDate(date);
-                    expending.setUpdateDate(date);
-                    expending.setType(type);
                 try {
                     //Database saving                
                     ejpa.create(expending);                 
@@ -412,32 +388,28 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
                     break;
                 }
                 case INGRESS:{
-                     Ingress ingress = new Ingress();                 
+                     Ingress ingress = new Ingress(Main.getUser(), name, value, date, date, priority, type);                 
                      IngressJpaController ijpa = new IngressJpaController(emf);
 
-                     //Setting attributes
-                     ingress.setName(name);
-                     ingress.setBudgetUser(Main.getUser());
-                     ingress.setPriority(priority);
-                     ingress.seFinanceTotal(value);
-                     ingress.setGenerateDate(date);
-                     ingress.setUpdateDate(date);
-                     ingress.setType(type);
-                try {
-                    //Saving on DB
-                    ijpa.create(ingress);
-                }catch (PreexistingEntityException ex) {
-                    jLabel12.setText(ex.getMessage());
-                    jLabel12.setVisible(true);
-                    isOk = false;
-                }
-                     break;
+                    try {
+                        //Saving on DB
+                        ijpa.create(ingress);
+                    }catch (PreexistingEntityException ex) {
+                        jLabel12.setText(ex.getMessage());
+                        jLabel12.setVisible(true);
+                        isOk = false;
+                    }
+                         break;
                 }            
             }
             if(isOk){
                 jLabel12.setText(Constant.FINANCE_SUCCEED_MSG);
                 jLabel12.setVisible(true);
-                reset();
+                
+                reset();               
+                jComboBox1.setSelectedIndex(0);
+                jLabel11.setVisible(true);
+                
             }
         }
     }//GEN-LAST:event_jButton1MouseClicked
@@ -463,7 +435,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
         }
     }//GEN-LAST:event_jComboBox2ItemStateChanged
 
-    public boolean dataValidation(String name, String type, int pr, int value, String process){
+    public boolean dataValidation(String name, String type, int pr, double value, String process){
 
         if(name.equals("")){
             jLabel1.setText(Constant.NAME_ERROR_MSG);
@@ -504,10 +476,8 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
     public void reset(){
         jTextField1.setText("");        
         jFormattedTextField1.setText("");
-        jComboBox1.setSelectedIndex(0);
         jComboBox2.setSelectedIndex(0);
-        jComboBox3.setSelectedIndex(0);
-        jLabel11.setVisible(true);
+        jComboBox3.setSelectedIndex(0);        
  //       jLabel12.setVisible(false);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

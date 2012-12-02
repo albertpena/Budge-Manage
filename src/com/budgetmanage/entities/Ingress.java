@@ -19,7 +19,7 @@ import javax.persistence.UniqueConstraint;
  * @author Nestor_Velasquez
  */
 @Entity
-@Table(uniqueConstraints= {@UniqueConstraint(columnNames={"BUDGETUSER_ID, BUDGET_NAME"})})
+@Table(uniqueConstraints= {@UniqueConstraint(columnNames={"BUDGETUSER_ID", "BUDGET_NAME"})})
 public class Ingress extends Finance implements Serializable {
     @ManyToOne
     private BudgetUser budgetUser;
@@ -30,7 +30,7 @@ public class Ingress extends Finance implements Serializable {
     @Column(name="Ingress_name")
     private String name;
     @Column(name="Ingress_total")
-    private int ingressTotal;
+    private double ingressTotal;
     @Column(name="Generate_Date")
     private String generateDate;
     @Column(name="Update_Date")
@@ -40,6 +40,20 @@ public class Ingress extends Finance implements Serializable {
     @Column(name="Ingress_type")
     private String type;
 
+    public Ingress() {
+    }
+
+    public Ingress(BudgetUser budgetUser, String name, double ingressTotal, String generateDate, String updateDate, int priority, String type) {
+        this.budgetUser = budgetUser;
+        this.name = name;
+        this.ingressTotal = ingressTotal;
+        this.generateDate = generateDate;
+        this.updateDate = updateDate;
+        this.priority = priority;
+        this.type = type;
+    }
+
+    
     @Override
     public Integer getId() {
         return id;
@@ -95,7 +109,7 @@ public class Ingress extends Finance implements Serializable {
      * @return the ingressTotal
      */
     @Override
-    public int getFinanceTotal() {
+    public double getFinanceTotal() {
         return ingressTotal;
     }
 
@@ -103,7 +117,7 @@ public class Ingress extends Finance implements Serializable {
      * @param ingressTotal the ingressTotal to set
      */
     @Override
-    public void seFinanceTotal(int ingressTotal) {
+    public void seFinanceTotal(double ingressTotal) {
         this.ingressTotal = ingressTotal;
     }
 

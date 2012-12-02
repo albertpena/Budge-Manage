@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -23,7 +22,6 @@ import javax.persistence.UniqueConstraint;
 @Table(uniqueConstraints= {@UniqueConstraint(columnNames={"BUDGETUSER_ID, EXPENDING_NAME"})})
 public class Expending extends Finance implements Serializable {
     @ManyToOne
-    @JoinColumn(unique=true)
     private BudgetUser budgetUser;
     private static final long serialVersionUID = 1L;
     @Id
@@ -34,7 +32,7 @@ public class Expending extends Finance implements Serializable {
     @Column(name="Expending_name")
     private String name;
     @Column(name="Expending_total")
-    private int expendingTotal;
+    private double expendingTotal;
     @Column(name="Generate_Date")
     private String generateDate;
     @Column(name="Update_Date")
@@ -43,6 +41,22 @@ public class Expending extends Finance implements Serializable {
     private int priority;
     @Column(name="Expending_Type")
     private String type;
+
+    public Expending() {
+    
+    }
+
+    public Expending(BudgetUser budgetUser, String name, double expendingTotal, String generateDate, String updateDate, int priority, String type) {
+        this.budgetUser = budgetUser;
+        this.name = name;
+        this.expendingTotal = expendingTotal;
+        this.generateDate = generateDate;
+        this.updateDate = updateDate;
+        this.priority = priority;
+        this.type = type;
+    }
+    
+    
     
     @Override
     public Integer getId() {
@@ -78,7 +92,7 @@ public class Expending extends Finance implements Serializable {
      * @return the expendingTotal
      */
     @Override
-    public int getFinanceTotal() {
+    public double getFinanceTotal() {
         return expendingTotal;
     }
 
@@ -86,7 +100,7 @@ public class Expending extends Finance implements Serializable {
      * @param expendingTotal the expendingTotal to set
      */
     @Override
-    public void seFinanceTotal(int expendingTotal) {
+    public void seFinanceTotal(double expendingTotal) {
         this.expendingTotal = expendingTotal;
     }
 
@@ -155,6 +169,7 @@ public class Expending extends Finance implements Serializable {
     }
 
     /**
+     * 
      * @return the type
      */
     @Override

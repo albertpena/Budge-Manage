@@ -12,8 +12,8 @@ public abstract class Finance {
     
     public abstract Integer getId();
     public abstract void setId(Integer id);
-    public abstract int getFinanceTotal();
-    public abstract void seFinanceTotal(int expendingTotal);
+    public abstract double getFinanceTotal();
+    public abstract void seFinanceTotal(double financeTotal);
     public abstract String getGenerateDate();
     public abstract void setGenerateDate(String generateDate);
     public abstract String getUpdateDate();

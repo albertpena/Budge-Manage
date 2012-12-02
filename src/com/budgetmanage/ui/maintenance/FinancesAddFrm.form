@@ -208,7 +208,6 @@
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jFormattedTextField1.addKeyListener(new KeyAdapter()&#xa;{&#xa;   public void keyTyped(KeyEvent e)&#xa;   {&#xa;      char caracter = e.getKeyChar();&#xa;&#xa;      // Verificar si la tecla pulsada no es un digito&#xa;      if(((caracter &lt; &apos;0&apos;) ||&#xa;         (caracter &gt; &apos;9&apos;)) &amp;&amp;&#xa;         (caracter != &apos;\b&apos; /*corresponde a BACK_SPACE*/))&#xa;      {&#xa;         e.consume();  // ignorar el evento de teclado&#xa;      }&#xa;   }&#xa;});"/>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField()"/>
           </AuxValues>
         </Component>

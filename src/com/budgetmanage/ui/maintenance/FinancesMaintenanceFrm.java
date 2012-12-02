@@ -240,22 +240,6 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        jFormattedTextField1.addKeyListener(new KeyAdapter()
-            {
-                public void keyTyped(KeyEvent e)
-                {
-                    char caracter = e.getKeyChar();
-
-                    // Verificar si la tecla pulsada no es un digito
-                    if(((caracter < '0') ||
-                        (caracter > '9')) &&
-                    (caracter != '\b' /*corresponde a BACK_SPACE*/))
-                {
-                    e.consume();  // ignorar el evento de teclado
-                }
-            }
-        });
-
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 51, 51));
         jLabel12.setText("jLabel12");
@@ -323,13 +307,13 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
     }//GEN-LAST:event_jComboBox2ItemStateChanged
     
     private void save(String what){
-        boolean isOk = false;
+        boolean isOk = true;
         String name = jTextField1.getText().toString().toUpperCase();
         String type = jComboBox3.getSelectedItem().toString();
         int priority = jComboBox2.getSelectedIndex();
-        int value = 0;
+        double value = 0;
         try{
-            value = Integer.parseInt(jFormattedTextField1.getText().trim());
+            value = Double.parseDouble(jFormattedTextField1.getText().trim());
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, Constant.VALUE_ERROR_MSG, "Error", JOptionPane.ERROR_MESSAGE);
             jFormattedTextField1.grabFocus();
@@ -357,10 +341,12 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
                         ijc.edit((Ingress)finance);
                     }catch(NonexistentEntityException ne){
                         JOptionPane.showMessageDialog(this, "No existe una finanza con estos criterios para editar", "Error", JOptionPane.ERROR_MESSAGE);
+                        isOk = false;
                     }catch(Exception ex){
                         JOptionPane.showMessageDialog(this, "No existe una finanza con estos criterios para editar", "Error", JOptionPane.ERROR_MESSAGE);
+                        isOk = false;
                     }
-                    isOk = true;
+                    
                 }
                 case EXPENDING:{                   
                     
@@ -368,12 +354,15 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
                         ejc.edit((Expending)finance);
                     } catch (NonexistentEntityException ex) {
                          JOptionPane.showMessageDialog(this, "No existe una finanza con estos criterios para editar", "Error", JOptionPane.ERROR_MESSAGE);
+                         isOk = false;
                     } catch (Exception ex) {
                          JOptionPane.showMessageDialog(this, "No existe una finanza con estos criterios para editar", "Error", JOptionPane.ERROR_MESSAGE);
+                         isOk = false;
                     }
-                    isOk = true;
+                    
                 }
             }
+                
             if(isOk){
                 jLabel12.setVisible(true);
                 jLabel12.setText(Constant.SUCEED_MSG);

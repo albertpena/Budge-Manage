@@ -29,8 +29,9 @@ public class PieChart extends JComponent {
     
     @Override
     public void paint(Graphics grphcs) {
-        font = new Font("Sanserif", Font.BOLD, 14);
+        font = new Font("Sanserif", Font.BOLD, 12);        
         Graphics2D g2 = (Graphics2D) grphcs;
+        g2.setFont(font);
         rec  =  new Rectangle(10, 10, 150, 150);
         draw(g2, rec);
     }
