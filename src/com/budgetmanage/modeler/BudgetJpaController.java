@@ -5,12 +5,15 @@
 package com.budgetmanage.modeler;
 
 import com.budgetmanage.entities.Budget;
+import com.budgetmanage.entities.Expending;
 import com.budgetmanage.entities.Finance;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.ui.Main;
 import com.budgetmanage.util.Constant;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
@@ -155,7 +158,31 @@ public class BudgetJpaController implements Serializable {
             em.close();
         }
     }
-
+    
+    public void generateBudget(String updatedDate, String name, double ingressTotal, double expendingTotal)throws Exception{
+        try {
+            Budget budget = this.getActual(Main.getUser().getId());
+            
+            budget.setExpendingTotal(expendingTotal);
+            budget.setIngressTotal(ingressTotal);
+            budget.setUpdateDate(updatedDate);
+            
+            edit(budget);
+        } catch (NonexistentEntityException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public List<Finance> findBudget(String name){
+        EntityManager em = getEntityManager();
+        try {
+            Query q = em.createNativeQuery("Select * from BUDGET where BUDGET_NAME like '%"+name+"%' and BUDGETUSER_ID = "+
+                    Main.getUser().getId(), Budget.class);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
     public int getBudgetCount() {
         EntityManager em = getEntityManager();
         try {

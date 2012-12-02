@@ -190,4 +190,18 @@ public class ExpendingJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public double getExpendingTotal(){
+        EntityManager em = getEntityManager();
+        Query q;
+        double expendingTotal = 0;
+        try{
+            q = em.createNativeQuery("Select sum(EXPENDING_TOTAL) from EXPENDING where BUDGETUSER_ID = "+Main.getUser().getId(), Expending.class);
+            expendingTotal = (Integer) q.getSingleResult();  
+            return expendingTotal;
+        }finally{
+            em.close();
+            return expendingTotal;
+        }
+    }
 }

@@ -20,12 +20,14 @@ import com.budgetmanage.util.Constant;
 import java.awt.Container;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -40,11 +42,11 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
     */
     
     Container c;
-    
+    EntityManagerFactory emf;
    
     public FinancesConsultingFrm(String name, Container c) {
         initComponents();
-        jTable1.setModel(new TableModel());
+        emf = Persistence.createEntityManagerFactory(P_UNIT);
         jLabel13.setText(name);
         this.c = c;
         if(name.equalsIgnoreCase("EDITAR FINANZAS")){
@@ -226,7 +228,15 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -367,15 +377,13 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         String process = jComboBox1.getSelectedItem().toString().toUpperCase();
         String wich = jLabel4.getText().toUpperCase();
         
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(P_UNIT);
+        
         UserJpaController ujc = new UserJpaController(emf);
         ExpendingJpaController ejc = new ExpendingJpaController(emf);
         IngressJpaController ijc = new IngressJpaController(emf);
         BudgetJpaController bjc = new BudgetJpaController(emf);
-        Budget budget = new Budget();
         
         List<Finance> finances = null;
-        jTable1.setModel(new TableModel());
           
         switch(process){
             case EXPENDING:{
@@ -413,35 +421,93 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                 break;
             }
             case BUDGET:{
-            try {
                 if(all){
                     finances = bjc.findAll();
                 }else{
-                    
+                    finances = bjc.findBudget(what);
                 }
-                budget  = bjc.getActual(Main.getUser().getId());
-            } catch (NonexistentEntityException ex) {
-                JOptionPane.showMessageDialog(this, NON_EXISTS_ERROR_MSG, "ERROR", JOptionPane.ERROR_MESSAGE);
-            }
+                break;
             }
         }
-        if(process.equalsIgnoreCase(BUDGET)){
-                 String[] col = {"ID","Nombre","Total Gasto", "Total Ingreso","Fecha generado"};
-                 DefaultTableModel model = new DefaultTableModel(col, 1);
-                 jTable1.setModel(model);
-                 model.insertRow(0, new Object[]{budget.getId(),budget.getName(),budget.getExpendingTotal(), budget.getIngressTotal(), budget.getGenerateDate()});
-                 jTable1.updateUI();
-                 jPanel2.setVisible(true);
-        }else{
-            if(!finances.isEmpty()){             
-                ((TableModel) jTable1.getModel()).getFinances().clear();
-                ((TableModel) jTable1.getModel()).getFinances().addAll(finances);
+        
+                 
+            if(!finances.isEmpty()){ 
+                Object[][] obj;
+                DefaultTableModel model = new DefaultTableModel(){
+
+                        @Override
+                        public boolean isCellEditable(int i, int i1) {
+                            return false;
+                        }
+                        
+                    };
+                if(process.equalsIgnoreCase(BUDGET)){
+                    obj = new Object[finances.size()][BUDGET_TABLE_COLS.length];
+                    int e;
+
+                    for(int i = 0; i < finances.size(); i++){
+                        Budget b = (Budget) finances.get(i);
+                        e = 0;
+                        obj[i][e] = b.getId();
+                        e++;
+                        obj[i][e] = b.getName();
+                        e++;
+                        obj[i][e] = b.getIngressTotal();
+                        e++;
+                        obj[i][e] = b.getExpendingTotal();
+                        e++;
+                        obj[i][e] = (b.getIngressTotal() - b.getExpendingTotal());
+                        e++;
+                        obj[i][e] = b.getGenerateDate();
+
+                    }                    
+                    model.setDataVector(obj, BUDGET_TABLE_COLS);
+                }
+                
+                if (process.equalsIgnoreCase(INGRESS)){
+                    obj = new Object[finances.size()][INGRESS_COL_ARRAY.length];
+                    int e;
+                    for(int i = 0; i < finances.size(); i++){
+                        Ingress b = (Ingress) finances.get(i);
+                        e = 0;
+                        obj[i][e] = b.getId();
+                        e++;
+                        obj[i][e] = b.getName();
+                        e++;
+                        obj[i][e] = b.getFinanceTotal();
+                        e++;
+                        obj[i][e] = b.getUpdateDate();
+                        
+                    }
+                    model.setDataVector(obj,INGRESS_COL_ARRAY);
+                }
+                if (process.equalsIgnoreCase(EXPENDING)){
+                    obj = new Object[finances.size()][EXPENDING_COL_ARRAY.length];
+                    int e;
+                    for(int i = 0; i < finances.size(); i++){
+                        Expending b = (Expending) finances.get(i);
+                        e = 0;
+                        obj[i][e] = b.getId();
+                        e++;
+                        obj[i][e] = b.getName();
+                        e++;
+                        obj[i][e] = CATEGORIES[b.getPriority()];
+                        e++;
+                        obj[i][e] = b.getFinanceTotal();
+                        e++;
+                        obj[i][e] = b.getUpdateDate();
+                        
+                    }
+                    model.setDataVector(obj, EXPENDING_COL_ARRAY);
+                }
+                
+                jTable1.setModel(model);
                 jTable1.updateUI();
                 jPanel2.setVisible(true);            
             }else{
                 JOptionPane.showMessageDialog(this, "No se encontraron finanzas con estos criterios","Busqueda",JOptionPane.INFORMATION_MESSAGE);
             }
-        }
+        
     }
     
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
@@ -467,11 +533,29 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         if(evt.getClickCount()>1){
             int rowCount = jTable1.getSelectedRow();
-            Finance finance = (Finance)((TableModel) jTable1.getModel()).finances.get(rowCount);
-            c.removeAll();
+            Object id = jTable1.getValueAt(rowCount, 0);
+            Finance finance = null;
+            
+            switch(jComboBox1.getSelectedItem().toString().toUpperCase()){
+//                case Constant.BUDGET:{
+//                    BudgetJpaController bjc = new BudgetJpaController(emf);
+//                    finance = bjc.findBudget((Integer)id);
+//                    break;
+//                }
+                case Constant.EXPENDING:{
+                    ExpendingJpaController ejc = new ExpendingJpaController(emf);
+                    finance = ejc.findExpending((Integer)id);
+                    break;
+                }
+                case Constant.INGRESS:{
+                    IngressJpaController ijc = new IngressJpaController(emf);
+                    finance = ijc.findIngress((Integer)id);
+                    break;
+                }
+            }            
+            jTable1.setCellSelectionEnabled(false);
             FinancesMaintenanceFrm fmf = new FinancesMaintenanceFrm(c, finance, jComboBox1.getSelectedIndex());
-            fmf.setPreferredSize(c.getPreferredSize());
-            c.add(fmf);
+            com.budgetmanage.util.Util.addPanel( (JPanel) c, fmf);
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -500,113 +584,6 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         return true;
         
     }
-
-private class TableModel<T> extends AbstractTableModel{
-
-    private List<T> finances;
-    private String[] columns = EXPENDING_COL_ARRAY;
-
-    public TableModel() {
-        this.finances = new ArrayList<>();
-    }
-
-    public TableModel(List<T> finances, String[] columns) {
-        this.finances = finances;
-        this.columns = columns;
-    }
-    
-    public TableModel(String[] columns){
-        this.columns = columns;
-    }
-    
-    public TableModel(List<T> finances) {
-        this.finances = finances;
-    }
-     
-    
-    @Override
-    public int getRowCount() {
-        return getFinances().size();
-    }
-
-    @Override
-    public int getColumnCount() {
-        return columns.length;
-    }
-
-    @Override
-    public String getColumnName(int i) {
-        return columns[i];
-    }
-    
-    
-    
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        String valueAt = null;
-        Object obj =  getFinances().get(rowIndex);
-        Finance finance = null;
-        
-        //Verifying the type of object
-        if(obj instanceof Expending){
-            finance = (Expending) obj;
-        }else if(obj instanceof Ingress){
-            finance = (Ingress) obj;
-        }else if(obj instanceof Budget){
-            finance = (Budget) obj;
-        }        
-        
-        switch(columnIndex){
-            case 0:{
-                valueAt = finance.getId().toString();
-                break;
-            }
-            case 1:{
-                valueAt = finance.getName();
-                break;
-            }
-            case 2:{
-                valueAt = finance.getType();
-                break;
-            }
-            case 3:{
-                valueAt = String.valueOf(finance.getFinanceTotal());
-                break;
-            }
-            case 4:{
-                valueAt = finance.getUpdateDate();
-                break;
-            }
-            case 5:{
-                valueAt = String.valueOf(finance.getPriority());
-                break;
-            }
-        }
-        return valueAt;
-    }
-
-    /**
-     * @param columns the columns to set
-     */
-    public void setColumns(String[] columns) {
-        this.columns = columns;
-    }
-
-    /**
-     * @return the finances
-     */
-    public List<T> getFinances() {
-        return finances;
-    }
-
-    /**
-     * @param finances the finances to set
-     */
-    public void setFinances(List<T> finances) {
-        this.finances = finances;
-    }
-    
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -176,4 +176,18 @@ public class IngressJpaController implements Serializable {
         }
     }
     
+    public double getIngressTotal(){
+        EntityManager em = getEntityManager();
+        Query q;
+        double ingressTotal = 0;
+        try{
+            q = em.createNativeQuery("Select sum(INGRESS_TOTAL) from INGRESS where BUDGETUSER_ID = "+Main.getUser().getId(),Ingress.class);
+            ingressTotal =  (Integer) q.getSingleResult();
+            return ingressTotal;
+        }finally{
+            em.close();
+            return ingressTotal;
+        }
+    }
+    
 }

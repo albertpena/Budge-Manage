@@ -11,18 +11,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author Nestor_Velasquez
  */
 @Entity
+@Table(uniqueConstraints= {@UniqueConstraint(columnNames={"BUDGETUSER_ID, BUDGET_NAME"})})
 public class Budget extends Finance implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column(name="Budget_name", unique=true)
+    @Column(name="Budget_name")
     private String name;
     @Column(name="Budget_Status")
     private String Status;
@@ -37,6 +40,7 @@ public class Budget extends Finance implements Serializable {
     @Column(name="Life_days")
     private int lifeDays;
 
+    
     public Budget() {
     
     }

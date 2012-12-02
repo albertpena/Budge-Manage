@@ -7,6 +7,7 @@ package com.budgetmanage.ui.Maintenance;
 import com.budgetmanage.entities.Expending;
 import com.budgetmanage.entities.Finance;
 import com.budgetmanage.entities.Ingress;
+import com.budgetmanage.modeler.BudgetJpaController;
 import com.budgetmanage.modeler.ExpendingJpaController;
 import com.budgetmanage.modeler.IngressJpaController;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
@@ -14,6 +15,10 @@ import com.budgetmanage.util.Constant;
 import java.awt.Container;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.DefaultComboBoxModel;
@@ -333,17 +338,21 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
         
         
         if(isOk()){    
+            Date actualDate = new Date();
+            String date = new SimpleDateFormat(FORMAT_DATE).format(actualDate);        
+
             finance.setName(name);
             finance.setType(type);
             finance.setPriority(priority);
             finance.seFinanceTotal(value);
+            finance.setUpdateDate(date);
+            
             
             EntityManagerFactory emf = Persistence.createEntityManagerFactory(P_UNIT);
-
+            IngressJpaController ijc = new IngressJpaController(emf);
+            ExpendingJpaController ejc = new ExpendingJpaController(emf);
             switch(what){
-                case INGRESS:{
-                    IngressJpaController ijc = new IngressJpaController(emf);
-                    
+                case INGRESS:{                     
                     try{
                         ijc.edit((Ingress)finance);
                     }catch(NonexistentEntityException ne){
@@ -353,8 +362,7 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
                     }
                     isOk = true;
                 }
-                case EXPENDING:{
-                    ExpendingJpaController ejc = new ExpendingJpaController(emf);
+                case EXPENDING:{                   
                     
                     try {                    
                         ejc.edit((Expending)finance);
@@ -370,6 +378,12 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
                 jLabel12.setVisible(true);
                 jLabel12.setText(Constant.SUCEED_MSG);
                 jButton1.setEnabled(false);
+                BudgetJpaController bjc = new BudgetJpaController(emf);
+                try {
+                    bjc.generateBudget(date, name, ijc.getIngressTotal(), ejc.getExpendingTotal());
+                } catch (Exception ex) {
+                    Logger.getLogger(FinancesMaintenanceFrm.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }

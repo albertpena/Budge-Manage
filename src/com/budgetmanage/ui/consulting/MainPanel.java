@@ -319,9 +319,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                 isOk = false;
             }
             //Get the total expendings
-            for (Finance expending: finances){
-                expendigTotal = (expendigTotal+expending.getFinanceTotal());
-            }
+            expendigTotal = ejc.getExpendingTotal();            
 
             finances.clear();
             finances = ijc.findIngressEntities();
@@ -330,9 +328,8 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                 isOk = false;
             }
             //Get the total ingresses
-            for(Finance ingresses: finances){
-                ingressTotal = (ingressTotal + ingresses.getFinanceTotal());
-            }
+            ingressTotal = ijc.getIngressTotal();
+            
             //Clearing the list
             finances.clear();
             

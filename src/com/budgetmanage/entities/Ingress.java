@@ -11,12 +11,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author Nestor_Velasquez
  */
 @Entity
+@Table(uniqueConstraints= {@UniqueConstraint(columnNames={"BUDGETUSER_ID, BUDGET_NAME"})})
 public class Ingress extends Finance implements Serializable {
     @ManyToOne
     private BudgetUser budgetUser;
@@ -24,7 +27,7 @@ public class Ingress extends Finance implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column(unique=true,name="Ingress_name")
+    @Column(name="Ingress_name")
     private String name;
     @Column(name="Ingress_total")
     private int ingressTotal;

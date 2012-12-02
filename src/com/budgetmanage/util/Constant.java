@@ -58,9 +58,10 @@ public interface Constant {
     public String[] INGRESS_TYPES = {"Seleccione","Salario","Remesas","Comisiones","Bonificaciones","Extras","Otros"};    
     public String[] FINANCES_ADD_ARRAY = {"Seleccione","Gastos","Ingresos"};
     public String[] FINANCES_EDIT_ARRAY = {"Seleccione","Gastos","Ingresos","Presupuesto"};
-    public String[] INGRESS_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Fecha Modificacion"};
-    public String[] EXPENDING_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Modificacion", "Prioridad"};
+    public String[] INGRESS_COL_ARRAY = {"Numero", "Nombre", "Monto", "Fecha Modificacion"};
+    public String[] EXPENDING_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Modificacion"};
     public String[] BUDGET_TABLE_COLS = {"ID","Nombre","Total Ingresos", "Total gastos", "Total Restante", "Generado"};
+    public String[]CATEGORIES = {"Seleccione", "Gastos fijos", "Servicios", "Ocio y Demas"};
     
    /************************Colors**************************************************/ 
     public Color BKG = new Color(204,255,204);
