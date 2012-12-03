@@ -218,7 +218,7 @@ public class Main extends javax.swing.JFrame implements Constant{
     }//GEN-LAST:event_jMenuItem33ActionPerformed
 
     private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
-        ConsultaAccount ca = new ConsultaAccount();
+        ConsultaAccount ca = new ConsultaAccount(jPanel1);
         com.budgetmanage.util.Util.addPanel(jPanel1, ca);
     }//GEN-LAST:event_jMenuItem25ActionPerformed
 

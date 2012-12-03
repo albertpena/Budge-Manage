@@ -10,9 +10,12 @@ import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.util.Constant;
 import java.awt.event.ItemEvent;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,8 +27,13 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
     /**
      * Creates new form ConsultaAccount
      */
-    public ConsultaAccount() {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
+    AccountJpaController ajc = new AccountJpaController(emf);
+    JPanel container;
+        
+    public ConsultaAccount(JPanel container) {
         initComponents();
+        this.container = container;
     }
 
     /**
@@ -45,6 +53,7 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
         btnConsultar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jCheckBox1 = new javax.swing.JCheckBox();
+        btnEliminar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -94,6 +103,13 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
             }
         });
 
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -107,6 +123,8 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnEliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnConsultar))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jCheckBox1)
@@ -124,8 +142,12 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnConsultar))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConsultar)
+                    .addComponent(btnEliminar)))
         );
+
+        btnEliminar.setEnabled(false);
 
         jPanel2.setBackground(BKG);
 
@@ -140,6 +162,11 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -204,10 +231,47 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
             btnConsultar.setEnabled(true);
         }
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
-
+//begin here
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int rowNum = jTable1.getSelectedRow();
+        if(evt.getClickCount() > 1){
+            try {
+                String account = jTable1.getValueAt(rowNum, 0).toString();
+                Account a  = ajc.findAccount(account);
+                //ajc.destroy(a.getId());
+                MantenimientoAccount ma = new MantenimientoAccount(a);
+                com.budgetmanage.util.Util.addPanel(container, ma);
+            } catch (NonexistentEntityException ex) {
+                Logger.getLogger(ConsultaAccount.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            if(jTable1.isRowSelected(rowNum)){
+                btnEliminar.setEnabled(true);
+            }else{
+                btnEliminar.setEnabled(false);
+            }
+            
+        }
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+//*************************boton eliminar**********************
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+       
+        int rowNum = jTable1.getSelectedRow();
+       
+            try {
+                String account = jTable1.getValueAt(rowNum, 0).toString();
+                Account a  = ajc.findAccount(account);
+                ajc.destroy(a.getId());
+                JOptionPane.showMessageDialog(this, "Registro Borrado Satisfactoriamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                com.budgetmanage.util.Util.addPanel(container, new ConsultaAccount(container));
+            } catch (NonexistentEntityException ex) {
+                ex.printStackTrace();
+            }
+      
+    }//GEN-LAST:event_btnEliminarActionPerformed
+//*************************************************************
     private void getAccount(boolean all){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
-        AccountJpaController ajc = new AccountJpaController(emf);
         List<Account> accounts = null;
         
         try{
@@ -219,8 +283,9 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
             
             String[] colums = {"Cuenta", "Banco","Balance"};
             Object[][] row = new Object[accounts.size()][colums.length];
-            int e = 0;
+            int e;
             for(int i=0; i < accounts.size(); i++){
+                e = 0;
                 Account acc =  accounts.get(i);
                 row[i][e] = acc.getAccountNumber();
                 e++;
@@ -244,6 +309,7 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
