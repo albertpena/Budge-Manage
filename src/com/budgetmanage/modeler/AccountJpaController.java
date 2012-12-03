@@ -152,6 +152,24 @@ public class AccountJpaController implements Serializable {
         }
     }
     
+       public Account findAccount(String number) throws NonexistentEntityException{
+        EntityManager em = getEntityManager();
+        Query q;
+        Account account = null;
+        try{
+            q = em.createNativeQuery("Select * from accounts where budgetuser_id = "+Main.getUser().getId()+
+                                      " and account_number = '"+number+"'", Account.class);
+            account = (Account) q.getSingleResult();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            throw new NonexistentEntityException("No existen cuentas para este usuario");
+        }
+        finally{
+            em.close();
+            return account;
+        }
+    }
+    
     public Account findAccount(Integer id) {
         EntityManager em = getEntityManager();
         try {
