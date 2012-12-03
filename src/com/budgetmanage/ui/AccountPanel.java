@@ -97,11 +97,21 @@ public class AccountPanel extends javax.swing.JPanel implements Constant{
         lblMessage.setText("Cuenta Agregada Satisfactoriamente");
 
         txtCuenta.setToolTipText("Numero de cuenta");
+        txtCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCuentaActionPerformed(evt);
+            }
+        });
 
         agregarBtn.setText("Agregar");
         agregarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 agregarBtnMouseClicked(evt);
+            }
+        });
+        agregarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarBtnActionPerformed(evt);
             }
         });
 
@@ -203,6 +213,14 @@ public class AccountPanel extends javax.swing.JPanel implements Constant{
             
         }
     }//GEN-LAST:event_agregarBtnMouseClicked
+
+    private void txtCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCuentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCuentaActionPerformed
+
+    private void agregarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregarBtnActionPerformed
 
     private boolean addAccount(String no, String bank){
         Account account = new Account(no, bank);
