@@ -7,7 +7,9 @@ package com.budgetmanage.modeler;
 import com.budgetmanage.entities.Account;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.modeler.exceptions.PreexistingEntityException;
+import com.budgetmanage.ui.Main;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -116,6 +118,40 @@ public class AccountJpaController implements Serializable {
         }
     }
 
+    public List<Account> findAccounts(){
+        EntityManager em = getEntityManager();
+        Query q;
+        List<Account> accounts = null;
+        try{
+            q = em.createNativeQuery("Select * from accounts where budgetuser_id = "+Main.getUser().getId(), Account.class);
+            accounts = q.getResultList();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            accounts = new ArrayList<>();
+        }
+        finally{
+            em.close();
+            return accounts;
+        }
+    }
+    public List<Account> findAccountByNo(String number) throws NonexistentEntityException{
+        EntityManager em = getEntityManager();
+        Query q;
+        List<Account> accounts = null;
+        try{
+            q = em.createNativeQuery("Select * from accounts where budgetuser_id = "+Main.getUser().getId()+
+                                      " and account_number = '"+number+"'", Account.class);
+            accounts = q.getResultList();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            throw new NonexistentEntityException("No existen cuentas para este usuario");
+        }
+        finally{
+            em.close();
+            return accounts;
+        }
+    }
+    
     public Account findAccount(Integer id) {
         EntityManager em = getEntityManager();
         try {

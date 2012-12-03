@@ -201,6 +201,9 @@
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Numero de cuenta"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCuentaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="agregarBtn">
           <Properties>
@@ -208,6 +211,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="agregarBtnMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="agregarBtnActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
