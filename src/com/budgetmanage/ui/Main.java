@@ -213,7 +213,7 @@ public class Main extends javax.swing.JFrame implements Constant{
     }//GEN-LAST:event_jMenuItem26ActionPerformed
 
     private void jMenuItem33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem33ActionPerformed
-        UserMaintenanceFrm umf = new UserMaintenanceFrm();
+        UserMaintenanceFrm umf = new UserMaintenanceFrm(jPanel1);
         com.budgetmanage.util.Util.addPanel(jPanel1, umf);
     }//GEN-LAST:event_jMenuItem33ActionPerformed
 
