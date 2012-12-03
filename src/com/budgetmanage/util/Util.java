@@ -14,7 +14,11 @@ public class Util {
         }
         return true;
     }
-    
+  /**
+   * Method for add a new JPanelFrame to current principal panel.
+   * @param p is the Principal panel the application.
+   * @param c the Panel which want add  and show.
+   */
     public static void addPanel(JPanel p, JPanel c){
         p.removeAll();       
         c.setPreferredSize(p.getPreferredSize());          
