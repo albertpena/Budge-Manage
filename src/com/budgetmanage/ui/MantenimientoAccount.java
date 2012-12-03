@@ -5,8 +5,14 @@
 package com.budgetmanage.ui;
 
 import com.budgetmanage.entities.Account;
+import com.budgetmanage.modeler.AccountJpaController;
+import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.util.Constant;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.Persistence;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -180,9 +186,44 @@ public class MantenimientoAccount extends javax.swing.JPanel implements Constant
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        
+       //******************* BOTON EDITAR*************************
+        boolean isOk = true;
+        String account = txtCuenta.getText().trim();
+        double monto = 0;
+        String bank = cmbBancos.getActionCommand().trim();
+        if(account.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Favor llenar el campo cuenta", "Error", JOptionPane.ERROR_MESSAGE);
+            isOk = false;
+        }   
+        if (bank.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Favor seleccione el Banco", "Error", JOptionPane.ERROR_MESSAGE);
+            isOk = false;
+        }
+        try{
+            monto = Double.parseDouble(txtMonto.getText().trim());
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, "Favor colocar un monto valido", "Error", JOptionPane.ERROR_MESSAGE);
+            isOk = false;
+        }
+        if(isOk){
+            ac.setAccountBank(account);
+            ac.setAccountNumber(account);
+            ac.setBalance(monto);
+            
+            AccountJpaController ajc = new AccountJpaController(Persistence.createEntityManagerFactory(PU));
+              JOptionPane.showMessageDialog(this, "Editado Correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);  //**********
+            try {
+                ajc.edit(ac);
+            } catch (NonexistentEntityException ex) {
+                Logger.getLogger(MantenimientoAccount.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(MantenimientoAccount.class.getName()).log(Level.SEVERE, null, ex);
+              
+            }
+        }
+    
     }//GEN-LAST:event_btnEditarActionPerformed
-
+                   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnLimpiar;
