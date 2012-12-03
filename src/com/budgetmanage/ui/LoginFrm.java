@@ -71,11 +71,6 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
                 btnAceptarMouseClicked(evt);
             }
         });
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setText("Clave");
@@ -89,11 +84,6 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
         btnRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegistrarMouseClicked(evt);
-            }
-        });
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
             }
         });
 
@@ -210,13 +200,6 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
         txtUsuario.setText("");
     }
     
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarActionPerformed
-
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAceptarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContainerPanel;
     private javax.swing.JButton btnAceptar;
