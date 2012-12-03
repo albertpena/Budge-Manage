@@ -193,4 +193,19 @@ public class UserJpaController implements Serializable {
         }
         return user;
     }
+     public BudgetUser getUser(String nameUser) throws Exception {
+        EntityManager em = getEntityManager();
+        BudgetUser actBU = new BudgetUser();
+        String consulta = String.format("Select * from NVELASQUEZ.BUDGETUSER tbUser where tbUser.USERNAME = '"+nameUser+"'");
+        try {
+            Query q = em.createNativeQuery(consulta, BudgetUser.class);
+           actBU = (BudgetUser) q.getSingleResult();
+           UserJpaController d = new UserJpaController(emf);
+        } catch (Exception e) {
+            throw new Exception(Constant.NON_EXISTS_ERROR_MSG);
+        } finally {
+            em.close();
+        }
+        return actBU;
+    }
 }
