@@ -23,9 +23,10 @@ public interface Constant {
     public String PASS_ERROR_MSG = "Favor colocar la clave";
     public String SEARCH_MSG_ERROR = "Debe colocar un criterio de busqueda";
     public String INVALID_USER_ERROR = "El usuario especificado no existe o la clave es invalida";
-    
+    public String PASS_NOT_MATCH_ERROR = "Claves no Coinciden";
     /*************************Messages And Labels***************************************/
     public String COMBOX_FINANCE_MSG = "Seleccione el tipo de finanza que desea";
+    public String SUCCED_USER_MSG = "Usuario guardado satisfactoriamente";
     public String FINANCE_SUCCEED_MSG = "Finanza agregada satisfactoriamente";
     public String TITLE = "Budget Friendly";
     public String EXPENDING = "GASTOS";
