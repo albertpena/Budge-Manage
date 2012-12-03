@@ -8,6 +8,7 @@ import com.budgetmanage.entities.BudgetUser;
 import com.budgetmanage.ui.Consulting.FinancesConsultingFrm;
 import com.budgetmanage.ui.consulting.MainPanel;
 import com.budgetmanage.ui.maintenance.FinancesAddFrm;
+import com.budgetmanage.ui.maintenance.UserMaintenanceFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.BorderLayout;
 
@@ -148,6 +149,11 @@ public class Main extends javax.swing.JFrame implements Constant{
         jMenu1.add(jMenuItem20);
 
         jMenuItem33.setText("Usuario");
+        jMenuItem33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem33ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem33);
 
         jMenuBar1.add(jMenu1);
@@ -200,6 +206,11 @@ public class Main extends javax.swing.JFrame implements Constant{
         AccountPanel ap = new AccountPanel();
         com.budgetmanage.util.Util.addPanel(jPanel1,ap);
     }//GEN-LAST:event_jMenuItem26ActionPerformed
+
+    private void jMenuItem33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem33ActionPerformed
+        UserMaintenanceFrm umf = new UserMaintenanceFrm();
+        com.budgetmanage.util.Util.addPanel(jPanel1, umf);
+    }//GEN-LAST:event_jMenuItem33ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

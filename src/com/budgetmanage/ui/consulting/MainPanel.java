@@ -389,7 +389,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
             }
         }       
         
-        flowPanel.add(new LineChart(exps, pad), BorderLayout.CENTER);
+        flowPanel.add(new LineChart(exps), BorderLayout.CENTER);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager BudgeManagePUEntityManager;

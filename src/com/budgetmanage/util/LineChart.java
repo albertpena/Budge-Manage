@@ -9,16 +9,12 @@ import javax.swing.*;
 public class LineChart extends JComponent {
 
     
-    double[] data = {
-        10, 10, 10, 03, 86, 88, 74, 87, 54, 77,
-        61, 55, 48, 60, 49, 36, 38, 27, 20, 18
-    };
-    private int PAD;// = 20;
+    double[] data;
+    final int PAD = 20;
     
-    public LineChart(double[] expendings, int pad) {
+    public LineChart(double[] expendings) {
         this.setToolTipText("Incrementa segun el incremento de gastos por dia");
         this.data = expendings;
-        this.PAD = pad;
         
         double max = getMax();
         
@@ -66,14 +62,16 @@ public class LineChart extends JComponent {
          //Draw lines.
         double max = getMax();
         double xInc = (double)(w - 2*PAD)/(data.length-1);
-        double scale = (double)(h - 2*PAD)/(max+max);
+        double scale = (double)(h - 2*PAD)/(max);
         g2.setPaint(Color.green.darker());
         for(int i = 0; i < data.length-1; i++) {
-            double x1 = PAD + i*xInc;
+            double x1 = PAD + (i)*xInc;
             double y1 = h - PAD - scale*data[i];
             double x2 = PAD + (i+1)*xInc;
             double y2 = h - PAD - scale*data[i+1];
+            //g2.drawString(x1+" "+y1+" "+x2+" "+y2, sx-10, sy);
             g2.draw(new Line2D.Double(x1, y1, x2, y2));
+            
         }
         
         // Mark data points.
