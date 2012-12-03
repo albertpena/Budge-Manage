@@ -18,13 +18,11 @@ public class LineChart extends JComponent {
         
         double max = getMax();
         
-        for(int i = 0; i < expendings.length-1; i++){
+        for(int i = 0; i < expendings.length; i++){
             data[i] = (expendings[i]/max)*100;
         }
         this.repaint();
-    }
-
-    
+    }    
     
     @Override
     protected void paintComponent(Graphics g) {
@@ -62,16 +60,16 @@ public class LineChart extends JComponent {
          //Draw lines.
         double max = getMax();
         double xInc = (double)(w - 2*PAD)/(data.length-1);
-        double scale = (double)(h - 2*PAD)/(max/2);
+        double scale = (double)(h - 2*PAD)/(max*2);
         g2.setPaint(Color.green.darker());
+        
         for(int i = 0; i < data.length-1; i++) {
             double x1 = PAD + (i)*xInc;
             double y1 = h - PAD - scale*data[i];
             double x2 = PAD + (i+1)*xInc;
             double y2 = h - PAD - scale*data[i+1];
             //g2.drawString(x1+" "+y1+" "+x2+" "+y2, sx-10, sy);
-            g2.draw(new Line2D.Double(x1, y1, x2, y2));
-            
+            g2.draw(new Line2D.Double(x1, y1, x2, y2));            
         }
         
         // Mark data points.
@@ -85,7 +83,7 @@ public class LineChart extends JComponent {
  
     private double getMax() {
         double max = -Integer.MAX_VALUE;
-        for(int i = 0; i < data.length; i++) {
+        for(int i = 0; i < data.length-1; i++) {
             if(data[i] > max){
                 max = data[i];
             }
