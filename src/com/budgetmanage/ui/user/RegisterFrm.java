@@ -8,7 +8,6 @@ import com.budgetmanage.entities.BudgetUser;
 import com.budgetmanage.modeler.UserJpaController;
 import com.budgetmanage.ui.LoginFrm;
 import com.budgetmanage.util.Constant;
-import java.awt.BorderLayout;
 import java.awt.Container;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -145,11 +144,6 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
                 btnCreateMouseClicked(evt);
             }
         });
-        btnCreate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateActionPerformed(evt);
-            }
-        });
 
         btnCancel.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         btnCancel.setText("Cancel");
@@ -249,8 +243,6 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
         }
     }//GEN-LAST:event_btnCreateMouseClicked
 
-    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-    }//GEN-LAST:event_btnCreateActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnCreate;
