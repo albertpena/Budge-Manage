@@ -379,13 +379,15 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         resumeExPanel.add(pieChart, BorderLayout.CENTER);
         
         List<Object[]> objs = ejc.getExpendingTotalByDay();
-        double[] exps = new double[objs.size()];
+        double[] exps = new double[objs.size()+1];
+        
         for(int i =0; i < objs.size(); i++){
             Object[] obj = objs.get(i);
             if(i==0){
                 exps[i] = (double)obj[0];
+                exps[i+1] = (double)obj[0];
             }else{
-                exps[i] = exps[i-1]+(double)obj[0];
+                exps[i+1] = exps[i-1]+(double)obj[0];
             }
         }       
         

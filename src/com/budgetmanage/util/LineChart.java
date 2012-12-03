@@ -18,7 +18,7 @@ public class LineChart extends JComponent {
         
         double max = getMax();
         
-        for(int i = 0; i < expendings.length; i++){
+        for(int i = 0; i < expendings.length-1; i++){
             data[i] = (expendings[i]/max)*100;
         }
         this.repaint();
@@ -62,7 +62,7 @@ public class LineChart extends JComponent {
          //Draw lines.
         double max = getMax();
         double xInc = (double)(w - 2*PAD)/(data.length-1);
-        double scale = (double)(h - 2*PAD)/(max);
+        double scale = (double)(h - 2*PAD)/(max/2);
         g2.setPaint(Color.green.darker());
         for(int i = 0; i < data.length-1; i++) {
             double x1 = PAD + (i)*xInc;

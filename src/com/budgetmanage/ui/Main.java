@@ -115,6 +115,11 @@ public class Main extends javax.swing.JFrame implements Constant{
         jMenu3.setText("Consultas");
 
         jMenuItem25.setText("Cuentas");
+        jMenuItem25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem25ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem25);
 
         jMenuItem23.setText("Finanzas");
@@ -211,6 +216,11 @@ public class Main extends javax.swing.JFrame implements Constant{
         UserMaintenanceFrm umf = new UserMaintenanceFrm();
         com.budgetmanage.util.Util.addPanel(jPanel1, umf);
     }//GEN-LAST:event_jMenuItem33ActionPerformed
+
+    private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
+        ConsultaAccount ca = new ConsultaAccount();
+        com.budgetmanage.util.Util.addPanel(jPanel1, ca);
+    }//GEN-LAST:event_jMenuItem25ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
