@@ -286,7 +286,6 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
             int days = 0;
             Date actualDate = new Date();
             Timestamp date = new Timestamp(actualDate.getTime());
-            List<Finance> finances;
             ExpendingJpaController ejc = new ExpendingJpaController(emf);
             IngressJpaController ijc = new IngressJpaController(emf);
             
@@ -304,28 +303,21 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                     break;
                 }                
             }
-
-            finances = ejc.findExpendingEntities();
-            if(finances.isEmpty()){
+            expendigTotal = ejc.getExpendingTotal();
+            ingressTotal = ijc.getIngressTotal();
+            if(expendigTotal == 0){
                 JOptionPane.showMessageDialog(this, "No tiene gastos registrados", "Error", JOptionPane.ERROR_MESSAGE);
                 isOk = false;
             }
-            //Get the total expendings
-
-            finances.clear();
-            finances = ijc.findIngressEntities();
-            if(finances.isEmpty()){
+            
+            if(ingressTotal == 0){
                 JOptionPane.showMessageDialog(this, "No tiene ingresos registrados", "Error", JOptionPane.ERROR_MESSAGE);
                 isOk = false;
             }            
             
-            //Clearing the list
-            finances.clear();
-            
             if(isOk){
                 //Creating and persisting the budgets.
-                expendigTotal = ejc.getExpendingTotal();
-                ingressTotal = ijc.getIngressTotal();
+                
                 Budget budget = new Budget(name, "A", expendigTotal, ingressTotal, date, date, Main.getUser(), days);                
                 bjc.create(budget);
                 jLabel1.setText("El Presupuesto se genero correctamente");

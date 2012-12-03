@@ -3,6 +3,7 @@ package com.budgetmanage.ui.maintenance;
 
 import com.budgetmanage.entities.Expending;
 import com.budgetmanage.entities.Ingress;
+import com.budgetmanage.modeler.BudgetJpaController;
 import com.budgetmanage.modeler.ExpendingJpaController;
 import com.budgetmanage.modeler.IngressJpaController;
 import com.budgetmanage.modeler.exceptions.PreexistingEntityException;
@@ -411,7 +412,8 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
                 reset();               
                 jComboBox1.setSelectedIndex(0);
                 jLabel11.setVisible(true);
-                
+                BudgetJpaController bjc = new BudgetJpaController(emf);
+                bjc.generateBudget();
             }
         }
     }//GEN-LAST:event_jButton1MouseClicked

@@ -160,7 +160,7 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
         jComboBox1.setEnabled(false);
 
         jPanel1.setBackground(BKG);
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del"+jComboBox1.getSelectedItem().toString().toLowerCase()));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Editar"));
 
         jLabel2.setText("Nombre");
 

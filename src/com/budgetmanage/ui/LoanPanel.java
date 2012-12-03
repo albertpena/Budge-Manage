@@ -381,6 +381,12 @@ public class LoanPanel extends javax.swing.JPanel implements Constant{
         
     }//GEN-LAST:event_btnSendActionPerformed
 
+    private void clear(){
+        txtAmount.setText("");
+        txtShares.setText("");
+        jPanel2.setVisible(false);
+    }
+    
     private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAmountActionPerformed
@@ -396,6 +402,7 @@ public class LoanPanel extends javax.swing.JPanel implements Constant{
             jPanel1.setVisible(false);
             jPanel2.setVisible(false);
         }
+        clear();
     }//GEN-LAST:event_cboxBancosItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

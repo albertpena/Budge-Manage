@@ -185,7 +185,7 @@ public class IngressJpaController implements Serializable {
             ingressTotal =  (Double) q.getSingleResult();
             return ingressTotal;
         }catch(Exception ex){
-            ex.printStackTrace();
+            ingressTotal = 0;
         }finally{
             em.close();
             return ingressTotal;

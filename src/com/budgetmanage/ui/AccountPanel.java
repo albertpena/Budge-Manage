@@ -45,7 +45,6 @@ public class AccountPanel extends javax.swing.JPanel implements Constant{
         jLabel13 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         lblCuenta = new javax.swing.JLabel();
-        lblMessage = new javax.swing.JLabel();
         txtCuenta = new javax.swing.JTextField();
         agregarBtn = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
@@ -92,10 +91,6 @@ public class AccountPanel extends javax.swing.JPanel implements Constant{
 
         lblCuenta.setText("No. Cuenta");
 
-        lblMessage.setFont(TITLE_FONT);
-        lblMessage.setForeground(new java.awt.Color(0, 0, 255));
-        lblMessage.setText("Cuenta Agregada Satisfactoriamente");
-
         txtCuenta.setToolTipText("Numero de cuenta");
         txtCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,21 +115,15 @@ public class AccountPanel extends javax.swing.JPanel implements Constant{
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(agregarBtn)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(lblCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(agregarBtn)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(lblCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,14 +132,10 @@ public class AccountPanel extends javax.swing.JPanel implements Constant{
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCuenta)
                     .addComponent(txtCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblMessage)
-                .addGap(18, 18, 18)
+                .addGap(43, 43, 43)
                 .addComponent(agregarBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        lblMessage.setVisible(false);
 
         jComboBox1.setModel(new DefaultComboBoxModel(Constant.BANKS));
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
@@ -203,8 +188,9 @@ public class AccountPanel extends javax.swing.JPanel implements Constant{
         }else{
             String bank = jComboBox1.getSelectedItem().toString();
             if(addAccount(account, bank)){
-                lblMessage.setText("Cuenta agregada satisfactoriamente");
-                lblMessage.setVisible(true);
+                JOptionPane.showMessageDialog(this, SUCCED_MSG, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                jComboBox1.setSelectedIndex(0);
+                txtCuenta.setText("");
             }else{
                 txtCuenta.setText("");
             }
@@ -246,7 +232,6 @@ public class AccountPanel extends javax.swing.JPanel implements Constant{
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lblCuenta;
-    private javax.swing.JLabel lblMessage;
     private javax.swing.JTextField txtCuenta;
     // End of variables declaration//GEN-END:variables
 }

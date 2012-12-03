@@ -36,6 +36,7 @@ public class Main extends javax.swing.JFrame implements Constant{
     public Main() {
         initComponents();
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        setLocation(200, 100);
         this.setLayout(new BorderLayout());
         dim = this.getPreferredSize();
         jPanel1.setPreferredSize(dim);
@@ -198,6 +199,7 @@ public class Main extends javax.swing.JFrame implements Constant{
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
         LoginFrm log = new LoginFrm(jPanel1, this);
         com.budgetmanage.util.Util.addPanel(jPanel1,log);
+        this.getJMenuBar().setVisible(false);
         jMenu5.setSelected(false);
     }//GEN-LAST:event_jMenu5MouseClicked
 
