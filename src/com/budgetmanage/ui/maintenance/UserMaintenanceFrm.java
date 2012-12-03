@@ -48,11 +48,7 @@ public class UserMaintenanceFrm extends javax.swing.JPanel {
         jLabel13.setForeground(new java.awt.Color(204, 255, 204));
         jLabel13.setText("Modificacion de Usuarios");
 
-        txtUserName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUserNameActionPerformed(evt);
-            }
-        });
+        txtUserName.setEnabled(false);
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel1.setText("Nombre Usuario");
@@ -69,6 +65,11 @@ public class UserMaintenanceFrm extends javax.swing.JPanel {
         btnCancel.setText("Cancelar");
 
         btnSaveChange.setText("Guardar");
+        btnSaveChange.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSaveChangeMouseClicked(evt);
+            }
+        });
 
         txtPassword.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
@@ -168,9 +169,11 @@ public class UserMaintenanceFrm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUserNameActionPerformed
+    private void btnSaveChangeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveChangeMouseClicked
+       //Validating fields empty
+        
+       
+    }//GEN-LAST:event_btnSaveChangeMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
