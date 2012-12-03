@@ -25,16 +25,16 @@ import javax.swing.JPanel;
 public class UserMaintenanceFrm extends javax.swing.JPanel implements Constant {
 
     BudgetUser bUser;
-
+    JPanel jp;
     /**
      * Creates new form UserMaintenanceFrm
      */
-    public UserMaintenanceFrm() {
+    public UserMaintenanceFrm(JPanel jp) {
         initComponents();
         initComponents();
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(Constant.P_UNIT);
         UserJpaController ujc = new UserJpaController(emf);
-
+        this.jp = jp;
         this.bUser = Main.getUser();
         try {
             BudgetUser dbUser = ujc.getUser(bUser.getUserName());
@@ -227,12 +227,11 @@ public class UserMaintenanceFrm extends javax.swing.JPanel implements Constant {
             } 
             JOptionPane.showMessageDialog(null, SUCCED_MSG, "Transaccion completada", JOptionPane.PLAIN_MESSAGE);
             MainPanel main = new MainPanel();  
-            Util.addPanel(jPanel1, main);
+            Util.addPanel(jp, main);
+            
         } else {
             JOptionPane.showMessageDialog(null, PASS_NOT_MATCH_ERROR, "", JOptionPane.INFORMATION_MESSAGE);
-        }
-
-       
+        }  
     }//GEN-LAST:event_btnSaveChangeMouseClicked
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -240,7 +239,7 @@ public class UserMaintenanceFrm extends javax.swing.JPanel implements Constant {
                 Constant.TITLE, JOptionPane.YES_NO_OPTION);
         //If [opt] had '1' value is the option yes and I show the login JPanel
         if (opt == 0) {
-            com.budgetmanage.util.Util.addPanel(jPanel1,new MainPanel());
+            com.budgetmanage.util.Util.addPanel(jp,new MainPanel());
         }
     }//GEN-LAST:event_btnCancelActionPerformed
 
