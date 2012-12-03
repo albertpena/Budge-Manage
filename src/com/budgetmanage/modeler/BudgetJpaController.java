@@ -10,7 +10,10 @@ import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.ui.Main;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
@@ -155,6 +158,37 @@ public class BudgetJpaController implements Serializable {
         }
     }
     
+    public void generateBudget(){
+        EntityManager em = getEntityManager();
+        Query q;
+        Query q2;
+        Date date = new Date();
+        Timestamp time = new Timestamp(date.getTime());
+        try{
+            Budget budget = getActual(Main.getUser().getId());
+            q  = em.createNativeQuery("Select sum(Expending_Total) from Expending"+
+                                    " where BUDGETUSER_ID = "+Main.getUser().getId());
+            double exTotal = (double) q.getSingleResult();
+            
+            q2 = em.createNativeQuery("Select sum(Ingress_Total) from Ingress"+
+                                    " where BUDGETUSER_ID = "+Main.getUser().getId());
+            double inTotal = (double) q2.getSingleResult();
+            
+            budget.setExpendingTotal(exTotal);
+            budget.setIngressTotal(inTotal);
+            budget.setUpdateDate(time);
+            edit(budget);
+        }catch(Exception ex){
+            try {
+                destroy(getActual(Main.getUser().getId()).getId());
+            } catch (NonexistentEntityException ex1) {
+                Logger.getLogger(BudgetJpaController.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }finally{
+            em.close();
+        }
+    }
+    
     public void generateBudget(Timestamp updatedDate, String name, double ingressTotal, double expendingTotal)throws Exception{
         try {
             Budget budget = this.getActual(Main.getUser().getId());
@@ -165,7 +199,7 @@ public class BudgetJpaController implements Serializable {
             
             edit(budget);
         } catch (NonexistentEntityException ex) {
-            ex.printStackTrace();
+            ex.printStackTrace();            
         }
     }
     

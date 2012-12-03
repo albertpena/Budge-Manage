@@ -26,7 +26,8 @@ public interface Constant {
     public String PASS_NOT_MATCH_ERROR = "Claves no Coinciden";
     /*************************Messages And Labels***************************************/
     public String COMBOX_FINANCE_MSG = "Seleccione el tipo de finanza que desea";
-    public String SUCCED_USER_MSG = "Usuario guardado satisfactoriamente";
+    public String SUCCED_MSG = "Registro guardado satisfactoriamente";
+    public String SUCEED_DESTROY_MSG = "Registro Borrado Satisfactoriamente";
     public String FINANCE_SUCCEED_MSG = "Finanza agregada satisfactoriamente";
     public String TITLE = "Budget Friendly";
     public String EXPENDING = "GASTOS";

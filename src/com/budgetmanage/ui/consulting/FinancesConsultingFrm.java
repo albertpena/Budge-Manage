@@ -22,6 +22,8 @@ import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.ComboBoxModel;
@@ -42,7 +44,8 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
     */
     
     Container c;
-    EntityManagerFactory emf;
+    EntityManagerFactory emf;    
+    Finance finance = null;
    
     public FinancesConsultingFrm(String name, Container c) {
         initComponents();
@@ -286,6 +289,11 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -332,6 +340,8 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jPanel1.setVisible(false);
         jPanel2.setVisible(false);
         jButton3.setVisible(false);
+        btnEliminar.setEnabled(false);
+        btnEliminar.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -358,12 +368,14 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
             jLabel3.setVisible(false);            
             jPanel1.setVisible(true);
             jCheckBox1.setSelected(false);
+            btnEliminar.setVisible(false);
         }else{
             jComboBox2.setModel(new DefaultComboBoxModel(new String[]{"Seleccione", "Nombre", "Monto"}));
             jTextField1.setText("");
             jLabel3.setVisible(false);            
             jPanel1.setVisible(true);
             jCheckBox1.setSelected(false);
+            btnEliminar.setVisible(true);
         }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
@@ -540,11 +552,40 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        
+        int rowCount = jTable1.getSelectedRow();
+        Object id = jTable1.getValueAt(rowCount, 0);
+
+        switch(jComboBox1.getSelectedItem().toString().toUpperCase()){
+//                case Constant.BUDGET:{
+//                    BudgetJpaController bjc = new BudgetJpaController(emf);
+//                    finance = bjc.findBudget((Integer)id);
+//                    break;
+//                }
+            case Constant.EXPENDING:{
+                ExpendingJpaController ejc = new ExpendingJpaController(emf);
+                finance = ejc.findExpending((Integer)id);
+                btnEliminar.setEnabled(true);
+                break;
+            }
+            case Constant.INGRESS:{
+                IngressJpaController ijc = new IngressJpaController(emf);
+                finance = ijc.findIngress((Integer)id);
+                btnEliminar.setEnabled(true);
+                break;
+            }
+        }
+        
         if(evt.getClickCount()>1){
-            int rowCount = jTable1.getSelectedRow();
-            Object id = jTable1.getValueAt(rowCount, 0);
-            Finance finance = null;
-            
+            jTable1.setCellSelectionEnabled(false);
+            FinancesMaintenanceFrm fmf = new FinancesMaintenanceFrm(c, finance, jComboBox1.getSelectedIndex());
+            com.budgetmanage.util.Util.addPanel( (JPanel) c, fmf);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+        int rowNum = jTable1.getSelectedRow();
+        if(jTable1.isRowSelected(rowNum)){
             switch(jComboBox1.getSelectedItem().toString().toUpperCase()){
 //                case Constant.BUDGET:{
 //                    BudgetJpaController bjc = new BudgetJpaController(emf);
@@ -553,20 +594,29 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
 //                }
                 case Constant.EXPENDING:{
                     ExpendingJpaController ejc = new ExpendingJpaController(emf);
-                    finance = ejc.findExpending((Integer)id);
+                    try {
+                        ejc.destroy(finance.getId());
+                    } catch (NonexistentEntityException ex) {
+                        Logger.getLogger(FinancesConsultingFrm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     break;
                 }
                 case Constant.INGRESS:{
                     IngressJpaController ijc = new IngressJpaController(emf);
-                    finance = ijc.findIngress((Integer)id);
+                    try {
+                        ijc.destroy(finance.getId());
+                    } catch (NonexistentEntityException ex) {
+                        Logger.getLogger(FinancesConsultingFrm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     break;
                 }
-            }            
-            jTable1.setCellSelectionEnabled(false);
-            FinancesMaintenanceFrm fmf = new FinancesMaintenanceFrm(c, finance, jComboBox1.getSelectedIndex());
-            com.budgetmanage.util.Util.addPanel( (JPanel) c, fmf);
+            }
+            JOptionPane.showMessageDialog(this, SUCEED_DESTROY_MSG, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            reset();
+            BudgetJpaController bjc = new BudgetJpaController(emf);
+            bjc.generateBudget();
         }
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_btnEliminarMouseClicked
 
     private void reset(){
         jLabel3.setVisible(true);
@@ -577,6 +627,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         jTextField1.setText("");
         jLabel1.setVisible(false);
         jComboBox2.setSelectedIndex(0);
+        btnEliminar.setVisible(false);
     }  
     
     private boolean dataValidation(){
