@@ -56,7 +56,7 @@ public interface Constant {
     public double INITIAL_ACCOUNT_VALUE = 30000.00;
     
     /***************************Lists************************************************/
-    public String[] FIXED_EXPENSE = {"Seleccione","Alquiler","Electricidad","Agua","Basura","Alimentacion","Combustible","Educacion","Otros"};
+    public String[] FIXED_EXPENSE = {"Seleccione","Alquiler","Electricidad","Agua","Basura","Alimentacion","Combustible","Educacion","Otros","Transporte"};
     public String[] SERVICES = {"Seleccione","Comunicaciones","Estetica","Prestamo","Tarjetas","Otros"};
     public String[] LEISURE = {"Seleccione","Cine","Familia","Disco","Compras","Imprevistos","Otros"};
     public String[] INGRESS_TYPES = {"Seleccione","Salario","Remesas","Comisiones","Bonificaciones","Extras","Otros"};    
@@ -66,15 +66,15 @@ public interface Constant {
     public String[] EXPENDING_COL_ARRAY = {"Numero", "Nombre", "Categoria", "Monto", "Modificacion"};
     public String[] BUDGET_TABLE_COLS = {"ID","Nombre","Ingresos", "Gastos", "Restante", "Generado","Actualizado"};
     public String[]CATEGORIES = {"Seleccione", "Gastos fijos", "Servicios", "Ocio y Demas"};
-    public String[] BANKS = {"Seleccione","BHD","APAP","ASOCION CIBAO","ALNAP","SCOTIABANK","VIMENCA","BANCO POPULAR","Banco Leon","Santa Cruz",
+    public String[] BANKS = {"Seleccione","BHD","APAP","ASOC. CIBAO","ALNAP","SCOTIABANK","VIMENCA","BANCO POPULAR","Banco Leon","Santa Cruz",
                              "BANRESERVAS"};
     
    /************************Colors**************************************************/ 
     public Color BKG = new Color(204,255,204);
     public Color FIXED_EXPENSE_COLOR = Color.BLUE;
-    public Color SERVICES_COLOR = Color.WHITE;
+    public Color SERVICES_COLOR = new Color(0, 102, 102);
     public Color LEISURE_COLOR = Color.RED;
     public Font ALL_FONTS = new Font("Tahoma", Font.PLAIN, 11);
-    public Font TITLE_FONT = new Font("Arial",Font.BOLD,11);
+    public Font TITLE_FONT = new Font("Arial",Font.BOLD,12);
     
 }

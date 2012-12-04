@@ -170,6 +170,7 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
 
         jLabel5.setText("Monto");
 
+        jButton1.setMnemonic(KeyEvent.VK_ENTER);
         jButton1.setText("Guardar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

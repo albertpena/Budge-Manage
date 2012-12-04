@@ -57,6 +57,7 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(Constant.BKG);
 
@@ -118,11 +119,11 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(66, 66, 66)
-                .addComponent(txtCcuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtCcuenta)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 103, Short.MAX_VALUE)
                 .addComponent(btnEliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnConsultar))
@@ -169,6 +170,9 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
         });
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel2.setText("Doble-click para editar");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -177,13 +181,19 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(347, 347, 347))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(327, 327, 327))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -193,9 +203,9 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -205,8 +215,8 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 331, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 318, Short.MAX_VALUE))
         );
 
         jPanel2.setVisible(false);
@@ -217,7 +227,7 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
           JOptionPane.showMessageDialog(this, "Favor de ingresar datos validos", "Error", JOptionPane.ERROR_MESSAGE);          
       }else {
           getAccount(false);
-          jCheckBox1.setEnabled(false);
+          //jCheckBox1.setEnabled(false);
       }  
     }//GEN-LAST:event_btnConsultarActionPerformed
 
@@ -280,32 +290,42 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
             }else{
                 accounts = ajc.findAccountByNo(txtCcuenta.getText().trim().toString());
             }
-            
-            String[] colums = {"Cuenta", "Banco","Balance"};
-            Object[][] row = new Object[accounts.size()][colums.length];
-            int e;
-            for(int i=0; i < accounts.size(); i++){
-                e = 0;
-                Account acc =  accounts.get(i);
-                row[i][e] = acc.getAccountNumber();
-                e++;
-                row[i][e] = acc.getAccountBank();
-                e++;
-                row[i][e] = acc.getBalance();
-            }
-            DefaultTableModel dtm = new DefaultTableModel(row, colums){
-                @Override
-                public boolean isCellEditable(int i, int i1) {
-                    return false;
-                }                
-            };
-            jTable1.setModel(dtm);
-            jPanel2.setVisible(true);
+            if(accounts.isEmpty()){
+                JOptionPane.showMessageDialog(this, "No tiene cuentas registradas", "Error", JOptionPane.ERROR_MESSAGE);
+                reset();
+            }else{
+                String[] colums = {"Cuenta", "Banco","Balance"};
+                Object[][] row = new Object[accounts.size()][colums.length];
+                int e;
+                for(int i=0; i < accounts.size(); i++){
+                    e = 0;
+                    Account acc =  accounts.get(i);
+                    row[i][e] = acc.getAccountNumber();
+                    e++;
+                    row[i][e] = acc.getAccountBank();
+                    e++;
+                    row[i][e] = acc.getBalance();
+                }
+                DefaultTableModel dtm = new DefaultTableModel(row, colums){
+                    @Override
+                    public boolean isCellEditable(int i, int i1) {
+                        return false;
+                    }                
+                };
+                jTable1.setModel(dtm);
+                jPanel2.setVisible(true);
+            }            
         }catch(NonexistentEntityException nee){
             JOptionPane.showMessageDialog(this, nee.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            reset();
         }
-        
-        
+    }
+    
+    private void reset(){
+        jCheckBox1.setSelected(false);
+        jCheckBox1.setEnabled(true);
+        txtCcuenta.setText("");
+        btnConsultar.setEnabled(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsultar;
@@ -313,6 +333,7 @@ public class ConsultaAccount extends javax.swing.JPanel implements Constant{
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

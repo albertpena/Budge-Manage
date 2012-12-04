@@ -67,14 +67,14 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
 
         jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(204, 255, 204));
-        jLabel13.setText("Formulario de Creacion de Usuarios");
+        jLabel13.setText("Crear de Usuarios");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(162, 162, 162)
                 .addComponent(jLabel13)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -87,34 +87,34 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
         );
 
         jPanel1.setBackground(com.budgetmanage.util.Constant.BKG);
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Personal Information"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, TITLE_FONT));
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel1.setFont(Constant.ALL_FONTS);
         jLabel1.setText("Nombre");
         jLabel1.setName(""); // NOI18N
 
         txtName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel3.setFont(Constant.ALL_FONTS);
         jLabel3.setText("Apellidos");
         jLabel3.setName(""); // NOI18N
 
         txtLaName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel2.setFont(Constant.ALL_FONTS);
         jLabel2.setText("Clave Secreta");
         jLabel2.setName(""); // NOI18N
 
         txtPassword.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel4.setFont(Constant.ALL_FONTS);
         jLabel4.setText("Nombre Usuario");
         jLabel4.setName(""); // NOI18N
 
         txtUserName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         btnCancel.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
-        btnCancel.setText("Cancel");
+        btnCancel.setText("Volver");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -122,7 +122,7 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
         });
 
         btnCreate.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
-        btnCreate.setText("Create");
+        btnCreate.setText("Crear");
         btnCreate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCreateMouseClicked(evt);
@@ -157,7 +157,7 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
                                 .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(txtUserName))))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +193,7 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

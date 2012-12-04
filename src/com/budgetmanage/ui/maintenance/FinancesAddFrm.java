@@ -10,8 +10,8 @@ import com.budgetmanage.modeler.exceptions.PreexistingEntityException;
 import com.budgetmanage.ui.Main;
 import com.budgetmanage.util.Constant;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -103,6 +103,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
             }
         });
 
+        jButton1.setMnemonic(KeyEvent.VK_ENTER);
         jButton1.setText("Guardar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -376,11 +377,12 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
         if(dataValidation(name, type, priority, value, process)){
             
             EntityManagerFactory emf = Persistence.createEntityManagerFactory(P_UNIT);
+            ExpendingJpaController ejpa = new ExpendingJpaController(emf);
+            IngressJpaController ijpa = new IngressJpaController(emf);
+            BudgetJpaController bjc = new BudgetJpaController(emf);
             switch(process.toUpperCase()){            
                 case EXPENDING:{
-                    Expending expending = new Expending(Main.getUser(), name, value, date, date, priority, type);                 
-                    ExpendingJpaController ejpa = new ExpendingJpaController(emf);
-
+                    Expending expending = new Expending(Main.getUser(), name, value, date, date, priority, type);
                 try {
                     //Database saving                
                     ejpa.create(expending);                 
@@ -391,9 +393,7 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
                     break;
                 }
                 case INGRESS:{
-                     Ingress ingress = new Ingress(Main.getUser(), name, value, date, date, priority, type);                 
-                     IngressJpaController ijpa = new IngressJpaController(emf);
-
+                     Ingress ingress = new Ingress(Main.getUser(), name, value, date, date, priority, type);
                     try {
                         //Saving on DB
                         ijpa.create(ingress);
@@ -411,9 +411,11 @@ public class FinancesAddFrm extends javax.swing.JPanel implements Constant {
                 
                 reset();               
                 jComboBox1.setSelectedIndex(0);
-                jLabel11.setVisible(true);
-                BudgetJpaController bjc = new BudgetJpaController(emf);
-                bjc.generateBudget();
+                jLabel11.setVisible(true);                
+                
+                if(!(bjc.findAll().isEmpty())){
+                    bjc.generateBudget();
+                }                
             }
         }
     }//GEN-LAST:event_jButton1MouseClicked

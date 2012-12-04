@@ -11,6 +11,7 @@ import com.budgetmanage.ui.Main;
 import com.budgetmanage.ui.consulting.MainPanel;
 import com.budgetmanage.util.Constant;
 import com.budgetmanage.util.Util;
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
@@ -69,25 +70,27 @@ public class UserMaintenanceFrm extends javax.swing.JPanel implements Constant {
         btnSaveChange = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
         txtPasswordConfirm = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
 
         setBackground(BKG);
 
         jPanel1.setBackground(BKG);
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Modificar Información", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, TITLE_FONT));
 
         txtUserName.setEnabled(false);
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel1.setFont(ALL_FONTS);
         jLabel1.setText("Nombre Usuario");
 
-        jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel2.setFont(ALL_FONTS);
         jLabel2.setText("Apellidos");
 
-        jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel4.setFont(ALL_FONTS);
         jLabel4.setText("Clave Secreta");
 
-        jLabel5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel5.setFont(ALL_FONTS);
         jLabel5.setText("Nombre");
 
         btnCancel.setText("Cancelar");
@@ -97,6 +100,7 @@ public class UserMaintenanceFrm extends javax.swing.JPanel implements Constant {
             }
         });
 
+        btnSaveChange.setMnemonic(KeyEvent.VK_ENTER);
         btnSaveChange.setText("Guardar");
         btnSaveChange.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -113,37 +117,41 @@ public class UserMaintenanceFrm extends javax.swing.JPanel implements Constant {
 
         txtPasswordConfirm.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
+        jLabel3.setFont(ALL_FONTS);
+        jLabel3.setText("Confirmar Clave");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(118, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSaveChange))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtName)
                             .addComponent(txtLastName)
                             .addComponent(txtUserName)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                            .addComponent(txtPasswordConfirm))))
-                .addGap(13, 13, 13))
+                            .addComponent(txtPassword)
+                            .addComponent(txtPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -160,12 +168,14 @@ public class UserMaintenanceFrm extends javax.swing.JPanel implements Constant {
                     .addComponent(jLabel4)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
                     .addComponent(btnSaveChange))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 204, 255));
@@ -202,7 +212,7 @@ public class UserMaintenanceFrm extends javax.swing.JPanel implements Constant {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 134, Short.MAX_VALUE)))
+                        .addGap(0, 122, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -212,7 +222,7 @@ public class UserMaintenanceFrm extends javax.swing.JPanel implements Constant {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addContainerGap(226, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -234,7 +244,7 @@ public class UserMaintenanceFrm extends javax.swing.JPanel implements Constant {
                 emf.close();
             }
             JOptionPane.showMessageDialog(null, SUCCED_MSG, "Transaccion completada", JOptionPane.PLAIN_MESSAGE);
-            MainPanel main = new MainPanel();
+            MainPanel main = new MainPanel(jp);
             Util.addPanel(jp, main);
 
         } else {
@@ -247,7 +257,7 @@ public class UserMaintenanceFrm extends javax.swing.JPanel implements Constant {
                 Constant.TITLE, JOptionPane.YES_NO_OPTION);
         //If [opt] had '1' value is the option yes and I show the login JPanel
         if (opt == 0) {
-            com.budgetmanage.util.Util.addPanel(jp, new MainPanel());
+            com.budgetmanage.util.Util.addPanel(jp, new MainPanel(jp));
         }
     }//GEN-LAST:event_btnCancelActionPerformed
 
@@ -260,6 +270,7 @@ public class UserMaintenanceFrm extends javax.swing.JPanel implements Constant {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;

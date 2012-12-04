@@ -66,7 +66,6 @@ public class Main extends javax.swing.JFrame implements Constant{
         jMenuItem23 = new javax.swing.JMenuItem();
         jMenuItem24 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
         jMenuItem33 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -85,7 +84,7 @@ public class Main extends javax.swing.JFrame implements Constant{
         jPanel1.setBounds(0, 0, 600, 550);
         jPanel1.setPreferredSize(this.getPreferredSize());
 
-        jMenu4.setText("Inicio");
+        jMenu4.setText("Presupuesto");
         jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu4MouseClicked(evt);
@@ -142,9 +141,6 @@ public class Main extends javax.swing.JFrame implements Constant{
         jMenuBar1.add(jMenu3);
 
         jMenu1.setText("Mantenimientos");
-
-        jMenuItem19.setText("Cuentas");
-        jMenu1.add(jMenuItem19);
 
         jMenuItem20.setText("Finanzas");
         jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
@@ -204,7 +200,7 @@ public class Main extends javax.swing.JFrame implements Constant{
     }//GEN-LAST:event_jMenu5MouseClicked
 
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
-       MainPanel main = new MainPanel();
+       MainPanel main = new MainPanel(jPanel1);
        com.budgetmanage.util.Util.addPanel(jPanel1,main);
        jMenu4.setSelected(false);
     }//GEN-LAST:event_jMenu4MouseClicked
@@ -264,7 +260,6 @@ public class Main extends javax.swing.JFrame implements Constant{
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;

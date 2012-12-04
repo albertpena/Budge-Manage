@@ -80,6 +80,7 @@ public class LoanPanel extends javax.swing.JPanel implements Constant{
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnSend = new javax.swing.JButton();
+        btnClean = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -146,13 +147,20 @@ public class LoanPanel extends javax.swing.JPanel implements Constant{
         jLabel1.setPreferredSize(new java.awt.Dimension(40, 20));
 
         jLabel2.setFont(ALL_FONTS);
-        jLabel2.setText("Cuotas");
+        jLabel2.setText("Meses");
 
         btnSend.setBackground(new java.awt.Color(204, 204, 204));
         btnSend.setText("Calcular");
         btnSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSendActionPerformed(evt);
+            }
+        });
+
+        btnClean.setText("Limpiar");
+        btnClean.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCleanMouseClicked(evt);
             }
         });
 
@@ -175,7 +183,10 @@ public class LoanPanel extends javax.swing.JPanel implements Constant{
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnSend))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnClean)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSend)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -194,7 +205,9 @@ public class LoanPanel extends javax.swing.JPanel implements Constant{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSend)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSend)
+                    .addComponent(btnClean))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -405,7 +418,14 @@ public class LoanPanel extends javax.swing.JPanel implements Constant{
         clear();
     }//GEN-LAST:event_cboxBancosItemStateChanged
 
+    private void btnCleanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCleanMouseClicked
+        txtAmount.setText("");
+        txtShares.setText("");
+        cboxBancos.setSelectedIndex(0);
+    }//GEN-LAST:event_btnCleanMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClean;
     private javax.swing.JButton btnSend;
     private javax.swing.JComboBox cboxBancos;
     private javax.swing.JLabel jLabel1;

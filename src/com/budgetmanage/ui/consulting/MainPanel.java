@@ -5,17 +5,19 @@
 package com.budgetmanage.ui.consulting;
 
 import com.budgetmanage.entities.Budget;
-import com.budgetmanage.entities.Finance;
 import com.budgetmanage.modeler.BudgetJpaController;
 import com.budgetmanage.modeler.ExpendingJpaController;
 import com.budgetmanage.modeler.IngressJpaController;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
 import com.budgetmanage.ui.Main;
+import com.budgetmanage.ui.maintenance.FinancesAddFrm;
 import com.budgetmanage.util.Constant;
 import com.budgetmanage.util.LineChart;
 import com.budgetmanage.util.PieChart;
 import com.budgetmanage.util.PieSlice;
 import java.awt.BorderLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,16 +40,23 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
      */
     EntityManagerFactory emf;
     BudgetJpaController bjc;
+    ExpendingJpaController ejc;
+    IngressJpaController ijc;
+    JPanel panel;
     
-    public MainPanel() {
+    public MainPanel(JPanel panel) {
         initComponents();        
         jLabel13.setText(MAIN_PANEL_TITLE);
-        jLabel4.setText("Bienvenido "+Main.getUser().getNombre()+" "+Main.getUser().getApellidos());
+        String name = Main.getUser().getNombre();
+        String lastName = Main.getUser().getApellidos();
+        jLabel4.setText("Bienvenido "+name+" "+lastName);
         emf = Persistence.createEntityManagerFactory(PU);
         bjc = new BudgetJpaController(emf);
+        ijc = new IngressJpaController(emf);
+        ejc = new ExpendingJpaController(emf);
         
         loadWindow();
-        
+        this.panel = panel;
     }
 
     /**
@@ -83,6 +93,12 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         resumeExPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        financesPanel = new javax.swing.JPanel();
+        ckbIngress = new javax.swing.JCheckBox();
+        ckbExpendings = new javax.swing.JCheckBox();
+        btnGenerarI = new javax.swing.JButton();
+        btnGenerarG = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setBackground(Constant.BKG);
 
@@ -90,6 +106,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         resumeBuPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resumen del Presupuesto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 0, 0))); // NOI18N
 
         resumeTable.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 255, 255)));
+        resumeTable.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         resumeTable.setGridColor(new java.awt.Color(204, 255, 204));
         jScrollPane1.setViewportView(resumeTable);
 
@@ -139,11 +156,12 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         );
 
         generatePanel.setBackground(Constant.BKG);
-        generatePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Generar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        generatePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Generar Presupuesto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, TITLE_FONT, new java.awt.Color(0, 0, 0)));
         generatePanel.setToolTipText("Generar presupuesto");
 
         nameTextField.setToolTipText("Nombre Del Presupuesto");
 
+        generateButton.setMnemonic(KeyEvent.VK_ENTER);
         generateButton.setText("Generar");
         generateButton.setToolTipText("Generar presupuesto");
         generateButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -153,7 +171,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Nombre");
+        jLabel2.setText("Nombre del presupuesto");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Semanal", "Quincenal", "Mensual" }));
         jComboBox1.setToolTipText("Tiempo de vida del presupuesto");
@@ -170,13 +188,12 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                 .addGroup(generatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(generatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, generatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jComboBox1, 0, 107, Short.MAX_VALUE)
                         .addComponent(nameTextField))
-                    .addComponent(generateButton, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(generateButton, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
         generatePanelLayout.setVerticalGroup(
             generatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,6 +227,82 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("No tiene Presupuestos generados");
 
+        financesPanel.setBackground(BKG);
+        financesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registrar Finanzas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, TITLE_FONT));
+        financesPanel.setToolTipText("Debe generar ingresos o gastos para iniciar");
+
+        ckbIngress.setBackground(BKG);
+        ckbIngress.setText("Ingresos registrados");
+        ckbIngress.setEnabled(false);
+        ckbIngress.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ckbIngressItemStateChanged(evt);
+            }
+        });
+
+        ckbExpendings.setBackground(BKG);
+        ckbExpendings.setText("Gastos registrados");
+        ckbExpendings.setEnabled(false);
+        ckbExpendings.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ckbExpendingsItemStateChanged(evt);
+            }
+        });
+
+        btnGenerarI.setText("Generar");
+        btnGenerarI.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGenerarIMouseClicked(evt);
+            }
+        });
+
+        btnGenerarG.setText("Generar");
+        btnGenerarG.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGenerarGMouseClicked(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel6.setText("Generar los conceptos indicados");
+        jLabel6.setToolTipText("");
+
+        javax.swing.GroupLayout financesPanelLayout = new javax.swing.GroupLayout(financesPanel);
+        financesPanel.setLayout(financesPanelLayout);
+        financesPanelLayout.setHorizontalGroup(
+            financesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(financesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(financesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(financesPanelLayout.createSequentialGroup()
+                        .addComponent(ckbExpendings)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGenerarG))
+                    .addGroup(financesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(financesPanelLayout.createSequentialGroup()
+                            .addComponent(ckbIngress)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btnGenerarI))))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        financesPanelLayout.setVerticalGroup(
+            financesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, financesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(financesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ckbIngress)
+                    .addComponent(btnGenerarI))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(financesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ckbExpendings)
+                    .addComponent(btnGenerarG))
+                .addGap(24, 24, 24))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -219,20 +312,24 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(resumeExPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 651, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(resumeBuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(resumeBuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(flowPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(generatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(generatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(resumeExPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10))))
+                                .addComponent(financesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,14 +344,18 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                         .addComponent(jLabel1)))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(generatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(resumeBuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(flowPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(resumeExPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(327, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(generatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(resumeBuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addComponent(flowPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(resumeExPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(279, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(financesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         resumeBuPanel.setVisible(false);
@@ -265,6 +366,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         resumeExPanel.setBackground(Constant.BKG);
         jLabel3.setVisible(false);
         jLabel1.setVisible(false);
+        financesPanel.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void generateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generateButtonMouseClicked
@@ -278,6 +380,33 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
             generateBudget(name);
         }
     }//GEN-LAST:event_generateButtonMouseClicked
+
+    private void ckbIngressItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ckbIngressItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            btnGenerarI.setEnabled(false);
+        }else{
+            btnGenerarI.setEnabled(false);
+        }
+    }//GEN-LAST:event_ckbIngressItemStateChanged
+
+    private void ckbExpendingsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ckbExpendingsItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            btnGenerarG.setEnabled(false);
+        }else{
+            btnGenerarG.setEnabled(false);
+        }
+    }//GEN-LAST:event_ckbExpendingsItemStateChanged
+
+    private void btnGenerarIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarIMouseClicked
+        FinancesAddFrm faf = new FinancesAddFrm(2);
+        com.budgetmanage.util.Util.addPanel(panel, faf);
+    }//GEN-LAST:event_btnGenerarIMouseClicked
+
+    private void btnGenerarGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarGMouseClicked
+        FinancesAddFrm faf = new FinancesAddFrm(1);
+        com.budgetmanage.util.Util.addPanel(panel, faf);
+    }//GEN-LAST:event_btnGenerarGMouseClicked
+    
     private void generateBudget(String name){
         //Defining attiributes for the budgets.
             boolean isOk = true;
@@ -286,8 +415,6 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
             int days = 0;
             Date actualDate = new Date();
             Timestamp date = new Timestamp(actualDate.getTime());
-            ExpendingJpaController ejc = new ExpendingJpaController(emf);
-            IngressJpaController ijc = new IngressJpaController(emf);
             
             switch(jComboBox1.getSelectedIndex()){
                 case 1:{
@@ -305,6 +432,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
             }
             expendigTotal = ejc.getExpendingTotal();
             ingressTotal = ijc.getIngressTotal();
+            
             if(expendigTotal == 0){
                 JOptionPane.showMessageDialog(this, "No tiene gastos registrados", "Error", JOptionPane.ERROR_MESSAGE);
                 isOk = false;
@@ -328,29 +456,54 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
     
     private void loadWindow(){
         Budget budget;
-        try {
-            budget = bjc.getActual(Main.getUser().getId());
-            String generatedDate = new SimpleDateFormat(Constant.FORMAT_DATE).format(budget.getGenerateDate());
-            String updatedDate = new SimpleDateFormat(Constant.FORMAT_DATE).format(budget.getUpdateDate());
-            DefaultTableModel model  = new DefaultTableModel(BUDGET_TABLE_COLS, 1);
-            resumeTable.setModel(model);
-            model.insertRow(0, new Object[]{budget.getId(),budget.getName(),
-                budget.getIngressTotal(), budget.getExpendingTotal(), (budget.getIngressTotal() - budget.getExpendingTotal()), generatedDate, updatedDate});
-            resumeTable.updateUI();
-            
-            if(budget.getExpendingTotal() > budget.getIngressTotal()){
-                jLabel3.setVisible(true);
+        double expendings = ejc.getExpendingTotal();
+        double ingresses = ijc.getIngressTotal();
+        boolean generate = true;
+        
+        if(expendings == 0){            
+            ckbExpendings.setSelected(false);
+            generate = false;
+        }else{
+            ckbExpendings.setSelected(true);                    
+        }
+        if(ingresses == 0){            
+            ckbIngress.setSelected(false);
+            generate = false;
+        }else{
+            ckbIngress.setSelected(true);
+        }
+        
+        if(generate){
+            try {
+                budget = bjc.getActual(Main.getUser().getId());
+                
+                String generatedDate = new SimpleDateFormat(Constant.FORMAT_DATE).format(budget.getGenerateDate());
+                String updatedDate = new SimpleDateFormat(Constant.FORMAT_DATE).format(budget.getUpdateDate());
+                DefaultTableModel model  = new DefaultTableModel(BUDGET_TABLE_COLS, 1);
+                
+                resumeTable.setModel(model);
+                model.insertRow(0, new Object[]{budget.getId(),budget.getName(),
+                    budget.getIngressTotal(), budget.getExpendingTotal(), (budget.getIngressTotal() - budget.getExpendingTotal()), generatedDate, updatedDate});
+                resumeTable.updateUI();
+
+                if(budget.getExpendingTotal() > budget.getIngressTotal()){
+                    jLabel3.setVisible(true);
+                }
+                resumeBuPanel.setVisible(true);
+                flowPanel.setVisible(true);
+                resumeExPanel.setVisible(true);
+                generatePanel.setVisible(false); 
+
+                fillExpendingChart(budget.getLifeDays());
+                this.updateUI();
+            } catch (NonexistentEntityException ex) {
+                    jLabel1.setVisible(true);
+                    jLabel1.setText("No tiene Presupuestos generados");
+                    generatePanel.setVisible(true);
             }
-            resumeBuPanel.setVisible(true);
-            flowPanel.setVisible(true);
-            resumeExPanel.setVisible(true);
-            generatePanel.setVisible(false); 
-            
-            fillExpendingChart(budget.getLifeDays());
-            this.updateUI();
-        } catch (NonexistentEntityException ex) {
-                jLabel1.setVisible(true);
-                generatePanel.setVisible(true);
+        }else{
+            financesPanel.setVisible(true);
+            jLabel1.setText("Debe registrar sus finanzas para iniciar");
         }
         
     }
@@ -391,12 +544,17 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
     private javax.persistence.EntityManager BudgeManagePUEntityManager;
     private java.util.List<com.budgetmanage.entities.Account> accountList;
     private javax.persistence.Query accountQuery;
+    private javax.swing.JButton btnGenerarG;
+    private javax.swing.JButton btnGenerarI;
     private java.util.List<com.budgetmanage.entities.Budget> budgetList;
     private java.util.List<com.budgetmanage.entities.Budget> budgetList1;
     private java.util.List<com.budgetmanage.entities.Budget> budgetList2;
     private javax.persistence.Query budgetQuery;
     private javax.persistence.Query budgetQuery1;
     private javax.persistence.Query budgetQuery2;
+    private javax.swing.JCheckBox ckbExpendings;
+    private javax.swing.JCheckBox ckbIngress;
+    private javax.swing.JPanel financesPanel;
     private javax.swing.JPanel flowPanel;
     private javax.swing.JButton generateButton;
     private javax.swing.JPanel generatePanel;
@@ -407,6 +565,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameTextField;

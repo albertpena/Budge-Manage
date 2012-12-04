@@ -218,7 +218,7 @@ public class ExpendingJpaController implements Serializable {
             expendingTotal = (Double) q.getSingleResult();  
             return expendingTotal;
         }catch(Exception ex){
-            ex.printStackTrace();
+            expendingTotal = 0;
         }finally{
             em.close();
             return expendingTotal;

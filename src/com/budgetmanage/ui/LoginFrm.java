@@ -8,6 +8,7 @@ import com.budgetmanage.util.Constant;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.ImageIcon;
@@ -51,15 +52,16 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
         setBackground(BKG);
 
         ContainerPanel.setBackground(BKG);
-        ContainerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Accesar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
+        ContainerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sistema De Prespuestos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, TITLE_FONT, java.awt.Color.black));
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText("Usuario");
 
         txtPassword.setName(""); // NOI18N
 
-        btnAceptar.setText("Aceptar");
-        btnAceptar.setBorder(new javax.swing.border.MatteBorder(null));
+        btnAceptar.setMnemonic(KeyEvent.VK_ENTER);
+        btnAceptar.setText("Ingresar");
+        btnAceptar.setBorder(null);
         btnAceptar.setMaximumSize(new java.awt.Dimension(57, 17));
         btnAceptar.setMinimumSize(new java.awt.Dimension(57, 17));
         btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -68,15 +70,13 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel2.setText("Clave");
 
-        btnRegistrar.setBackground(new java.awt.Color(102, 102, 102));
+        btnRegistrar.setBackground(new java.awt.Color(255, 255, 255));
         btnRegistrar.setForeground(new java.awt.Color(0, 0, 204));
         btnRegistrar.setText("Crear Usuario");
-        btnRegistrar.setBorder(new javax.swing.border.MatteBorder(null));
-        btnRegistrar.setBorderPainted(false);
-        btnRegistrar.setContentAreaFilled(false);
+        btnRegistrar.setBorder(null);
         btnRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegistrarMouseClicked(evt);
@@ -88,22 +88,19 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
         ContainerPanelLayout.setHorizontalGroup(
             ContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ContainerPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(ContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
                 .addGroup(ContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ContainerPanelLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70)
-                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(ContainerPanelLayout.createSequentialGroup()
-                        .addGroup(ContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(ContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                            .addComponent(txtUsuario))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                        .addGap(87, 87, 87)
+                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         ContainerPanelLayout.setVerticalGroup(
             ContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,11 +113,11 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
                 .addGroup(ContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(ContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 204, 255));
@@ -137,7 +134,7 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(213, 213, 213)
                 .addComponent(jLabel13)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(336, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,21 +154,21 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
+                .addGap(133, 133, 133)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ContainerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblValidatorMessage))
-                .addContainerGap(174, Short.MAX_VALUE))
+                    .addComponent(lblValidatorMessage)
+                    .addComponent(ContainerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
+                .addGap(53, 53, 53)
                 .addComponent(ContainerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblValidatorMessage)
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -205,7 +202,7 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
             if (isOk) {
                 Main.setUser(Currentuser);
                 frame.getJMenuBar().setVisible(true);
-                MainPanel main = new MainPanel();
+                MainPanel main = new MainPanel((JPanel)con);
                 com.budgetmanage.util.Util.addPanel((JPanel)con,main);
             } else {
                 JOptionPane.showMessageDialog(this, INVALID_USER_ERROR, "Error", JOptionPane.ERROR_MESSAGE);
@@ -226,7 +223,7 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
         txtPassword.setText("");
         txtUsuario.setText("");
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContainerPanel;
     private javax.swing.JButton btnAceptar;
