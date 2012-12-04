@@ -2,18 +2,21 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.budgetmanage.ui.user;
+package com.budgetmanage.ui.maintenance;
 
 import com.budgetmanage.entities.BudgetUser;
 import com.budgetmanage.modeler.UserJpaController;
 import com.budgetmanage.ui.LoginFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.Container;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.text.BadLocationException;
 
 /**
  *
@@ -100,6 +103,11 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
         jLabel3.setName(""); // NOI18N
 
         txtLaName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtLaName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtLaNameKeyReleased(evt);
+            }
+        });
 
         jLabel2.setFont(Constant.ALL_FONTS);
         jLabel2.setText("Clave Secreta");
@@ -242,11 +250,26 @@ public class RegisterFrm extends javax.swing.JPanel implements Constant {
                 LoginFrm login = new LoginFrm(container, frame);
                com.budgetmanage.util.Util.addPanel((JPanel)container, login);
             } else {
-                JOptionPane.showMessageDialog(null, "Ha occurido un error",
+                try {
+                    if(userController.getUser(txtUserName.getText()) != null){
+                         JOptionPane.showMessageDialog(null, "Pre-existe un usuario con ese nombre.",
                         "Error al Insertar", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(RegisterFrm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
         }
     }//GEN-LAST:event_btnCreateMouseClicked
+
+    private void txtLaNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLaNameKeyReleased
+         try {
+            txtUserName.setText(txtName.getText(0, 1)+txtLaName.getText());
+        } catch (BadLocationException ex) {
+            Logger.getLogger(RegisterFrm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtLaNameKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;

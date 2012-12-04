@@ -4,6 +4,7 @@
  */
 package com.budgetmanage.ui;
 
+import com.budgetmanage.ui.consulting.ConsultaAccount;
 import com.budgetmanage.entities.BudgetUser;
 import com.budgetmanage.ui.Consulting.FinancesConsultingFrm;
 import com.budgetmanage.ui.consulting.MainPanel;

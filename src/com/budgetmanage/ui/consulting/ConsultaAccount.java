@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.budgetmanage.ui;
+package com.budgetmanage.ui.consulting;
 
+import com.budgetmanage.ui.maintenance.MantenimientoAccount;
 import com.budgetmanage.entities.Account;
 import com.budgetmanage.modeler.AccountJpaController;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;

@@ -3,7 +3,7 @@ package com.budgetmanage.ui;
 import com.budgetmanage.entities.BudgetUser;
 import com.budgetmanage.modeler.UserJpaController;
 import com.budgetmanage.ui.consulting.MainPanel;
-import com.budgetmanage.ui.user.RegisterFrm;
+import com.budgetmanage.ui.maintenance.RegisterFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.Container;
 import java.awt.Graphics;
@@ -58,6 +58,11 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
         jLabel1.setText("Usuario");
 
         txtPassword.setName(""); // NOI18N
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+        });
 
         btnAceptar.setMnemonic(KeyEvent.VK_ENTER);
         btnAceptar.setText("Ingresar");
@@ -218,6 +223,12 @@ public class LoginFrm extends javax.swing.JPanel implements Constant {
         RegisterFrm register = new RegisterFrm(con, frame);
         com.budgetmanage.util.Util.addPanel((JPanel)con, register);
     }//GEN-LAST:event_btnRegistrarMouseClicked
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        if(evt.getKeyCode() == 10){
+           btnAceptarMouseClicked(null);
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
     private void clean(){
         txtPassword.setText("");

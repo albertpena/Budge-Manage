@@ -7,8 +7,11 @@ package com.budgetmanage.modeler;
 import com.budgetmanage.entities.BudgetUser;
 import com.budgetmanage.entities.Finance;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
+import com.budgetmanage.modeler.exceptions.PreexistingEntityException;
 import com.budgetmanage.util.Constant;
 import java.io.Serializable;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.SQLNonTransientException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -33,9 +36,10 @@ public class UserJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public boolean create(BudgetUser user) {
-        EntityManager em = null;
+    public boolean create(BudgetUser user){
         try {
+            EntityManager em = null;
+
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(user);
@@ -45,6 +49,7 @@ public class UserJpaController implements Serializable {
             }
             return true;
         } catch (Exception e) {
+           
         }
         return false;
     }
@@ -71,44 +76,44 @@ public class UserJpaController implements Serializable {
             }
         }
     }
-    
-    public List<Finance> getFinaces(Long id, String what)throws Exception{
+
+    public List<Finance> getFinaces(Long id, String what) throws Exception {
         EntityManager em = getEntityManager();
         List<Finance> finances = new ArrayList<>();
-        String  query = "Select * from "+what.toUpperCase().trim()+" where BUDGETUSER_ID = "+id;
+        String query = "Select * from " + what.toUpperCase().trim() + " where BUDGETUSER_ID = " + id;
         Query q = null;
-        
-        try{
+
+        try {
             q = em.createNativeQuery(query);
             finances = q.getResultList();
-            
-            if(finances.isEmpty()){
-                throw new Exception(Constant.EXIST_ERROR_MSG);
-            }            
-            return finances;
-        }finally{            
-            em.close();            
-        }
-    }
-    
-    public List<Finance> findFinanceByName(String name, Long id, String what)throws Exception{
-        
-        List<Finance> finances = null;
-        EntityManager em = getEntityManager();
-        Query q = null;
-        String query = "Select * from"+what.toUpperCase()+" where BUDGETUSER_ID = "+id+" and EXPENDING_NAME like '%"+name+"%'";
-        try{
-            q = em.createNativeQuery(query);
-            finances = q.getResultList(); 
-            if(finances.isEmpty()){
+
+            if (finances.isEmpty()) {
                 throw new Exception(Constant.EXIST_ERROR_MSG);
             }
             return finances;
-        }finally{
+        } finally {
             em.close();
         }
     }
-    
+
+    public List<Finance> findFinanceByName(String name, Long id, String what) throws Exception {
+
+        List<Finance> finances = null;
+        EntityManager em = getEntityManager();
+        Query q = null;
+        String query = "Select * from" + what.toUpperCase() + " where BUDGETUSER_ID = " + id + " and EXPENDING_NAME like '%" + name + "%'";
+        try {
+            q = em.createNativeQuery(query);
+            finances = q.getResultList();
+            if (finances.isEmpty()) {
+                throw new Exception(Constant.EXIST_ERROR_MSG);
+            }
+            return finances;
+        } finally {
+            em.close();
+        }
+    }
+
     public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -162,7 +167,7 @@ public class UserJpaController implements Serializable {
             em.close();
         }
     }
-    
+
     public int getUserCount() {
         EntityManager em = getEntityManager();
         try {
@@ -175,32 +180,32 @@ public class UserJpaController implements Serializable {
             em.close();
         }
     }
-    
-    public BudgetUser isUserValid(String username, String password)throws Exception{
+
+    public BudgetUser isUserValid(String username, String password) throws Exception {
         EntityManager em = getEntityManager();
         BudgetUser user = new BudgetUser();
         Query q = null;
-        String query = "select * from NVELASQUEZ.BUDGETUSER c where c.USERNAME = '"+username+"' and PASSWORD = '"+password+"'";
-        try{
-           q = em.createNativeQuery(query, BudgetUser.class);            
-           user = (BudgetUser)q.getSingleResult();
-           
-        }catch(Exception ex){
+        String query = "select * from NVELASQUEZ.BUDGETUSER c where c.USERNAME = '" + username + "' and PASSWORD = '" + password + "'";
+        try {
+            q = em.createNativeQuery(query, BudgetUser.class);
+            user = (BudgetUser) q.getSingleResult();
+
+        } catch (Exception ex) {
             throw new Exception(Constant.INVALID_USER_ERROR);
-        }
-        finally{
+        } finally {
             em.close();
         }
         return user;
     }
-     public BudgetUser getUser(String nameUser) throws Exception {
+
+    public BudgetUser getUser(String nameUser) throws Exception {
         EntityManager em = getEntityManager();
         BudgetUser actBU = new BudgetUser();
-        String consulta = String.format("Select * from NVELASQUEZ.BUDGETUSER tbUser where tbUser.USERNAME = '"+nameUser+"'");
+        String consulta = String.format("Select * from NVELASQUEZ.BUDGETUSER tbUser where tbUser.USERNAME = '" + nameUser + "'");
         try {
             Query q = em.createNativeQuery(consulta, BudgetUser.class);
-           actBU = (BudgetUser) q.getSingleResult();
-           UserJpaController d = new UserJpaController(emf);
+            actBU = (BudgetUser) q.getSingleResult();
+            UserJpaController d = new UserJpaController(emf);
         } catch (Exception e) {
             throw new Exception(Constant.NON_EXISTS_ERROR_MSG);
         } finally {
