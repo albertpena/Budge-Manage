@@ -11,26 +11,20 @@ import com.budgetmanage.entities.Ingress;
 import com.budgetmanage.modeler.BudgetJpaController;
 import com.budgetmanage.modeler.ExpendingJpaController;
 import com.budgetmanage.modeler.IngressJpaController;
-import com.budgetmanage.modeler.UserJpaController;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
-import com.budgetmanage.ui.Main;
 import com.budgetmanage.ui.Maintenance.FinancesMaintenanceFrm;
 import com.budgetmanage.ui.maintenance.FinancesAddFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.Container;
 import java.awt.event.ItemEvent;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -397,17 +391,11 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         
         String process = jComboBox1.getSelectedItem().toString().toUpperCase();
         String wich = jLabel4.getText().toUpperCase();
-        
-        
-        UserJpaController ujc = new UserJpaController(emf);
-        ExpendingJpaController ejc = new ExpendingJpaController(emf);
-        IngressJpaController ijc = new IngressJpaController(emf);
-        BudgetJpaController bjc = new BudgetJpaController(emf);
-        
         List<Finance> finances = null;
           
         switch(process){
             case EXPENDING:{
+                ExpendingJpaController ejc = new ExpendingJpaController(emf);
                 if(all){
                     finances = ejc.findAll();
                 }else{
@@ -425,6 +413,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                 break;                    
             }
             case INGRESS:{
+                IngressJpaController ijc = new IngressJpaController(emf);
                 if(all){
                     finances = ijc.findAll();
                 }else{
@@ -442,6 +431,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                 break;
             }
             case BUDGET:{
+                BudgetJpaController bjc = new BudgetJpaController(emf);
                 if(all){
                     finances = bjc.findAll();
                 }else{
@@ -520,8 +510,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
                         
                     }
                     model.setDataVector(obj, EXPENDING_COL_ARRAY);
-                }
-                
+                }                
                 jTable1.setModel(model);
                 jTable1.updateUI();
                 jPanel2.setVisible(true);            
@@ -545,10 +534,9 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
     }//GEN-LAST:event_jComboBox2ItemStateChanged
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        c.removeAll();
+        
         FinancesAddFrm faf = new FinancesAddFrm(jComboBox1.getSelectedIndex());
-        faf.setPreferredSize(c.getPreferredSize());
-        c.add(faf);
+        com.budgetmanage.util.Util.addPanel((JPanel)c, faf);
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked

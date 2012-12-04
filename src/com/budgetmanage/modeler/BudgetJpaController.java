@@ -158,6 +158,9 @@ public class BudgetJpaController implements Serializable {
         }
     }
     
+    /*
+     * Method to generate an existing budget.
+     */
     public void generateBudget(){
         EntityManager em = getEntityManager();
         Query q;
@@ -189,6 +192,9 @@ public class BudgetJpaController implements Serializable {
         }
     }
     
+    /*
+     * Method to regenerate an existing budget.
+     */
     public void generateBudget(Timestamp updatedDate, String name, double ingressTotal, double expendingTotal)throws Exception{
         try {
             Budget budget = this.getActual(Main.getUser().getId());
@@ -203,6 +209,9 @@ public class BudgetJpaController implements Serializable {
         }
     }
     
+    /*
+     * Method to find a budget by name
+     */
     public List<Finance> findBudget(String name){
         EntityManager em = getEntityManager();
         try {
