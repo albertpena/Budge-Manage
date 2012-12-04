@@ -51,7 +51,7 @@ public class IngressJpaController implements Serializable {
         }
     }
 
-    public void edit(Ingress ingress) throws NonexistentEntityException, Exception {
+    public void edit(Ingress ingress) throws NonexistentEntityException{
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -63,7 +63,7 @@ public class IngressJpaController implements Serializable {
             if (msg == null || msg.length() == 0) {
                 Integer id = ingress.getId();
                 if (findIngress(id) == null) {
-                    throw new NonexistentEntityException("The ingress with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException(Constant.NON_EXISTS_ERROR_MSG);
                 }
             }
             throw ex;

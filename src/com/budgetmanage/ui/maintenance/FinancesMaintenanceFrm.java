@@ -11,19 +11,21 @@ import com.budgetmanage.modeler.BudgetJpaController;
 import com.budgetmanage.modeler.ExpendingJpaController;
 import com.budgetmanage.modeler.IngressJpaController;
 import com.budgetmanage.modeler.exceptions.NonexistentEntityException;
+import com.budgetmanage.ui.Consulting.FinancesConsultingFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.Container;
-import java.awt.event.KeyAdapter;
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -35,20 +37,25 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
      * Creates new form FinancesMaintenanceFrm
      */
     Finance finance;
+    int process;
     public FinancesMaintenanceFrm(Container n, Finance finance, int process) {
         this.c = n;
         initComponents();
         this.finance = finance;
+        this.process = process;
         
         jLabel13.setText(EDIT_PANEL_TITLE);
         jComboBox1.setSelectedIndex(process);
         jTextField1.setText(finance.getName());
+        
         switch(process){            
             case 2:{
+                jComboBox2.setVisible(false);
                 jComboBox3.setModel(new DefaultComboBoxModel(INGRESS_TYPES));
                 break;
             }
-        }        
+        }
+        
         jFormattedTextField1.setText(String.valueOf(finance.getFinanceTotal()));
         jComboBox2.setSelectedIndex(finance.getPriority());
         jComboBox3.setSelectedItem(finance.getType());
@@ -283,7 +290,7 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        save(jComboBox1.getSelectedItem().toString().toUpperCase());        
+        save(process);        
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
@@ -308,24 +315,25 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
         }
     }//GEN-LAST:event_jComboBox2ItemStateChanged
     
-    private void save(String what){
+    private void save(int what){
         boolean isOk = true;
         String name = jTextField1.getText().toString().toUpperCase();
         String type = jComboBox3.getSelectedItem().toString();
         int priority = jComboBox2.getSelectedIndex();
         double value = 0;
+        
         try{
             value = Double.parseDouble(jFormattedTextField1.getText().trim());
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, Constant.VALUE_ERROR_MSG, "Error", JOptionPane.ERROR_MESSAGE);
             jFormattedTextField1.grabFocus();
             isOk = false;
-        }    
+        }
         
-        
-        if(isOk()){    
+        if(isOk()){
+            
             Date actualDate = new Date();
-            Timestamp date = new Timestamp(actualDate.getDate());
+            Timestamp date = new Timestamp(actualDate.getTime());
         
             finance.setName(name);
             finance.setType(type);
@@ -334,45 +342,44 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
             finance.setUpdateDate(date);
             
             
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory(P_UNIT);
-            IngressJpaController ijc = new IngressJpaController(emf);
-            ExpendingJpaController ejc = new ExpendingJpaController(emf);
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory(P_UNIT);            
+            
             switch(what){
-                case INGRESS:{                     
+                case 2:{
+                    IngressJpaController ijc = new IngressJpaController(emf);
                     try{
                         ijc.edit((Ingress)finance);
                     }catch(NonexistentEntityException ne){
-                        JOptionPane.showMessageDialog(this, "No existe una finanza con estos criterios para editar", "Error", JOptionPane.ERROR_MESSAGE);
-                        isOk = false;
-                    }catch(Exception ex){
-                        JOptionPane.showMessageDialog(this, "No existe una finanza con estos criterios para editar", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, ne.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                         isOk = false;
                     }
-                    
+                    break;
                 }
-                case EXPENDING:{                   
-                    
+                case 1:{                   
+                    ExpendingJpaController ejc = new ExpendingJpaController(emf);        
                     try {                    
                         ejc.edit((Expending)finance);
                     } catch (NonexistentEntityException ex) {
-                         JOptionPane.showMessageDialog(this, "No existe una finanza con estos criterios para editar", "Error", JOptionPane.ERROR_MESSAGE);
-                         isOk = false;
-                    } catch (Exception ex) {
-                         JOptionPane.showMessageDialog(this, "No existe una finanza con estos criterios para editar", "Error", JOptionPane.ERROR_MESSAGE);
+                         JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                          isOk = false;
                     }
-                    
+                    break;
                 }
             }
                 
             if(isOk){
-                jLabel12.setVisible(true);
-                jLabel12.setText(Constant.SUCEED_MSG);
-                jButton1.setEnabled(false);
+                
                 BudgetJpaController bjc = new BudgetJpaController(emf);
                 try {
-                    bjc.generateBudget(date, name, ijc.getIngressTotal(), ejc.getExpendingTotal());
-                } catch (Exception ex) {
+                    bjc.generateBudget();
+                    jButton1.setEnabled(false);
+                    JOptionPane.showMessageDialog(this, FINANCE_SUCCEED_MSG, "Información", JOptionPane.INFORMATION_MESSAGE);
+                    Thread.sleep(TimeUnit.SECONDS.toMillis(1));
+                    
+                    FinancesConsultingFrm fcf = new FinancesConsultingFrm(EDIT_PANEL_TITLE, c);
+                    com.budgetmanage.util.Util.addPanel((JPanel)c, fcf);
+                    
+                } catch (HeadlessException | InterruptedException ex) {
                     Logger.getLogger(FinancesMaintenanceFrm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -398,15 +405,17 @@ public class FinancesMaintenanceFrm extends javax.swing.JPanel implements Consta
             return false;
         }
         
-        if((jFormattedTextField1.toString().isEmpty())||(com.budgetmanage.util.Util.numberValid(jFormattedTextField1.toString()))){
+        if(jFormattedTextField1.toString().isEmpty()){
             JOptionPane.showMessageDialog(this, Constant.VALUE_ERROR_MSG, "Error", JOptionPane.ERROR_MESSAGE);
             jFormattedTextField1.grabFocus();
             return false;
         }
         
         if(jComboBox2.getSelectedIndex() == 0){
-            JOptionPane.showMessageDialog(this, Constant.PRIORITY_ERROR_MSG, "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
+            if(process == 2){
+                JOptionPane.showMessageDialog(this, Constant.PRIORITY_ERROR_MSG, "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
         }
         
         return true;

@@ -167,8 +167,9 @@ public class BudgetJpaController implements Serializable {
         Query q2;
         Date date = new Date();
         Timestamp time = new Timestamp(date.getTime());
+        Budget budget = null;
         try{
-            Budget budget = getActual(Main.getUser().getId());
+            budget = getActual(Main.getUser().getId());
             q  = em.createNativeQuery("Select sum(Expending_Total) from Expending"+
                                     " where BUDGETUSER_ID = "+Main.getUser().getId());
             double exTotal = (double) q.getSingleResult();
@@ -183,7 +184,9 @@ public class BudgetJpaController implements Serializable {
             edit(budget);
         }catch(Exception ex){
             try {
-                destroy(getActual(Main.getUser().getId()).getId());
+                if(budget != null){
+                    destroy(getActual(Main.getUser().getId()).getId());
+                }
             } catch (NonexistentEntityException ex1) {
                 Logger.getLogger(BudgetJpaController.class.getName()).log(Level.SEVERE, null, ex1);
             }

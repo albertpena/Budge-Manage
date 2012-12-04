@@ -17,6 +17,7 @@ import com.budgetmanage.ui.maintenance.FinancesAddFrm;
 import com.budgetmanage.util.Constant;
 import java.awt.Container;
 import java.awt.event.ItemEvent;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -441,83 +442,88 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
             }
         }
         
-                 
-            if(!finances.isEmpty()){ 
-                Object[][] obj;
-                DefaultTableModel model = new DefaultTableModel(){
-
-                        @Override
-                        public boolean isCellEditable(int i, int i1) {
-                            return false;
-                        }
-                        
-                    };
-                if(process.equalsIgnoreCase(BUDGET)){
-                    obj = new Object[finances.size()][BUDGET_TABLE_COLS.length];
-                    int e;
-
-                    for(int i = 0; i < finances.size(); i++){
-                        Budget b = (Budget) finances.get(i);
-                        e = 0;
-                        obj[i][e] = b.getId();
-                        e++;
-                        obj[i][e] = b.getName();
-                        e++;
-                        obj[i][e] = b.getIngressTotal();
-                        e++;
-                        obj[i][e] = b.getExpendingTotal();
-                        e++;
-                        obj[i][e] = (b.getIngressTotal() - b.getExpendingTotal());
-                        e++;
-                        obj[i][e] = b.getGenerateDate();
-
-                    }                    
-                    model.setDataVector(obj, BUDGET_TABLE_COLS);
-                }
-                
-                if (process.equalsIgnoreCase(INGRESS)){
-                    obj = new Object[finances.size()][INGRESS_COL_ARRAY.length];
-                    int e;
-                    for(int i = 0; i < finances.size(); i++){
-                        Ingress b = (Ingress) finances.get(i);
-                        e = 0;
-                        obj[i][e] = b.getId();
-                        e++;
-                        obj[i][e] = b.getName();
-                        e++;
-                        obj[i][e] = b.getFinanceTotal();
-                        e++;
-                        obj[i][e] = b.getUpdateDate();
-                        
-                    }
-                    model.setDataVector(obj,INGRESS_COL_ARRAY);
-                }
-                if (process.equalsIgnoreCase(EXPENDING)){
-                    obj = new Object[finances.size()][EXPENDING_COL_ARRAY.length];
-                    int e;
-                    for(int i = 0; i < finances.size(); i++){
-                        Expending b = (Expending) finances.get(i);
-                        e = 0;
-                        obj[i][e] = b.getId();
-                        e++;
-                        obj[i][e] = b.getName();
-                        e++;
-                        obj[i][e] = CATEGORIES[b.getPriority()];
-                        e++;
-                        obj[i][e] = b.getFinanceTotal();
-                        e++;
-                        obj[i][e] = b.getUpdateDate();
-                        
-                    }
-                    model.setDataVector(obj, EXPENDING_COL_ARRAY);
-                }                
-                jTable1.setModel(model);
-                jTable1.updateUI();
-                jPanel2.setVisible(true);            
-            }else{
-                JOptionPane.showMessageDialog(this, "No se encontraron finanzas con estos criterios","Busqueda",JOptionPane.INFORMATION_MESSAGE);
-            }
+        String date;
         
+        if(!finances.isEmpty()){ 
+            Object[][] obj;
+            DefaultTableModel model = new DefaultTableModel(){
+
+                    @Override
+                    public boolean isCellEditable(int i, int i1) {
+                        return false;
+                    }
+
+                };
+            if(process.equalsIgnoreCase(BUDGET)){
+                obj = new Object[finances.size()][BUDGET_TABLE_COLS.length];
+                int e;
+
+                for(int i = 0; i < finances.size(); i++){
+                    Budget b = (Budget) finances.get(i);
+                    
+                    date = new SimpleDateFormat(Constant.FORMAT_DATE).format(b.getGenerateDate());
+                    e = 0;
+                    obj[i][e] = b.getId();
+                    e++;
+                    obj[i][e] = b.getName();
+                    e++;
+                    obj[i][e] = b.getIngressTotal();
+                    e++;
+                    obj[i][e] = b.getExpendingTotal();
+                    e++;
+                    obj[i][e] = (b.getIngressTotal() - b.getExpendingTotal());
+                    e++;
+                    obj[i][e] = date;
+
+                }                    
+                model.setDataVector(obj, BUDGET_TABLE_COLS);
+            }
+
+            if (process.equalsIgnoreCase(INGRESS)){
+                obj = new Object[finances.size()][INGRESS_COL_ARRAY.length];
+                int e;
+                for(int i = 0; i < finances.size(); i++){
+                    Ingress b = (Ingress) finances.get(i);
+                    date = new SimpleDateFormat(Constant.FORMAT_DATE).format(b.getUpdateDate());
+                    e = 0;
+                    obj[i][e] = b.getId();
+                    e++;
+                    obj[i][e] = b.getName();
+                    e++;
+                    obj[i][e] = b.getFinanceTotal();
+                    e++;
+                    obj[i][e] = date;
+
+                }
+                model.setDataVector(obj,INGRESS_COL_ARRAY);
+            }
+            if (process.equalsIgnoreCase(EXPENDING)){
+                obj = new Object[finances.size()][EXPENDING_COL_ARRAY.length];
+                int e;
+                for(int i = 0; i < finances.size(); i++){
+                    Expending b = (Expending) finances.get(i);
+                    date = new SimpleDateFormat(Constant.FORMAT_DATE).format(b.getUpdateDate());
+                    e = 0;
+                    obj[i][e] = b.getId();
+                    e++;
+                    obj[i][e] = b.getName();
+                    e++;
+                    obj[i][e] = CATEGORIES[b.getPriority()];
+                    e++;
+                    obj[i][e] = b.getFinanceTotal();
+                    e++;
+                    obj[i][e] = date;
+
+                }
+                model.setDataVector(obj, EXPENDING_COL_ARRAY);
+            }                
+            jTable1.setModel(model);
+            jTable1.updateUI();
+            jPanel2.setVisible(true);            
+        }else{
+            JOptionPane.showMessageDialog(this, NON_EXISTS_ERROR_MSG,"Busqueda",JOptionPane.INFORMATION_MESSAGE);
+            reset();
+        }
     }
     
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
@@ -545,11 +551,7 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
         Object id = jTable1.getValueAt(rowCount, 0);
 
         switch(jComboBox1.getSelectedItem().toString().toUpperCase()){
-//                case Constant.BUDGET:{
-//                    BudgetJpaController bjc = new BudgetJpaController(emf);
-//                    finance = bjc.findBudget((Integer)id);
-//                    break;
-//                }
+
             case Constant.EXPENDING:{
                 ExpendingJpaController ejc = new ExpendingJpaController(emf);
                 finance = ejc.findExpending((Integer)id);
@@ -572,37 +574,36 @@ public class FinancesConsultingFrm extends javax.swing.JPanel implements Constan
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        int rowNum = jTable1.getSelectedRow();
-        if(jTable1.isRowSelected(rowNum)){
-            switch(jComboBox1.getSelectedItem().toString().toUpperCase()){
-//                case Constant.BUDGET:{
-//                    BudgetJpaController bjc = new BudgetJpaController(emf);
-//                    finance = bjc.findBudget((Integer)id);
-//                    break;
-//                }
-                case Constant.EXPENDING:{
-                    ExpendingJpaController ejc = new ExpendingJpaController(emf);
-                    try {
-                        ejc.destroy(finance.getId());
-                    } catch (NonexistentEntityException ex) {
-                        Logger.getLogger(FinancesConsultingFrm.class.getName()).log(Level.SEVERE, null, ex);
+        int opt = JOptionPane.showConfirmDialog(this, "Desea eliminar el registro?", TITLE, JOptionPane.YES_NO_OPTION);
+        if(opt == 0){
+            int rowNum = jTable1.getSelectedRow();
+            if(jTable1.isRowSelected(rowNum)){
+                switch(jComboBox1.getSelectedItem().toString().toUpperCase()){
+
+                    case Constant.EXPENDING:{
+                        ExpendingJpaController ejc = new ExpendingJpaController(emf);
+                        try {
+                            ejc.destroy(finance.getId());
+                        } catch (NonexistentEntityException ex) {
+                            Logger.getLogger(FinancesConsultingFrm.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        break;
                     }
-                    break;
-                }
-                case Constant.INGRESS:{
-                    IngressJpaController ijc = new IngressJpaController(emf);
-                    try {
-                        ijc.destroy(finance.getId());
-                    } catch (NonexistentEntityException ex) {
-                        Logger.getLogger(FinancesConsultingFrm.class.getName()).log(Level.SEVERE, null, ex);
+                    case Constant.INGRESS:{
+                        IngressJpaController ijc = new IngressJpaController(emf);
+                        try {
+                            ijc.destroy(finance.getId());
+                        } catch (NonexistentEntityException ex) {
+                            Logger.getLogger(FinancesConsultingFrm.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        break;
                     }
-                    break;
                 }
+                JOptionPane.showMessageDialog(this, SUCEED_DESTROY_MSG, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                search(true, null);
+                BudgetJpaController bjc = new BudgetJpaController(emf);
+                bjc.generateBudget();
             }
-            JOptionPane.showMessageDialog(this, SUCEED_DESTROY_MSG, "Informacion", JOptionPane.INFORMATION_MESSAGE);
-            reset();
-            BudgetJpaController bjc = new BudgetJpaController(emf);
-            bjc.generateBudget();
         }
     }//GEN-LAST:event_btnEliminarMouseClicked
 

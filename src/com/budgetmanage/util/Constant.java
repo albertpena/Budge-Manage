@@ -18,7 +18,7 @@ public interface Constant {
     public String TYPE_ERROR_MSG = "Debe colocar el tipo de finanza";
     public String VALUE_ERROR_MSG = "Debe colocar un monto valido";
     public String EXIST_ERROR_MSG = "Existe una finanza con este criterio";
-    public String NON_EXISTS_ERROR_MSG = "No existe una finanza con estos criterios";
+    public String NON_EXISTS_ERROR_MSG = "No existen finanzas de este tipo";
     public String USER_ERROR_MSG = "Favor colocar un nombre de usuario";
     public String PASS_ERROR_MSG = "Favor colocar la clave";
     public String SEARCH_MSG_ERROR = "Debe colocar un criterio de busqueda";
@@ -28,7 +28,7 @@ public interface Constant {
     public String COMBOX_FINANCE_MSG = "Seleccione el tipo de finanza que desea";
     public String SUCCED_MSG = "Registro guardado satisfactoriamente";
     public String SUCEED_DESTROY_MSG = "Registro Borrado Satisfactoriamente";
-    public String FINANCE_SUCCEED_MSG = "Finanza agregada satisfactoriamente";
+    public String FINANCE_SUCCEED_MSG = "Finanza guardada satisfactoriamente";
     public String TITLE = "Budget Friendly";
     public String EXPENDING = "GASTOS";
     public String INGRESS = "INGRESOS";
@@ -46,8 +46,6 @@ public interface Constant {
     /**************************Parameters*********************************************/
     public int FRAME_HEIGHT = 602;
     public int FRAME_WIDTH = 606;
-    public int PAGE_MAX = 5;
-    public int PAGE_MIN = 1;
     public int YES = 1;
     public int NO = 2;
     public String PU = "BudgeManagePU";

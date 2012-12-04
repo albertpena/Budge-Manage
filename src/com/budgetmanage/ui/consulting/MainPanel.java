@@ -23,6 +23,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
@@ -47,10 +49,22 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
     public MainPanel(JPanel panel) {
         initComponents();        
         jLabel13.setText(MAIN_PANEL_TITLE);
-        String name = Main.getUser().getNombre();
-        String lastName = Main.getUser().getApellidos();
-        jLabel4.setText("Bienvenido "+name+" "+lastName);
+        String name = Main.getUser().getNombre().trim();
+        String lastName = Main.getUser().getApellidos().trim();
+        
+        //If the user contains two names, we show the first one
+        if(name.contains(" ")){
+            name = name.substring(0, name.indexOf(" "));
+        }
+        //If the user contains two lastnames, we show the first one
+        if(lastName.contains(" ")){
+            lastName = lastName.substring(0, lastName.indexOf(" "));
+        }
+        
+        jLabel4.setText("Bienvenid@ "+name +" "+lastName);
+       
         emf = Persistence.createEntityManagerFactory(PU);
+        
         bjc = new BudgetJpaController(emf);
         ijc = new IngressJpaController(emf);
         ejc = new ExpendingJpaController(emf);
@@ -249,14 +263,17 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
             }
         });
 
-        btnGenerarI.setText("Generar");
+        btnGenerarI.setText("Registrar Ingresos");
+        btnGenerarI.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnGenerarI.setPreferredSize(new java.awt.Dimension(119, 18));
         btnGenerarI.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnGenerarIMouseClicked(evt);
             }
         });
 
-        btnGenerarG.setText("Generar");
+        btnGenerarG.setText("Registrar Gastos");
+        btnGenerarG.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnGenerarG.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnGenerarGMouseClicked(evt);
@@ -265,7 +282,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel6.setText("Generar los conceptos indicados");
+        jLabel6.setText("Generar los conceptos indicados para iniciar");
         jLabel6.setToolTipText("");
 
         javax.swing.GroupLayout financesPanelLayout = new javax.swing.GroupLayout(financesPanel);
@@ -278,29 +295,31 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                     .addGroup(financesPanelLayout.createSequentialGroup()
                         .addComponent(ckbExpendings)
                         .addGap(18, 18, 18)
-                        .addComponent(btnGenerarG))
-                    .addGroup(financesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(financesPanelLayout.createSequentialGroup()
-                            .addComponent(ckbIngress)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnGenerarI))))
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addComponent(btnGenerarG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(financesPanelLayout.createSequentialGroup()
+                        .addGroup(financesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(financesPanelLayout.createSequentialGroup()
+                                .addComponent(ckbIngress)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnGenerarI, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(10, 10, 10))
         );
         financesPanelLayout.setVerticalGroup(
             financesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, financesPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(financesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ckbExpendings)
+                    .addComponent(btnGenerarG, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(financesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ckbIngress)
-                    .addComponent(btnGenerarI))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(financesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ckbExpendings)
-                    .addComponent(btnGenerarG))
-                .addGap(24, 24, 24))
+                    .addComponent(btnGenerarI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -313,7 +332,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(resumeExPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 651, Short.MAX_VALUE))
+                        .addGap(10, 968, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -407,6 +426,9 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         com.budgetmanage.util.Util.addPanel(panel, faf);
     }//GEN-LAST:event_btnGenerarGMouseClicked
     
+    /*
+     * @method this method generate the first budget in case of no one exists.
+     */
     private void generateBudget(String name){
         //Defining attiributes for the budgets.
             boolean isOk = true;
@@ -444,41 +466,53 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
             }            
             
             if(isOk){
-                //Creating and persisting the budgets.
-                
+
+                //Creating and persisting the budgets.                
                 Budget budget = new Budget(name, "A", expendigTotal, ingressTotal, date, date, Main.getUser(), days);                
                 bjc.create(budget);
                 jLabel1.setText("El Presupuesto se genero correctamente");
             }
             nameTextField.setText("");            
+            //Reloading the window after generate the budget.
             loadWindow();
     }
     
+    /*
+     * @method load the corresponding panels according to the state of then user (with finances or without finances)
+     */
     private void loadWindow(){
         Budget budget;
         double expendings = ejc.getExpendingTotal();
         double ingresses = ijc.getIngressTotal();
         boolean generate = true;
         
+        //If the user has not expending yet, we ask him for register them, else we mark it as yes.
         if(expendings == 0){            
             ckbExpendings.setSelected(false);
             generate = false;
         }else{
             ckbExpendings.setSelected(true);                    
         }
+        
+        //If the user has not register yet, we ask him for register them, else we mark it as yes.
         if(ingresses == 0){            
             ckbIngress.setSelected(false);
             generate = false;
         }else{
             ckbIngress.setSelected(true);
         }
-        
+
         if(generate){
             try {
+                //If everything is ok we prepare the main window.
+                
+                //Get the actual budget.
                 budget = bjc.getActual(Main.getUser().getId());
                 
+                //Formating the dates of the budget.
                 String generatedDate = new SimpleDateFormat(Constant.FORMAT_DATE).format(budget.getGenerateDate());
                 String updatedDate = new SimpleDateFormat(Constant.FORMAT_DATE).format(budget.getUpdateDate());
+                //Creating a table model
                 DefaultTableModel model  = new DefaultTableModel(BUDGET_TABLE_COLS, 1);
                 
                 resumeTable.setModel(model);
@@ -494,7 +528,7 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                 resumeExPanel.setVisible(true);
                 generatePanel.setVisible(false); 
 
-                fillExpendingChart(budget.getLifeDays());
+                fillExpendingChart();
                 this.updateUI();
             } catch (NonexistentEntityException ex) {
                     jLabel1.setVisible(true);
@@ -508,25 +542,30 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
         
     }
     
-    private void fillExpendingChart(int pad){
-        ExpendingJpaController ejc = new ExpendingJpaController(emf);
+    /*
+     * @method fillExpendingChart: fills the line and pie charts of expendings for this budget.
+     */
+    private void fillExpendingChart(){
         List<PieSlice> slices = new ArrayList<>();
         
+        //Look for the totals expendings according to its category.
         double fixedExpendingTotal = ejc.getExpendigsTotal(1);
         double servicesExpendingTotal = ejc.getExpendigsTotal(2);
         double leisureExpendingTotal = ejc.getExpendigsTotal(3);
         
+        //Adding slices for the pie.
         slices.add(new PieSlice(FIXED_EXPENSE_COLOR, fixedExpendingTotal, "Total de gastos fijos"));
         slices.add(new PieSlice(SERVICES_COLOR, servicesExpendingTotal, "Total de gastos por servicios"));
         slices.add(new PieSlice(LEISURE_COLOR, leisureExpendingTotal, "Total de gastos por ocio y demas"));
         
+        //Creating a pie chart and adding to its corresponding panel.
         PieChart pieChart = new PieChart(slices);
         resumeExPanel.add(pieChart, BorderLayout.CENTER);
         
         List<Object[]> objs = ejc.getExpendingTotalByDay();
         double[] exps = new double[objs.size()+1];
 
-
+        //look for porcentage of the values to make the line chart with them.
         for(int i =0; i < objs.size(); i++){
             Object[] obj = objs.get(i);
             if(i==0){
@@ -536,8 +575,8 @@ public class MainPanel extends javax.swing.JPanel implements Constant{
                 exps[i+1] = exps[i-1]+(double)obj[0];
             }
         }
-
         
+        //Add a line chart depending the expense of the budget.
         flowPanel.add(new LineChart(exps), BorderLayout.CENTER);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

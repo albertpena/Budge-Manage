@@ -51,7 +51,7 @@ public class ExpendingJpaController implements Serializable {
         }
     }
 
-    public void edit(Expending expending) throws NonexistentEntityException, Exception {
+    public void edit(Expending expending) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -63,7 +63,7 @@ public class ExpendingJpaController implements Serializable {
             if (msg == null || msg.length() == 0) {
                 Integer id = expending.getId();
                 if (findExpending(id) == null) {
-                    throw new NonexistentEntityException("The expending with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException(Constant.NON_EXISTS_ERROR_MSG);
                 }
             }
             throw ex;
